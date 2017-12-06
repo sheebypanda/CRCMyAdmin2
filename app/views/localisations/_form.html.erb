@@ -1,20 +1,42 @@
 <%= simple_form_for(@localisation) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :nom %>
-    <%= f.input :adresse %>
-    <%= f.input :codepostal %>
-    <%= f.input :ville %>
-    <%= f.input :etage %>
-    <%= f.input :tel %>
-    <%= f.input :mail %>
-    <%= f.input :description %>
-    <%= f.input :lat %>
-    <%= f.input :lng %>
+  <div class="card border-danger mb-3">
+    <div class="card-body">
+      <%= f.input :nom, label: "Nom du site" %>
+      <div class="form-row">
+        <div class='col-lg-6 col-sm-12'>
+          <%= f.input :adresse, label: "Adresse" %>
+          <%= f.input :codepostal, label: "Code postal" %>
+          <%= f.input :ville, label: "Ville" %>
+        </div>
+        <div class='col-lg-6 col-sm-12'>
+          <button id="gps" type="button" class="pure-button pure-button-primary btn btn-outline-danger btn-block"><%= fa_icon("map-marker") %> Utiliser ma position</button>
+          <%= f.input :lat, label: "Latitude" %>
+          <%= f.input :lng, label: "Longitude" %>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+
+    <div class="card border-info mb-3">
+      <div class="card-body">
+      <div class="form-row">
+        <div class='col-lg-4 col-sm-12'>
+          <%= f.input :etage, label: "" %>
+        </div>
+        <div class='col-lg-4 col-sm-12'>
+          <%= f.input :tel, label: "Téléphone contact du site" %>
+        </div>
+        <div class='col-lg-4 col-sm-12'>
+          <%= f.input :mail, label: "Mail de contact du site" %>
+        </div>
+      </div>
+      <%= f.input :description, label: "Informations complétmentaires" %>
+    </div>
   </div>
+
+  <%= f.button :submit, "Ajouter la localisation", class: "btn btn-outline-primary btn-block mb-3" %>
+
 <% end %>

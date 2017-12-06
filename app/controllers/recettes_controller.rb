@@ -1,5 +1,6 @@
 class RecettesController < ApplicationController
   before_action :set_recette, only: [:show, :edit, :update, :destroy]
+  before_action :get_enr, only: [:new, :edit]
 
   def index
     @recettes = Recette.all
@@ -10,8 +11,6 @@ class RecettesController < ApplicationController
 
   def new
     @recette = Recette.new
-    @equipements = Equipement.all.order(updated_at: :desc)
-    #TODO retirer les equipements qui ont deja une recette
   end
 
   def edit
@@ -35,7 +34,7 @@ class RecettesController < ApplicationController
     respond_to do |format|
       if @recette.update(recette_params)
         format.html { redirect_to @recette, notice: 'Recette was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recette }
+        format.json { render :index, status: :ok, location: @recette }
       else
         format.html { render :edit }
         format.json { render json: @recette.errors, status: :unprocessable_entity }
@@ -52,14 +51,21 @@ class RecettesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_recette
       @recette = Recette.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def recette_params
       params.require(:recette).permit(:user_id, :equipement_id, :ligne_id, :localisation_id, :snmp, :tacacs, :testdebit, :supervision, :etiquette)
+    end
+
+    def get_enr
+      @enr = []
+      Equipement.all.order(updated_at: :desc).each do |e|
+        unless e.recette
+          @enr.push(e)
+        end
+      end
     end
 
 end

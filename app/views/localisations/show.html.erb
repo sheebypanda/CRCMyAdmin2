@@ -50,5 +50,8 @@
   <%= @localisation.lng %>
 </p>
 
+<%= image_tag "https://maps.google.com/api/staticmap?size=300x300&&markers=#{@localisation.lat}2C#{@localisation.lng}" %>
+
+
 <%= link_to 'Edit', edit_localisation_path(@localisation) %> |
 <%= link_to 'Back', localisations_path %>

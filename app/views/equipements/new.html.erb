@@ -1,5 +1,4 @@
-<h1>New Equipement</h1>
+<%= link_to fa_icon('chevron-left')+' Retour à la liste', equipements_path, class: "btn btn-outline-primary" %>
+<h1 class="text-center p-3">Ajout d'un nouvel équipement</h1>
 
 <%= render 'form', equipement: @equipement %>
-
-<%= link_to 'Back', equipements_path %>

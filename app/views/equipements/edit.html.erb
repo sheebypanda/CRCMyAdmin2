@@ -1,6 +1,3 @@
-<h1>Editing Equipement</h1>
-
+<%= link_to fa_icon('chevron-left')+' Retour à la liste', equipements_path, class: "btn btn-outline-primary" %>
+  <h1 class="text-center p-3">Édition de l'équipement</h1>
 <%= render 'form', equipement: @equipement %>
-
-<%= link_to 'Show', @equipement %> |
-<%= link_to 'Back', equipements_path %>

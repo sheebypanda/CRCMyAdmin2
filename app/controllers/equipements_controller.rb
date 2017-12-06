@@ -4,7 +4,7 @@ class EquipementsController < ApplicationController
   # GET /equipements
   # GET /equipements.json
   def index
-    @equipements = Equipement.all.order(updated_at: :desc)
+    @equipements = Equipement.all.order(updated_at: :desc).limit(200)
   end
 
   # GET /equipements/1

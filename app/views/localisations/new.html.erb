@@ -1,5 +1,4 @@
-<h1>New Localisation</h1>
+<%= link_to fa_icon('chevron-left')+' Retour à la liste', localisations_path, class: "btn btn-outline-primary" %>
+<h1 class="text-center p-3">Ajout d'une nouvelle localisation</h1>
 
 <%= render 'form', localisation: @localisation %>
-
-<%= link_to 'Back', localisations_path %>

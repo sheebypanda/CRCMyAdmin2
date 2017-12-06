@@ -4,7 +4,7 @@ class LocalisationsController < ApplicationController
   # GET /localisations
   # GET /localisations.json
   def index
-    @localisations = Localisation.all
+    @localisations = Localisation.all.order(updated_at: :desc)
   end
 
   # GET /localisations/1

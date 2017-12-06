@@ -1,29 +1,69 @@
 <%= simple_form_for(@recette) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-
-    <div class="form-group">
-       <label for="recette_equipement_id">Équipements</label>
-       <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
-         <%  @equipements.each do |e|  %>
-          <option value="<%= e.id %>"><%= e.nom %></option>
-         <% end %>
-       </select>
-     </div>
-
-    <a href="<%= new_equipement_path %>" class="btn btn-primary">Ajouter un nouvel équipement</a>
-    <%= f.association :ligne, label_method: :ndi, value_method: :id, include_blank: false %>
-    <%= f.association :localisation, label_method: :nom, value_method: :id, include_blank: false %>
-    <%= f.input :snmp %>
-    <%= f.input :tacacs %>
-
-    <%= f.input :testdebit %>
-    <%= f.input :supervision %>
-    <%= f.input :etiquette %>
+  <div class="card text-white bg-danger mb-3">
+    <div class="card-body">
+      <h4 class="card-title"><%= fa_icon("server") %> Équipements</h4>
+      <div class="form-row">
+        <div class='col-lg-6 col-sm-12'>
+          <label for="recette_equipement_id">Sélectionner un équipement existant et non-recetté</label>
+          <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
+            <%  @enr.each do |e|  %>
+            <option value="<%= e.id %>"><%= e.nom %></option>
+            <% end %>
+          </select>
+        </div>
+        <div class='col-lg-6 col-sm-12'>
+          <label for="recette_equipement_id">ou alors</label><br/>
+          <a href="<%= new_equipement_path %>" class="btn btn-primary"><%= fa_icon("plus") %> Ajouter un nouvel équipement</a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="card text-white bg-warning mb-3">
+    <div class="card-body">
+      <h4 class="card-title"><%= fa_icon("globe") %> Sortie internet</h4>
+      <div class="form-row">
+        <div class='col-lg-6 col-sm-12'>
+          <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: :ndi, value_method: :id, include_blank: false %>
+        </div>
+        <div class='col-lg-6 col-sm-12'>
+          <label for="recette_equipement_id">ou alors</label><br/>
+          <a href="<%= new_ligne_path %>" class="btn btn-primary"><%= fa_icon("plus") %> Ajouter une nouvelle ligne</a>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div class="card text-white bg-info mb-3">
+    <div class="card-body">
+      <h4 class="card-title"><%= fa_icon("map-marker") %> Localisation</h4>
+      <div class="form-row">
+        <div class='col-lg-6 col-sm-12'>
+          <%= f.association :localisation, label_method: :nom, value_method: :id, include_blank: false %>
+        </div>
+        <div class='col-lg-6 col-sm-12'>
+          <label for="recette_equipement_id">ou alors</label><br/>
+          <a href="<%= new_localisation_path %>" class="btn btn-primary"><%= fa_icon("map-marker") %> Ajouter une nouvelle localisation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card text-white bg-success mb-3">
+    <div class="card-body">
+      <h4 class="card-title"><%= fa_icon("check") %> Test de conformité</h4>
+
+          <%= f.input :snmp, label: "Communauté SNMP ajoutée"%>
+          <%= f.input :tacacs, label: "Authentification TACACS effectué"%>
+          <%= f.input :testdebit, label: "Test de débit effectués"%>
+          <%= f.input :supervision, label: "Équipement supervisé"%>
+          <%= f.input :etiquette, label: "Étiquette collée sur l'équipement"%>
+
+    </div>
+  </div>
+
+  <%= f.button :submit, "Valider et ajouter la fiche recette", class: "btn btn-block btn-outline-primary mb-3" %>
+
 <% end %>
