@@ -1,0 +1,29 @@
+<%= simple_form_for(@recette) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+
+    <div class="form-group">
+       <label for="recette_equipement_id">Équipements</label>
+       <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
+         <%  @equipements.each do |e|  %>
+          <option value="<%= e.id %>"><%= e.nom %></option>
+         <% end %>
+       </select>
+     </div>
+
+    <a href="<%= new_equipement_path %>" class="btn btn-primary">Ajouter un nouvel équipement</a>
+    <%= f.association :ligne, label_method: :ndi, value_method: :id, include_blank: false %>
+    <%= f.association :localisation, label_method: :nom, value_method: :id, include_blank: false %>
+    <%= f.input :snmp %>
+    <%= f.input :tacacs %>
+
+    <%= f.input :testdebit %>
+    <%= f.input :supervision %>
+    <%= f.input :etiquette %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

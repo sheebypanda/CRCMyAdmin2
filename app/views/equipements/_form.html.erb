@@ -1,0 +1,61 @@
+<%= simple_form_for(@equipement) do |f| %>
+  <% if equipement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(equipement.errors.count, "error") %> prohibited this equipement from being saved:</h2>
+
+      <ul>
+      <% equipement.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.input :nom, id: :equipement_nom %>
+  </div>
+
+  <div class="field">
+    <%= f.input :marque, id: :equipement_marque %>
+  </div>
+
+  <div class="field">
+    <%= f.input :modele, id: :equipement_modele %>
+  </div>
+
+  <div class="field">
+    <%= f.input :snmpcontact, id: :equipement_snmpcontact %>
+  </div>
+
+  <div class="field">
+    <%= f.input :dns, id: :equipement_dns %>
+  </div>
+
+  <div class="field">
+    <%= f.input :iosv, id: :equipement_iosv %>
+  </div>
+
+  <div class="field">
+    <%= f.input :ip, id: :equipement_ip %>
+  </div>
+
+  <div class="field">
+    <%= f.input :achat, id: :equipement_achat %>
+  </div>
+
+  <div class="field">
+    <%= f.input :garantie, id: :equipement_garantie %>
+  </div>
+
+  <div class="field">
+    <%= f.input :asapid, id: :equipement_asapid %>
+  </div>
+
+  <div class="field">
+    <%= f.input :serial, id: :equipement_serial %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

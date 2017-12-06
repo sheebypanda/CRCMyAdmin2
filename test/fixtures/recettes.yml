@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  equipement: one
+  ligne: one
+  localisation: one
+  snmp: false
+  tacacs: false
+  testdebit: false
+  supervision: false
+  etiquette: false
+
+two:
+  user: two
+  equipement: two
+  ligne: two
+  localisation: two
+  snmp: false
+  tacacs: false
+  testdebit: false
+  supervision: false
+  etiquette: false

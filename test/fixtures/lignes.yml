@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  numerocompte: MyString
+  ndi: MyString
+  debit: 1.5
+  ippublique: MyString
+  mail: MyString
+  tel: MyString
+  identifiantoperateur: MyString
+  mdpoperateur: MyString
+  compte: MyString
+  motdepasse: MyString
+  operateur: one
+
+two:
+  numerocompte: MyString
+  ndi: MyString
+  debit: 1.5
+  ippublique: MyString
+  mail: MyString
+  tel: MyString
+  identifiantoperateur: MyString
+  mdpoperateur: MyString
+  compte: MyString
+  motdepasse: MyString
+  operateur: two

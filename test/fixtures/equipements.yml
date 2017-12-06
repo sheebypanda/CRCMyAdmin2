@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nom: MyString
+  marque: MyString
+  modele: MyString
+  snmpcontact: MyString
+  dns: MyString
+  iosv: MyString
+  ip: MyString
+  achat: 2017-12-05
+  garantie: 1
+  asapid: MyString
+  serial: MyString
+
+two:
+  nom: MyString
+  marque: MyString
+  modele: MyString
+  snmpcontact: MyString
+  dns: MyString
+  iosv: MyString
+  ip: MyString
+  achat: 2017-12-05
+  garantie: 1
+  asapid: MyString
+  serial: MyString

@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @recette.user %>
+</p>
+
+<p>
+  <strong>Equipement:</strong>
+  <%= @recette.equipement %>
+</p>
+
+<p>
+  <strong>Ligne:</strong>
+  <%= @recette.ligne %>
+</p>
+
+<p>
+  <strong>Localisation:</strong>
+  <%= @recette.localisation %>
+</p>
+
+<p>
+  <strong>Snmp:</strong>
+  <%= @recette.snmp %>
+</p>
+
+<p>
+  <strong>Tacacs:</strong>
+  <%= @recette.tacacs %>
+</p>
+
+<p>
+  <strong>Testdebit:</strong>
+  <%= @recette.testdebit %>
+</p>
+
+<p>
+  <strong>Supervision:</strong>
+  <%= @recette.supervision %>
+</p>
+
+<p>
+  <strong>Etiquette:</strong>
+  <%= @recette.etiquette %>
+</p>
+
+<%= link_to 'Edit', edit_recette_path(@recette) %> |
+<%= link_to 'Back', recettes_path %>

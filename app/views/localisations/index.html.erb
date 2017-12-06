@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Localisations</h1>
+<%= link_to fa_icon("plus")+' Ajouter une localisation', new_localisation_path, class: 'btn btn-outline-primary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ville</th>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>Codepostal</th>
+      <th>Etage</th>
+      <th>Tel</th>
+      <th>Mail</th>
+      <th>Description</th>
+      <th>Lat</th>
+      <th>Lng</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @localisations.each do |localisation| %>
+      <tr>
+        <td><%= localisation.ville %></td>
+        <td><%= localisation.nom %></td>
+        <td><%= localisation.adresse %></td>
+        <td><%= localisation.codepostal %></td>
+        <td><%= localisation.etage %></td>
+        <td><%= localisation.tel %></td>
+        <td><%= localisation.mail %></td>
+        <td><%= localisation.description %></td>
+        <td><%= localisation.lat %></td>
+        <td><%= localisation.lng %></td>
+        <td><%= link_to 'Show', localisation %></td>
+        <td><%= link_to 'Edit', edit_localisation_path(localisation) %></td>
+        <td><%= link_to 'Destroy', localisation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

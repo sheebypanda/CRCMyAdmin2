@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lignes</h1>
+<%= link_to fa_icon("plus")+' Ajouter une nouvelle Ligne', new_ligne_path, class: "btn btn-outline-primary" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numerocompte</th>
+      <th>Ndi</th>
+      <th>Debit</th>
+      <th>Ippublique</th>
+      <th>Mail</th>
+      <th>Tel</th>
+      <th>Compte</th>
+      <th>Motdepasse</th>
+      <th>Operateur</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lignes.each do |ligne| %>
+      <tr>
+        <td><%= ligne.numerocompte %></td>
+        <td><%= ligne.ndi %></td>
+        <td><%= ligne.debit %></td>
+        <td><%= ligne.ippublique %></td>
+        <td><%= ligne.mail %></td>
+        <td><%= ligne.tel %></td>
+        <td><%= ligne.compte %></td>
+        <td><%= ligne.motdepasse %></td>
+        <td><%= ligne.operateur.nom %></td>
+        <td><%= link_to 'Show', ligne %></td>
+        <td><%= link_to 'Edit', edit_ligne_path(ligne) %></td>
+        <td><%= link_to 'Destroy', ligne, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

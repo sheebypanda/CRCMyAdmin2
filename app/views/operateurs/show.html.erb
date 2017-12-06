@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nom:</strong>
+  <%= @operateur.nom %>
+</p>
+
+<p>
+  <strong>Hotline:</strong>
+  <%= @operateur.hotline %>
+</p>
+
+<%= link_to 'Edit', edit_operateur_path(@operateur) %> |
+<%= link_to 'Back', operateurs_path %>

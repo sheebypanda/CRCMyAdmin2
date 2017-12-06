@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= fa_icon("server") %> Équipements</h1>
+
+<%= link_to fa_icon("plus")+' Ajouter un équipement', new_equipement_path, class: 'btn btn-outline-primary' %>
+
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Marque</th>
+      <th>Modele</th>
+      <th>Nom</th>
+      <th>Ip</th>
+      <th>Achat</th>
+      <th>Garantie</th>
+      <th>Asapid</th>
+      <th>Serial</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @equipements.each do |equipement| %>
+      <tr>
+        <td><%= equipement.marque %></td>
+        <td><%= equipement.modele %></td>
+        <td><%= equipement.nom %></td>
+        <td><%= equipement.ip %></td>
+        <td><%= equipement.achat %></td>
+        <td><%= equipement.garantie %></td>
+        <td><%= equipement.asapid %></td>
+        <td><%= equipement.serial %></td>
+        <td><%= link_to 'Show', equipement %></td>
+        <td><%= link_to 'Edit', edit_equipement_path(equipement) %></td>
+        <td><%= link_to 'Destroy', equipement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

@@ -1,0 +1,21 @@
+<%= simple_form_for(@ligne) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :numerocompte %>
+    <%= f.input :ndi %>
+    <%= f.input :debit %>
+    <%= f.input :ippublique %>
+    <%= f.input :mail %>
+    <%= f.input :tel %>
+    <%= f.input :identifiantoperateur %>
+    <%= f.input :mdpoperateur %>
+    <%= f.input :compte %>
+    <%= f.input :motdepasse %>
+    <%= f.association :operateur %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

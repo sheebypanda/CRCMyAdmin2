@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nom:</strong>
+  <%= @localisation.nom %>
+</p>
+
+<p>
+  <strong>Adresse:</strong>
+  <%= @localisation.adresse %>
+</p>
+
+<p>
+  <strong>Codepostal:</strong>
+  <%= @localisation.codepostal %>
+</p>
+
+<p>
+  <strong>Ville:</strong>
+  <%= @localisation.ville %>
+</p>
+
+<p>
+  <strong>Etage:</strong>
+  <%= @localisation.etage %>
+</p>
+
+<p>
+  <strong>Tel:</strong>
+  <%= @localisation.tel %>
+</p>
+
+<p>
+  <strong>Mail:</strong>
+  <%= @localisation.mail %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @localisation.description %>
+</p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @localisation.lat %>
+</p>
+
+<p>
+  <strong>Lng:</strong>
+  <%= @localisation.lng %>
+</p>
+
+<%= link_to 'Edit', edit_localisation_path(@localisation) %> |
+<%= link_to 'Back', localisations_path %>
