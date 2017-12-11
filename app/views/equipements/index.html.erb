@@ -30,9 +30,9 @@
         <td><%= equipement.garantie %></td>
         <td><%= equipement.asapid %></td>
         <td><%= equipement.serial %></td>
-        <td><%= link_to 'Show', equipement %></td>
-        <td><%= link_to 'Edit', edit_equipement_path(equipement) %></td>
-        <td><%= link_to 'Destroy', equipement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("search"), equipement, class: "btn btn-outline-info" %></td>
+        <td><%= link_to fa_icon("pencil"), edit_equipement_path(equipement), class: "btn btn-outline-warning" %></td>
+        <td><%= link_to fa_icon("trash"), equipement, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -38,9 +38,10 @@
         <% if recette.etiquette %><td><%=  fa_icon("check", class: "text-success") %></td>
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
 
-        <td><%= link_to 'Show', recette %></td>
-        <td><%= link_to 'Edit', edit_recette_path(recette) %></td>
-        <td><%= link_to 'Destroy', recette, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("search"), recette, class: "btn btn-outline-info" %></td>
+        <td><%= link_to fa_icon("pencil"), edit_recette_path(recette), class: "btn btn-outline-warning" %></td>
+        <td><%= link_to fa_icon("trash"), recette, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
       </tr>
     <% end %>
   </tbody>

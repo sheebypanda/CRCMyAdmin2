@@ -1,3 +1,3 @@
 class Operateur < ApplicationRecord
-  has_many :lignes
+  has_many :lignes, dependent: :destroy
 end
