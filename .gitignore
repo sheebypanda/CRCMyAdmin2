@@ -18,7 +18,5 @@
 
 .byebug_history
 
-./equipements.csv
-
-./equipements.csv
-./lignes.csv
+equipements.csv
+lignes.csv
