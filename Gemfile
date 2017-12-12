@@ -27,6 +27,11 @@ gem 'bootstrap', '~> 4.0.0.beta'
 gem 'geocoder'
 # gem 'kaminari'
 
+gem "capistrano"
+gem "capistrano3-puma"
+gem "capistrano-rails", require: false
+gem "capistrano-bundler", require: false
+gem "capistrano-rbenv"
 
 
 
