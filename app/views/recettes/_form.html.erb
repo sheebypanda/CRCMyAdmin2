@@ -26,7 +26,7 @@
       <h4 class="card-title"><%= fa_icon("globe") %> Sortie internet</h4>
       <div class="form-row">
         <div class='col-lg-6 col-sm-12'>
-          <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: :ndi, value_method: :id, include_blank: false %>
+          <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: :numerocompte, value_method: :id, include_blank: false %>
         </div>
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id">ou alors</label><br/>

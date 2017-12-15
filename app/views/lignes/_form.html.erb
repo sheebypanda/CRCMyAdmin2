@@ -1,21 +1,71 @@
 <%= simple_form_for(@ligne) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :numerocompte %>
-    <%= f.input :ndi %>
-    <%= f.input :debit %>
-    <%= f.input :ippublique %>
-    <%= f.input :mail %>
-    <%= f.input :tel %>
-    <%= f.input :identifiantoperateur %>
-    <%= f.input :mdpoperateur %>
-    <%= f.input :compte %>
-    <%= f.input :motdepasse %>
-    <%= f.association :operateur %>
-  </div>
+
+
+    <div class="card text-white bg-danger mb-3">
+      <div class="card-body">
+        <h4 class="card-title"><%= fa_icon("id-card") %> Caractéristiques</h4>
+
+        <div class="form-row">
+          <div class='col-lg-4 col-sm-12'>
+            <div class="form-group">
+              <%= f.association :operateur, label: fa_icon("industry")+" Opérateur", label_method: :nom, value_method: :id, include_blank: false %>
+             </div>
+          </div>
+          <div class='col-lg-4 col-sm-12'>
+            <%= f.input :debit, label: fa_icon("cloud-download")+" Débit descendant (Mb/s)", input_html: {placeholder: "20"} %>
+          </div>
+          <div class='col-lg-4 col-sm-12'>
+            <%= f.input :ippublique, label: fa_icon("at")+" IP publique", input_html: {placeholder: "163.172.94.200"} %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :numerocompte, label: fa_icon("barcode")+" Numéro de compte", input_html: {placeholder: "VV670110"} %>
+          </div>
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :ndi, label: fa_icon("phone")+" NDI", input_html: {placeholder: "05 56 16 80 80"} %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :identifiantoperateur, label:fa_icon("user-circle")+" Identifiant de connexion", input_html: {placeholder: "fti/t3wvdhz"} %>
+          </div>
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :mdpoperateur, label:fa_icon("lock")+" Mot de passe de connexion" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card text-white bg-info mb-3">
+      <div class="card-body">
+        <h4 class="card-title"><%= fa_icon("globe") %> Portail opérateur</h4>
+
+        <div class="form-row">
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :mail, label: fa_icon("envelope")+" Mail de contact", input_html: {placeholder: "mairie-annexe@orange.fr"} %>
+          </div>
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :tel, label: fa_icon("phone")+" Téléphone de contact", input_html: {placeholder: "05 56 16 80 80"} %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :compte, label:fa_icon("user-circle")+" Identifiant", input_html: {placeholder: "alsh-lamarianne"} %>
+          </div>
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :motdepasse, label:fa_icon("lock")+" Mot de passe" %>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, " Ajouter la ligne", class: "btn btn-block btn-outline-primary mb-3" %>
   </div>
 <% end %>
