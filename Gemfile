@@ -25,7 +25,7 @@ gem 'jquery-rails'
 gem "font-awesome-rails"
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'geocoder'
-# gem 'kaminari'
+gem 'animate-rails'
 
 gem "capistrano"
 gem "capistrano3-puma"

@@ -4,7 +4,7 @@ class LignesController < ApplicationController
   # GET /lignes
   # GET /lignes.json
   def index
-    @lignes = Ligne.all
+    @lignes = Ligne.all.order(updated_at: :desc).limit(200)
   end
 
   # GET /lignes/1
@@ -28,8 +28,8 @@ class LignesController < ApplicationController
 
     respond_to do |format|
       if @ligne.save
-        format.html { redirect_to @ligne, notice: 'Ligne was successfully created.' }
-        format.json { render :show, status: :created, location: @ligne }
+        format.html { redirect_to lignes_path, notice: "La ligne #{@ligne.numerocompte} a bien été créée." }
+        format.json { render :index, status: :created, location: @ligne }
       else
         format.html { render :new }
         format.json { render json: @ligne.errors, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class LignesController < ApplicationController
   def update
     respond_to do |format|
       if @ligne.update(ligne_params)
-        format.html { redirect_to @ligne, notice: 'Ligne was successfully updated.' }
+        format.html { redirect_to lignes_path, notice: "La ligne #{@ligne.numerocompte} a bien été modifiée." }
         format.json { render :show, status: :ok, location: @ligne }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class LignesController < ApplicationController
   def destroy
     @ligne.destroy
     respond_to do |format|
-      format.html { redirect_to lignes_url, notice: 'Ligne was successfully destroyed.' }
+      format.html { redirect_to lignes_url, notice: "La ligne #{@ligne.numerocompte} a bien été supprimée." }
       format.json { head :no_content }
     end
   end

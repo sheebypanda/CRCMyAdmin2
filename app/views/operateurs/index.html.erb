@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% if notice  %>
+  <div class="alert alert-success animated slideInDown" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
 
 <h1>Operateurs</h1>
 <%= link_to fa_icon("plus")+' Ajouter un opérateur', new_operateur_path, class: 'btn btn-outline-primary' %>

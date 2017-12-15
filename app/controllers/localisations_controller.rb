@@ -28,7 +28,7 @@ class LocalisationsController < ApplicationController
 
     respond_to do |format|
       if @localisation.save
-        format.html { redirect_to @localisation, notice: 'Localisation was successfully created.' }
+        format.html { redirect_to localisations_path, notice: "La localisation #{@localisation.nom} a bien été créée." }
         format.json { render :show, status: :created, location: @localisation }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class LocalisationsController < ApplicationController
   def update
     respond_to do |format|
       if @localisation.update(localisation_params)
-        format.html { redirect_to @localisation, notice: 'Localisation was successfully updated.' }
+        format.html { redirect_to localisations_path, notice: "La localisation #{@localisation.nom} a bien été créée." }
         format.json { render :show, status: :ok, location: @localisation }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class LocalisationsController < ApplicationController
   def destroy
     @localisation.destroy
     respond_to do |format|
-      format.html { redirect_to localisations_url, notice: 'Localisation was successfully destroyed.' }
+      format.html { redirect_to localisations_url, notice: "La localisation #{@localisation.nom} a bien été supprimée." }
       format.json { head :no_content }
     end
   end

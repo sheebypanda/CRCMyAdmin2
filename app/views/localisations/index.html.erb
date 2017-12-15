@@ -1,9 +1,13 @@
-<p id="notice"><%= notice %></p>
+<% if notice  %>
+  <div class="alert alert-success animated slideInDown" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
 
 <h1>Localisations</h1>
 <%= link_to fa_icon("plus")+' Ajouter une localisation', new_localisation_path, class: 'btn btn-outline-primary' %>
 
-<table>
+<table class="table table-sm table-striped">
   <thead>
     <tr>
       <th>Ville</th>
@@ -33,9 +37,9 @@
         <td><%= localisation.description %></td>
         <td><%= localisation.lat %></td>
         <td><%= localisation.lng %></td>
-        <td><%= link_to 'Show', localisation %></td>
-        <td><%= link_to 'Edit', edit_localisation_path(localisation) %></td>
-        <td><%= link_to 'Destroy', localisation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("search"), localisation, class: "btn btn-outline-info" %></td>
+        <td><%= link_to fa_icon("pencil"), edit_localisation_path(localisation), class: "btn btn-outline-warning" %></td>
+        <td><%= link_to fa_icon("trash"), localisation, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

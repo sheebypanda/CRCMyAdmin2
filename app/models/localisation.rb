@@ -3,6 +3,9 @@ class Localisation < ApplicationRecord
   has_many :equipements, through: :recettes
   has_many :lignes, through: :recettes
 
+  validates :nom, presence: true, uniqueness: true
+
+
   geocoded_by :adresse
   after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }
 

@@ -1,5 +1,10 @@
 <%= simple_form_for(@ligne) do |f| %>
-  <%= f.error_notification %>
+  <%- if f.error_notification %>
+  <div class="alert alert-error fade in">
+    <a class="close" data-dismiss="alert" href="#">&times;</a>
+    <%= f.error_notification %>
+  </div>
+  <%- end %>
 
 
 
@@ -23,7 +28,7 @@
 
         <div class="form-row">
           <div class='col-lg-6 col-sm-12'>
-            <%= f.input :numerocompte, label: fa_icon("barcode")+" Numéro de compte", input_html: {placeholder: "VV670110"} %>
+            <%= f.input :numerocompte, label: fa_icon("barcode")+" Référence opérateur", input_html: {placeholder: "VV670110"} %>
           </div>
           <div class='col-lg-6 col-sm-12'>
             <%= f.input :ndi, label: fa_icon("phone")+" NDI", input_html: {placeholder: "05 56 16 80 80"} %>
