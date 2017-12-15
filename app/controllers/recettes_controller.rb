@@ -21,7 +21,7 @@ class RecettesController < ApplicationController
     @recette.user = current_user
     respond_to do |format|
       if @recette.save
-        format.html { redirect_to @recette, notice: 'Recette was successfully created.' }
+        format.html { redirect_to recettes_path, notice: "La recette de l'équipement #{@recette.equipement.nom} a bien été créée." }
         format.json { render :show, status: :created, location: @recette }
       else
         format.html { render :new }
@@ -33,7 +33,7 @@ class RecettesController < ApplicationController
   def update
     respond_to do |format|
       if @recette.update(recette_params)
-        format.html { redirect_to @recette, notice: 'Recette was successfully updated.' }
+        format.html { redirect_to @recette, notice: "La recette de l'équipement #{@recette.equipement.nom} a bien été modifiée." }
         format.json { render :index, status: :ok, location: @recette }
       else
         format.html { render :edit }
@@ -45,7 +45,7 @@ class RecettesController < ApplicationController
   def destroy
     @recette.destroy
     respond_to do |format|
-      format.html { redirect_to recettes_url, notice: 'Recette was successfully destroyed.' }
+      format.html { redirect_to recettes_url, notice:  "La recette de l'équipement #{@recette.equipement.nom} a bien été supprimée." }
       format.json { head :no_content }
     end
   end

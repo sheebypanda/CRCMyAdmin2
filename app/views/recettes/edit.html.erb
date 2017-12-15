@@ -1,6 +1,5 @@
-<h1>Editing Recette</h1>
+<%= link_to fa_icon('chevron-left')+' Retour à la liste', recettes_path, class: "btn btn-outline-primary" %>
+
+<h1 class="text-center mb-3"><%= fa_icon("file-text") %> Modification de la fiche Recette</h1>
 
 <%= render 'form', recette: @recette %>
-
-<%= link_to 'Show', @recette %> |
-<%= link_to 'Back', recettes_path %>

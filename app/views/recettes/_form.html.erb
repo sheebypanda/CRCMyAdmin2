@@ -15,7 +15,7 @@
         </div>
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id">ou alors</label><br/>
-          <a href="<%= new_equipement_path %>" class="btn btn-primary"><%= fa_icon("plus") %> Ajouter un nouvel équipement</a>
+          <a href="<%= new_equipement_path %>" class="btn btn-primary"><%= fa_icon("server") %> Ajouter un nouvel équipement</a>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
         </div>
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id">ou alors</label><br/>
-          <a href="<%= new_ligne_path %>" class="btn btn-primary"><%= fa_icon("plus") %> Ajouter une nouvelle ligne</a>
+          <a href="<%= new_ligne_path %>" class="btn btn-primary"><%= fa_icon("phone") %> Ajouter une nouvelle ligne</a>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
       <h4 class="card-title"><%= fa_icon("map-marker") %> Localisation</h4>
       <div class="form-row">
         <div class='col-lg-6 col-sm-12'>
-          <%= f.association :localisation, label_method: :nom, value_method: :id, include_blank: false %>
+          <%= f.association :localisation, label: "Selectionner une adresse existante", label_method: :nom, value_method: :id, include_blank: false %>
         </div>
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id">ou alors</label><br/>
@@ -55,11 +55,23 @@
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("check") %> Test de conformité</h4>
 
+      <div class="form-row">
+        <div class='col-lg-6 col-sm-12'>
           <%= f.input :snmp, label: "Communauté SNMP ajoutée"%>
+        </div>
+        <div class='col-lg-6 col-sm-12'>
           <%= f.input :tacacs, label: "Authentification TACACS effectué"%>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class='col-lg-6 col-sm-12'>
           <%= f.input :testdebit, label: "Test de débit effectués"%>
+        </div>
+        <div class='col-lg-6 col-sm-12'>
           <%= f.input :supervision, label: "Équipement supervisé"%>
-          <%= f.input :etiquette, label: "Étiquette collée sur l'équipement"%>
+        </div>
+      </div>
+      <%= f.input :etiquette, label: "Étiquette collée sur l'équipement"%>
 
     </div>
   </div>

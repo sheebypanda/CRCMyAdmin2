@@ -11,16 +11,16 @@
 <table id="tablesorter" class="tablesorter table table-sm table-striped">
   <thead>
     <tr>
-      <th>User</th>
-      <th>Equipement</th>
-      <th>Ligne</th>
-      <th>Localisation</th>
+      <th><%= fa_icon("user-circle") %> User</th>
+      <th><%= fa_icon("server") %> Equipement</th>
+      <th><%= fa_icon("phone") %> Ligne</th>
+      <th><%= fa_icon("home") %> Localisation</th>
       <th>Snmp</th>
       <th>Tacacs</th>
       <th>Testdebit</th>
       <th>Supervision</th>
       <th>Etiquette</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -28,9 +28,9 @@
     <% @recettes.each do |recette| %>
       <tr>
         <td><%= recette.user.email %></td>
-        <td><%= recette.equipement.nom %></td>
-        <td><%= recette.ligne.ndi %></td>
-        <td><%= recette.localisation.nom %></td>
+        <td><a href="<%= edit_equipement_path(recette.equipement) %>"><%= recette.equipement.nom %></a></td>
+        <td><a href="<%= edit_ligne_path(recette.ligne) %>"><%= recette.ligne.ndi %></a></td>
+        <td><a href="<%= edit_localisation_path(recette.localisation) %>"><%= recette.localisation.nom %></a></td>
         <% if recette.snmp %><td><%=  fa_icon("check", class: "text-success") %></td>
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
         <% if recette.tacacs %><td><%=  fa_icon("check", class: "text-success") %></td>
@@ -42,7 +42,6 @@
         <% if recette.etiquette %><td><%=  fa_icon("check", class: "text-success") %></td>
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
 
-        <td><%= link_to fa_icon("search"), recette, class: "btn btn-outline-info" %></td>
         <td><%= link_to fa_icon("pencil"), edit_recette_path(recette), class: "btn btn-outline-warning" %></td>
         <td><%= link_to fa_icon("trash"), recette, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
 

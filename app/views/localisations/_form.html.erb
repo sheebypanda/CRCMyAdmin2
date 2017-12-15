@@ -12,8 +12,8 @@
         </div>
         <div class='col-lg-6 col-sm-12'>
           <button id="gps" type="button" class="pure-button pure-button-primary btn btn-outline-danger btn-block"><%= fa_icon("map-marker") %> Utiliser ma position</button>
-          <%= f.input :lat, label: "Latitude" %>
-          <%= f.input :lng, label: "Longitude" %>
+          <%= f.input :lat, input_html: {readonly:""}, label: "Latitude" %>
+          <%= f.input :lng, input_html: {readonly:""}, label: "Longitude" %>
         </div>
       </div>
     </div>

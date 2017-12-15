@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% if notice  %>
+  <div class="alert alert-success animated slideInDown" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
 
 <h1><%= fa_icon("server") %> Équipements</h1>
 
@@ -7,13 +11,13 @@
 <table id="tablesorter" class="tablesorter table table-striped table-sm">
   <thead>
     <tr>
-      <th>Marque</th>
-      <th>Modele</th>
-      <th>Nom</th>
-      <th>Ip</th>
-      <th>Asapid</th>
-      <th>Serial</th>
-      <th colspan="3"></th>
+      <th><%= fa_icon("tag") %> Marque</th>
+      <th><%= fa_icon("server") %> Modèle</th>
+      <th><%= fa_icon("comment") %> Nom</th>
+      <th><%= fa_icon("at") %> IP</th>
+      <th><%= fa_icon("tag") %> ID ASAP</th>
+      <th><%= fa_icon("barcode") %> Numéro de série</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -22,11 +26,10 @@
       <tr>
         <td><%= equipement.marque %></td>
         <td><%= equipement.modele %></td>
-        <td><%= equipement.nom %></td>
+        <td><a href="<%= edit_equipement_path(equipement) %>"><%= equipement.nom %></a></td>
         <td><%= equipement.ip %></td>
         <td><%= equipement.asapid %></td>
         <td><%= equipement.serial %></td>
-        <td><%= link_to fa_icon("search"), equipement, class: "btn btn-outline-info" %></td>
         <td><%= link_to fa_icon("pencil"), edit_equipement_path(equipement), class: "btn btn-outline-warning" %></td>
         <td><%= link_to fa_icon("trash"), equipement, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

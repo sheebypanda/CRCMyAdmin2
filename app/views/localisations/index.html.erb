@@ -10,34 +10,31 @@
 <table id="tablesorter" class="tablesorter table table-sm table-striped">
   <thead>
     <tr>
-      <th>Ville</th>
-      <th>Nom</th>
-      <th>Adresse</th>
-      <th>Codepostal</th>
-      <th>Etage</th>
-      <th>Tel</th>
-      <th>Mail</th>
-      <th>Description</th>
-      <th>Lat</th>
-      <th>Lng</th>
-      <th colspan="3"></th>
+      <th><%= fa_icon("") %> Nom</th>
+      <th><%= fa_icon("map") %> Adresse</th>
+      <th><%= fa_icon("barcode") %> CP</th>
+      <th><%= fa_icon("home") %> Ville</th>
+      <th><%= fa_icon("building") %> Étage</th>
+      <th><%= fa_icon("phone") %> Tel</th>
+      <th><%= fa_icon("map-marker") %> Géoloc</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @localisations.each do |localisation| %>
       <tr>
-        <td><%= localisation.ville %></td>
-        <td><%= localisation.nom %></td>
+        <td><a href="<%= edit_localisation_path(localisation)%>"><%= localisation.nom %></a></td>
         <td><%= localisation.adresse %></td>
         <td><%= localisation.codepostal %></td>
+        <td><%= localisation.ville %></td>
         <td><%= localisation.etage %></td>
         <td><%= localisation.tel %></td>
-        <td><%= localisation.mail %></td>
-        <td><%= localisation.description %></td>
-        <td><%= localisation.lat %></td>
-        <td><%= localisation.lng %></td>
-        <td><%= link_to fa_icon("search"), localisation, class: "btn btn-outline-info" %></td>
+        <% if localisation.lat %>
+          <td class="text-success"><%= fa_icon("check") %></td>
+        <% else %>
+          <td class="text-danger"><%= fa_icon("close") %></td>
+        <% end %>
         <td><%= link_to fa_icon("pencil"), edit_localisation_path(localisation), class: "btn btn-outline-warning" %></td>
         <td><%= link_to fa_icon("trash"), localisation, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
