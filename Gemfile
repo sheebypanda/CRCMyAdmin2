@@ -26,6 +26,8 @@ gem "font-awesome-rails"
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'geocoder'
 gem 'animate-rails'
+gem 'jquery-tablesorter'
+
 
 gem "capistrano"
 gem "capistrano3-puma"
