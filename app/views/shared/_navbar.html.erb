@@ -32,10 +32,10 @@
           <ul class="navbar-nav my-2 my-lg-0">
             <% if user_signed_in? %>
               <li class="nav-item  mr-2 mb-1">
-                <%= link_to fa_icon("user-circle-o") + " " + current_user.email , edit_user_registration_path, :class => 'btn-outline-secondary btn' %>
+                <%= link_to fa_icon("user-circle-o") + " " + current_user.email , edit_user_registration_path, :class => 'nav-link' %>
               </li>
               <li class="nav-item">
-                <%= link_to fa_icon("sign-out") + "Logout", destroy_user_session_path, method: :delete, :class => 'btn-outline-danger btn'  %>
+                <%= link_to fa_icon("sign-out") + "Déconnexion", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
               </li>
             <% else %>
             <li class="nav-item">
