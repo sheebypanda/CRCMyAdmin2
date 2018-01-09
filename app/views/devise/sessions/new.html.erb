@@ -1,0 +1,19 @@
+<h1 class="text-center"><%= fa_icon("dashboard")%> CRCMyAdmin</h1>
+
+<div class="alert alert-danger" role="alert">
+  Pour accéder à l'application, merci de vous authentifier.
+</div>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input :password, label: 'Mot de passe', required: true %>
+    <%= f.input :remember_me, label: 'Se souvenir de moi', as: :boolean if devise_mapping.rememberable? %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Connexion", class: "btn-primary btn-block"  %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
