@@ -13,6 +13,7 @@
       <th><%= fa_icon("bug")%> Opérateur</th>
       <th><%= fa_icon("barcode")%> Référence opérateur</th>
       <th><%= fa_icon("phone")%> NDI</th>
+      <th><%= fa_icon("feed")%> Techno</th>
       <th><%= fa_icon("cloud-download")%> Débit</th>
       <th><%= fa_icon("at")%> IP publique</th>
       <th><%= fa_icon("envelope")%> Mail</th>
@@ -26,6 +27,7 @@
         <td><%= ligne.operateur.nom %></td>
         <td><a href="<%= edit_ligne_path(ligne) %>"><%= ligne.numerocompte %></a></td>
         <td><%= ligne.ndi %></td>
+        <td><%= ligne.techno %></td>
         <td><%= ligne.debit %></td>
         <td><%= ligne.ippublique %></td>
         <td><%= ligne.mail %></td>

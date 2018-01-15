@@ -4,7 +4,7 @@ class LignesController < ApplicationController
   # GET /lignes
   # GET /lignes.json
   def index
-    @lignes = Ligne.all.order(updated_at: :desc).limit(200)
+    @lignes = Ligne.all.order(updated_at: :desc)
   end
 
   # GET /lignes/1
@@ -69,6 +69,6 @@ class LignesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ligne_params
-      params.require(:ligne).permit(:numerocompte, :ndi, :debit, :ippublique, :mail, :tel, :identifiantoperateur, :mdpoperateur, :compte, :motdepasse, :operateur_id)
+      params.require(:ligne).permit(:numerocompte, :techno, :cout, :ndi, :debit, :ippublique, :mail, :tel, :identifiantoperateur, :mdpoperateur, :compte, :motdepasse, :operateur_id)
     end
 end
