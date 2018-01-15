@@ -18,6 +18,6 @@
 
 .byebug_history
 
-equipements.csv
-lignes.csv
+# equipements.csv
+# lignes.csv
 config/secrets.yml
