@@ -8,9 +8,14 @@
 
 
 require 'csv'
-# exec("pwd")
-csv_text = File.read('lib/seeds/lignes.csv')
-csv = CSV.parse(csv_text, :headers => true)
+require "open-uri"
+lignesurl = URI.encode("http://sheebypanda.com/wp-content/uploads/2018/01/lignes.csv")
+equipementsurl = URI.encode("http://sheebypanda.com/wp-content/uploads/2018/01/equipements.csv  ")
+
+lignescsv = open(lignesurl)
+equipementscsv = open(equipementsurl)
+#csv_text = File.read('lib/seeds/lignes.csv')
+csv = CSV.parse(lignescsv, :headers => true)
 csv.each do |row|
 
   vv = Ligne.create!({
@@ -40,8 +45,8 @@ csv.each do |row|
 
 end
 
-csv_text = File.read('lib/seeds/equipements.csv')
-csv = CSV.parse(csv_text, :headers => true)
+# csv_text = File.read('lib/seeds/equipements.csv')
+csv = CSV.parse(equipementscsv, :headers => true)
 csv.each do |row|
 
   Equipement.create!({
