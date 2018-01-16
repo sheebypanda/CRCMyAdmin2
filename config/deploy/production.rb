@@ -2,12 +2,24 @@ set :stage, :production
 set :rails_env, :production
 set :deploy_to, "/usr/local/CRCMyAdmin2"
 set :repo_url, "https://github.com/sheebypanda/CRCMyAdmin2"
-set :branch, ENV["PRODUCTION_BRANCH"]
-
+#set :branch, ENV["PRODUCTION_BRANCH"]
+set :branch, "master"
 set :bundle_env_variables, { 'https_proxy' => 'https://172.20.92.38:3128' }
 
-server ENV["PRODUCTION_SERVER_IP"], user: ENV["PRODUCTION_DEPLOY_USER"], roles: %w{web app db}
+#server ENV["PRODUCTION_SERVER_IP"], user: ENV["PRODUCTION_DEPLOY_USER"], roles: %w{web app db}
+server "172.20.92.38", user: "deploy", roles: %w{web app db}
 
+
+desc 'Runs rake db:seed'
+task :seed => [:set_rails_env] do
+  on primary fetch(:migration_role) do
+    within release_path do
+      with rails_env: fetch(:rails_env) do
+        execute :rake, "db:seed"
+      end
+    end
+  end
+end
 
 # server-based syntax
 # ======================
