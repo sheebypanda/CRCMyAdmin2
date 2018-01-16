@@ -3,6 +3,7 @@ class EquipementsController < ApplicationController
 
   def index
     @equipements = Equipement.all.order(updated_at: :desc).limit(200)
+    @nb = Equipement.all.count
   end
 
   def show

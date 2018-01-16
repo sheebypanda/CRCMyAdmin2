@@ -4,6 +4,7 @@ class RecettesController < ApplicationController
 
   def index
     @recettes = Recette.all
+    @nb = Recette.all.count
   end
 
   def show

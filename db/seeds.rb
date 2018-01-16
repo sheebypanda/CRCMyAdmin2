@@ -8,8 +8,8 @@
 
 
 require 'csv'
-
-csv_text = File.read('lignes.csv')
+# exec("pwd")
+csv_text = File.read('lib/seeds/lignes.csv')
 csv = CSV.parse(csv_text, :headers => true)
 csv.each do |row|
 
@@ -36,10 +36,11 @@ csv.each do |row|
     :nom => row[1],
     :adresse => row[2],
     :description => row[3]
-  }
-)
+  })
 
-csv_text = File.read('equipements.csv')
+end
+
+csv_text = File.read('lib/seeds/equipements.csv')
 csv = CSV.parse(csv_text, :headers => true)
 csv.each do |row|
 
@@ -53,7 +54,4 @@ csv.each do |row|
       :marque => row[6],
     }
   )
-end
-
-
 end
