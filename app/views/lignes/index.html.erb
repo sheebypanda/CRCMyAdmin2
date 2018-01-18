@@ -10,13 +10,12 @@
 <table id="tablesorter" class="table table-striped table-sm tablesorter">
   <thead>
     <tr>
+      <th><%= fa_icon("feed")%> Techno</th>
       <th><%= fa_icon("bug")%> Opérateur</th>
       <th><%= fa_icon("barcode")%> Référence opérateur</th>
       <th><%= fa_icon("phone")%> NDI</th>
-      <th><%= fa_icon("feed")%> Techno</th>
       <th><%= fa_icon("cloud-download")%> Débit</th>
       <th><%= fa_icon("at")%> IP publique</th>
-      <th><%= fa_icon("envelope")%> Mail</th>
       <th colspan="2"><%= fa_icon("pencil")%></th>
     </tr>
   </thead>
@@ -24,13 +23,12 @@
   <tbody>
     <% @lignes.each do |ligne| %>
       <tr>
+        <td><%= ligne.techno %></td>
         <td><%= ligne.operateur.nom %></td>
         <td><a href="<%= edit_ligne_path(ligne) %>"><%= ligne.numerocompte %></a></td>
         <td><%= ligne.ndi %></td>
-        <td><%= ligne.techno %></td>
         <td><%= ligne.debit %></td>
         <td><%= ligne.ippublique %></td>
-        <td><%= ligne.mail %></td>
         <td><%= link_to fa_icon("pencil"), edit_ligne_path(ligne), class: "btn btn-outline-warning" %></td>
         <td><%= link_to fa_icon("trash"), ligne, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
