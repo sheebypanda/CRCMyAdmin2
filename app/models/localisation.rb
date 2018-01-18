@@ -4,7 +4,7 @@ class Localisation < ApplicationRecord
   has_many :lignes, through: :recettes
 
   validates :nom, presence: true
-  
+
 
   geocoded_by :adresse
   after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }

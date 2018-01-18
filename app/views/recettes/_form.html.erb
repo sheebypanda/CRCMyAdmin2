@@ -27,7 +27,7 @@
       <div class="form-row">
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id">Sélectionner une localisation</label>
-          <select class="form-control" name="recette[localisation_id]" id="recette_localisation_id">
+          <select class="form-control" name="recette[ligne_id]" id="recette_ligne_id">
             <% @lignes.each do |lig| %>
               <option value="<%= lig.id %>"><%= lig.numerocompte %> - <%= lig.ndi %></option>
             <% end %>

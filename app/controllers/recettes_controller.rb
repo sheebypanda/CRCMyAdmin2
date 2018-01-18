@@ -1,6 +1,6 @@
 class RecettesController < ApplicationController
   before_action :set_recette, only: [:show, :edit, :update, :destroy]
-  before_action :get_enr, :get_localisation, :get_ligne, only: [:new, :edit]
+  before_action :get_enr, :get_localisation, :get_ligne, only: [:new, :edit, :create]
 
 
   def index
