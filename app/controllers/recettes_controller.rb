@@ -1,6 +1,7 @@
 class RecettesController < ApplicationController
   before_action :set_recette, only: [:show, :edit, :update, :destroy]
-  before_action :get_enr, only: [:new, :edit]
+  before_action :get_enr, :get_localisation, :get_ligne, only: [:new, :edit]
+
 
   def index
     @recettes = Recette.all
@@ -52,6 +53,12 @@ class RecettesController < ApplicationController
   end
 
   private
+    def get_localisation
+      @localisations = Localisation.all.order(:ville).order(:nom)
+    end
+    def get_ligne
+      @lignes = Ligne.all.order(:numerocompte).order(:ndi)
+    end
     def set_recette
       @recette = Recette.find(params[:id])
     end
