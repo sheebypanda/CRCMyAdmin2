@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :equipements
   devise_for :users
 
-  root 'equipements#index'
+  root 'recettes#dashboard'
 end

@@ -1,0 +1,10 @@
+<script>Chartkick.configure({language: "fr"}); </script>
+</script>
+<h2>Fiches recettes au fil de temps</h2>
+<%= line_chart Recette.group_by_day(:created_at).count %>
+
+<h2>Matériel par marque</h2>
+<%= pie_chart Equipement.group(:marque).count, donut: true, download: true, legend: "right" %>
+
+<h2>Matériel Brocade par modèle</h2>
+<%= pie_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count, donut: true, download: true, legend: "right" %>

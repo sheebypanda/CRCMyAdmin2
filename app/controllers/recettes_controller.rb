@@ -11,6 +11,10 @@ class RecettesController < ApplicationController
   def show
   end
 
+  def dashboard
+    @brocades = Equipement.where(marque:"Brocade")
+  end
+
   def new
     @recette = Recette.new
   end
