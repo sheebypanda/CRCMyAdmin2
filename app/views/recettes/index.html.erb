@@ -11,6 +11,7 @@
 <table id="tablesorter" class="tablesorter table table-sm table-striped">
   <thead>
     <tr>
+      <th><%= fa_icon("calendar") %> Date</th>
       <th><%= fa_icon("user-circle") %> User</th>
       <th><%= fa_icon("server") %> Equipement</th>
       <th><%= fa_icon("phone") %> Ligne</th>
@@ -27,7 +28,9 @@
   <tbody>
     <% @recettes.each do |recette| %>
       <tr>
-        <td><%= recette.user.email %></td>
+        <td><%= recette.created_at.strftime("%d/%m/%Y") %></td>
+        <% index = recette.user.email.index('@') - 1 %>
+        <td><%= recette.user.email.slice(0..index) %></td>
         <td><a href="<%= edit_equipement_path(recette.equipement) %>"><%= recette.equipement.nom %></a></td>
         <td><a href="<%= edit_ligne_path(recette.ligne) %>"><%= recette.ligne.identifiantoperateur %></a></td>
         <td><a href="<%= edit_localisation_path(recette.localisation) %>"><%= recette.localisation.nom %></a></td>
