@@ -70,6 +70,15 @@
             <%= f.input :motdepasse, label:fa_icon("lock")+" Mot de passe" %>
           </div>
         </div>
+
+        <div class="form-row">
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :cout, label:fa_icon("money")+" Coût / mois en €", input_html: {placeholder: "29,90"} %>
+          </div>
+          <div class='col-lg-6 col-sm-12'>
+            <%= f.input :vlan, label:fa_icon("plug")+" Vlans", input_html: {placeholder: "300, 500, 501..."} %>
+          </div>
+        </div>
       </div>
     </div>
 
