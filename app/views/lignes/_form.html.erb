@@ -13,15 +13,18 @@
         <h4 class="card-title"><%= fa_icon("id-card") %> Caractéristiques</h4>
 
         <div class="form-row">
-          <div class='col-lg-4 col-sm-12'>
+          <div class='col-lg-3 col-sm-12'>
             <div class="form-group">
               <%= f.association :operateur, label: fa_icon("bug")+" Opérateur", label_method: :nom, value_method: :id, include_blank: false %>
              </div>
           </div>
-          <div class='col-lg-4 col-sm-12'>
+          <div class='col-lg-3 col-sm-12'>
+            <%= f.input :techno, label: fa_icon("rebel")+" Techno", input_html: {placeholder: "FO - ADSL - SDSL..."} %>
+          </div>
+          <div class='col-lg-3 col-sm-12'>
             <%= f.input :debit, label: fa_icon("cloud-download")+" Débit descendant (Mb/s)", input_html: {placeholder: "20"} %>
           </div>
-          <div class='col-lg-4 col-sm-12'>
+          <div class='col-lg-3 col-sm-12'>
             <%= f.input :ippublique, label: fa_icon("at")+" IP publique", input_html: {placeholder: "163.172.94.200"} %>
           </div>
         </div>
