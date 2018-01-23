@@ -32,7 +32,7 @@
         <% index = recette.user.email.index('@') - 1 %>
         <td><%= recette.user.email.slice(0..index) %></td>
         <td><a href="<%= edit_equipement_path(recette.equipement) %>"><%= recette.equipement.nom %></a></td>
-        <td><a href="<%= edit_ligne_path(recette.ligne) %>"><%= recette.ligne.identifiantoperateur %></a></td>
+        <td><a href="<%= edit_ligne_path(recette.ligne) %>"><%= recette.ligne.numerocompte %></a></td>
         <td><a href="<%= edit_localisation_path(recette.localisation) %>"><%= recette.localisation.nom %></a></td>
         <% if recette.snmp %><td><%=  fa_icon("check", class: "text-success") %></td>
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
