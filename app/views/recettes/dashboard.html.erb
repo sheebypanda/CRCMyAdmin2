@@ -1,10 +1,22 @@
 <script>Chartkick.configure({language: "fr"}); </script>
-</script>
-<h2>Fiches recettes au fil de temps</h2>
-<%= line_chart Recette.group_by_day(:created_at).count %>
 
-<h2>Matériel par marque</h2>
-<%= pie_chart Equipement.group(:marque).count, donut: true, download: true, legend: "right" %>
+<h2>Fiches recettes</h2>
+  <h4>Chronologie</h4>
+  <%= line_chart Recette.group_by_week(:created_at).count %>
 
-<h2>Matériel Brocade par modèle</h2>
-<%= pie_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count, donut: true, download: true, legend: "right" %>
+<h2>Équipements</h2>
+  <h4>Répartition par fabricant</h4>
+  <%= pie_chart Equipement.group(:marque).count, donut: true, download: true, legend: "right" %>
+
+  <h4>Matériel Brocade par modèle</h4>
+  <%= pie_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count, donut: true, download: true, legend: "right" %>
+
+<h2>Sorties internet</h2>
+  <h4>Répartition par opérateur</h4>
+  <%= pie_chart Operateur.joins(:lignes).group(:nom).count, donut: true, download: true, legend: "right" %>
+
+  <h4>Répartition par technologie</h4>
+  <%= pie_chart Ligne.group(:techno).count, donut: true, download: true, legend: "right" %>
+
+  <h4>Répartition par débit</h4>
+  <%= pie_chart Ligne.group(:debit).count, donut: true, download: true, legend: "right" %>
