@@ -73,7 +73,16 @@ class RecettesController < ApplicationController
     end
 
     def recette_params
-      params.require(:recette).permit(:user_id, :equipement_id, :ligne_id, :localisation_id, :snmp, :tacacs, :testdebit, :supervision, :etiquette)
+      params.require(:recette).permit(
+        :user_id,
+        :equipement_id,
+        :ligne_id,
+        :localisation_id,
+        :snmp,
+        :tacacs,
+        :testdebit,
+        :supervision,
+        :etiquette)
     end
 
     def get_enr

@@ -6,12 +6,16 @@
       <h4 class="card-title"><%= fa_icon("server") %> Équipements</h4>
       <div class="form-row">
         <div class='col-lg-6 col-sm-12'>
-          <label for="recette_equipement_id">Sélectionner un équipement existant et non-recetté</label>
-          <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
-            <%  @equipements.each do |e|  %>
-            <option value="<%= e.id %>"><%= e.nom %></option>
-            <% end %>
-          </select>
+          <% if params[:action] == 'edit' %>
+            <%= f.association :equipement, label: "Sélectionner un équipement", label_method: :nom, value_method: :id, include_blank: false %>
+          <% else %>
+            <label for="recette_equipement_id">Sélectionner un équipement existant et non-recetté</label>
+            <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
+              <%  @equipements.each do |e|  %>
+              <option value="<%= e.id %>"><%= e.nom %></option>
+              <% end %>
+            </select>
+          <% end %>
         </div>
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id">ou alors</label><br/>
@@ -25,7 +29,7 @@
       <h4 class="card-title"><%= fa_icon("globe") %> Sortie internet</h4>
       <div class="form-row">
         <div class='col-lg-6 col-sm-12'>
-          <% if current_page?('/recettes/edit') %>
+          <% if params[:action] == 'edit' %>
             <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: :numerocompte, value_method: :id, include_blank: false %>
           <% else %>
           <label for="recette_equipement_id">Sélectionner une localisation</label>
@@ -49,7 +53,7 @@
       <h4 class="card-title"><%= fa_icon("map-marker") %> Localisation</h4>
       <div class="form-row">
         <div class='col-lg-6 col-sm-12'>
-          <% if current_page?('/recettes/edit') %>
+          <% if params[:action] == 'edit' %>
             <%= f.association :localisation, label: "Sélectionner une localisation existante", label_method: :nom, value_method: :id, include_blank: false %>
           <% else %>
           <label for="recette_equipement_id">Sélectionner une localisation</label>
