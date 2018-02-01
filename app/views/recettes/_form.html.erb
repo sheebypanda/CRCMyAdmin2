@@ -8,7 +8,7 @@
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id">Sélectionner un équipement existant et non-recetté</label>
           <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
-            <%  @enr.each do |e|  %>
+            <%  @equipements.each do |e|  %>
             <option value="<%= e.id %>"><%= e.nom %></option>
             <% end %>
           </select>
@@ -20,18 +20,21 @@
       </div>
     </div>
   </div>
-
   <div class="card text-white bg-warning mb-3">
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("globe") %> Sortie internet</h4>
       <div class="form-row">
         <div class='col-lg-6 col-sm-12'>
+          <% if current_page?('/recettes/edit') %>
+            <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: :numerocompte, value_method: :id, include_blank: false %>
+          <% else %>
           <label for="recette_equipement_id">Sélectionner une localisation</label>
           <select class="form-control" name="recette[ligne_id]" id="recette_ligne_id">
             <% @lignes.each do |lig| %>
               <option value="<%= lig.id %>"><%= lig.numerocompte %> - <%= lig.ndi %></option>
             <% end %>
           </select>
+          <% end %>
         </div>
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id">ou alors</label><br/>
@@ -46,12 +49,16 @@
       <h4 class="card-title"><%= fa_icon("map-marker") %> Localisation</h4>
       <div class="form-row">
         <div class='col-lg-6 col-sm-12'>
+          <% if current_page?('/recettes/edit') %>
+            <%= f.association :localisation, label: "Sélectionner une localisation existante", label_method: :nom, value_method: :id, include_blank: false %>
+          <% else %>
           <label for="recette_equipement_id">Sélectionner une localisation</label>
           <select class="form-control" name="recette[localisation_id]" id="recette_localisation_id">
             <% @localisations.each do |loc| %>
               <option value="<%= loc.id %>"><%= loc.ville %> <%= loc.nom %></option>
             <% end %>
           </select>
+          <% end %>
         </div>
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id">ou alors</label><br/>
