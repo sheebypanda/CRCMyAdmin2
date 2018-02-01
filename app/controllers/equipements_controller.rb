@@ -2,7 +2,7 @@ class EquipementsController < ApplicationController
   before_action :set_equipement, only: [:show, :edit, :update, :destroy]
 
   def index
-    @equipements = Equipement.all.order(updated_at: :desc).limit(200)
+    @equipements = Equipement.all.order(updated_at: :desc)
     @nb = Equipement.all.count
   end
 
