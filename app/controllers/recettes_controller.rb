@@ -1,10 +1,12 @@
 class RecettesController < ApplicationController
   before_action :set_recette, only: [:show, :edit, :update, :destroy]
-  before_action :get_enr, :get_localisation, :get_ligne, only: [:new, :edit, :create]
+  before_action :get_localisations, :get_lignes, only: [:new, :edit, :create]
+  before_action :get_enr, only:[:new]
+  before_action :get_equipements, only:[:edit]
 
 
   def index
-    @recettes = Recette.all
+    @recettes = Recette.all.order(created_at: :desc)
     @nb = Recette.all.count
   end
 
@@ -39,7 +41,7 @@ class RecettesController < ApplicationController
   def update
     respond_to do |format|
       if @recette.update(recette_params)
-        format.html { redirect_to @recette, notice: "La recette de l'équipement #{@recette.equipement.nom} a bien été modifiée." }
+        format.html { redirect_to recettes_path, notice: "La recette de l'équipement #{@recette.equipement.nom} a bien été modifiée." }
         format.json { render :index, status: :ok, location: @recette }
       else
         format.html { render :edit }
@@ -57,10 +59,13 @@ class RecettesController < ApplicationController
   end
 
   private
-    def get_localisation
+    def get_equipements
+      @equipements = Equipement.all.order(updated_at: :desc)
+    end
+    def get_localisations
       @localisations = Localisation.all.order(:ville).order(:nom)
     end
-    def get_ligne
+    def get_lignes
       @lignes = Ligne.all.order(:numerocompte).order(:ndi)
     end
     def set_recette
@@ -72,10 +77,10 @@ class RecettesController < ApplicationController
     end
 
     def get_enr
-      @enr = []
+      @equipements = []
       Equipement.all.order(updated_at: :desc).each do |e|
         unless e.recette
-          @enr.push(e)
+          @equipements.push(e)
         end
       end
     end
