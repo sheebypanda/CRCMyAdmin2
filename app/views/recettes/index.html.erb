@@ -16,11 +16,11 @@
       <th><%= fa_icon("server") %> Equipement</th>
       <th><%= fa_icon("phone") %> Ligne</th>
       <th><%= fa_icon("home") %> Localisation</th>
-      <th>Snmp</th>
-      <th>Tacacs</th>
-      <th>Testdebit</th>
-      <th>Supervision</th>
-      <th>Etiquette</th>
+      <th>SNMP</th>
+      <th>TACACS</th>
+      <th><%= fa_icon("dashboard") %> Orion</th>
+      <th><%= fa_icon("download") %> Débit</th>
+      <th><%= fa_icon("tag") %> Net</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -38,9 +38,9 @@
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
         <% if recette.tacacs %><td><%=  fa_icon("check", class: "text-success") %></td>
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
-        <% if recette.testdebit %><td><%=  fa_icon("check", class: "text-success") %></td>
-        <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
         <% if recette.supervision %><td><%=  fa_icon("check", class: "text-success") %></td>
+        <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
+        <% if recette.testdebit %><td><%=  fa_icon("check", class: "text-success") %></td>
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
         <% if recette.etiquette %><td><%=  fa_icon("check", class: "text-success") %></td>
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
