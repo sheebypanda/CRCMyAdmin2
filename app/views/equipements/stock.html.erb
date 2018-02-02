@@ -1,0 +1,39 @@
+<% if notice  %>
+  <div class="alert alert-success animated slideInDown" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
+<h1><%= fa_icon("archive") %> <%= @nb %> Équipements en stock</h1>
+
+<%= link_to fa_icon("plus")+' Ajouter des équipement au stock', new_equipement_path, class: 'btn btn-outline-primary' %>
+
+<h2 class="m-3">État du stock</h2>
+<%= column_chart @stock.group(:modele).count %>
+
+<h2 class="m-3">Détail du matériel en stock </h2>
+
+<table id="tablesorter" class="tablesorter table table-striped table-sm">
+  <thead>
+    <tr>
+      <th><%= fa_icon("tag") %> Marque</th>
+      <th><%= fa_icon("server") %> Modèle</th>
+      <th><%= fa_icon("barcode") %> Numéro de série</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stock.each do |s| %>
+      <tr>
+        <td><%= s.marque %></td>
+        <td><%= s.modele %></td>
+        <td><%= s.serial %></td>
+        <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary" %></td>
+        <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

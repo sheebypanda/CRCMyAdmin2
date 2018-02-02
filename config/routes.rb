@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'recettes#dashboard'
+  get '/stock', to: 'equipements#stock'
 end

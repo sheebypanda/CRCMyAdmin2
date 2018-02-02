@@ -1,4 +1,55 @@
-<%= link_to fa_icon('chevron-left')+' Retour à la liste', equipements_path, class: "btn btn-outline-primary" %>
-<h1 class="text-center p-3">Ajout d'un nouvel équipement</h1>
+<%= simple_form_for(@equipement) do |f| %>
 
-<%= render 'form', equipement: @equipement %>
+<%= link_to fa_icon('chevron-left')+' Retour au stock', '/stock', class: "btn btn-outline-primary" %>
+<h1 class="text-center p-3">Ajout d'équipements au stock</h1>
+
+<div class="card text-white bg-danger mb-3">
+  <div class="card-body">
+    <h4 class="card-title"><%= fa_icon("id-card") %> Identité</h4>
+
+    <div class="form-row">
+      <div class='col-lg-6 col-sm-12'>
+
+        <div class="form-group">
+           <label for="equipement_marque">Marque</label>
+           <select class="form-control" name="equipement[marque]" id="equipement_marque">
+              <option value="Brocade">Brocade</option>
+              <option value="Cisco">Cisco</option>
+              <option value="Netgear">Netgear</option>
+              <option value="Nortel">Nortel</option>
+              <option value="Avaya">Avaya</option>
+           </select>
+         </div>
+
+      </div>
+      <div class='col-lg-6 col-sm-12'>
+        <%= f.input :modele, id: :equipement_modele, label: 'Modèle', input_html: {placeholder:'ICX7250-24P...'} %>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class='col'>
+        <%= f.input :serial, id: :equipement_serial, label: 'Numéro de série', input_html: {placeholder:'DUI3821N0B3'} %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card text-white bg-info mb-3">
+  <div class="card-body">
+    <h4 class="card-title"><%= fa_icon("handshake-o") %> Garantie</h4>
+    <div class="form-row">
+      <div class='col-lg-6 col-sm-12'>
+        <%= f.input :achat, id: :equipement_achat, label: "Date d'achat", input_html: {placeholder: ''}  %>
+      </div>
+      <div class='col-lg-6 col-sm-12'>
+        <%= f.input :garantie, id: :equipement_garantie, label: "Durée de garantie (en année)", input_html: {placeholder: ''}  %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= f.button :submit, "Ajouter l'équipement", class: "btn btn-block btn-outline-primary mb-3" %>
+
+<% end %>

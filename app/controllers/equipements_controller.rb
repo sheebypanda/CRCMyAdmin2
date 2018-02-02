@@ -2,7 +2,7 @@ class EquipementsController < ApplicationController
   before_action :set_equipement, only: [:show, :edit, :update, :destroy]
 
   def index
-    @equipements = Equipement.all.order(updated_at: :desc)
+    @equipements = Equipement.where.not(ip: '').order(updated_at: :desc)
     @nb = Equipement.all.count
   end
 
@@ -14,6 +14,10 @@ class EquipementsController < ApplicationController
   end
 
   def edit
+  end
+
+  def stock
+    @stock = Equipement.where(ip: '')
   end
 
   def create

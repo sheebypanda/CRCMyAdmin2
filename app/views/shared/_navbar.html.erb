@@ -11,7 +11,10 @@
               <a class="nav-link <% if request.path.start_with?('/recettes') %>active<% end %>" href="<%= recettes_path %>"><%= fa_icon("check-square-o") %> Fiches recettes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <% if request.path.start_with?('/equipements') %>active<% end %>" href="<%= equipements_path %>"><%= fa_icon("server") %> Équipements <span class="sr-only">(current)</span></a>
+              <a class="nav-link <% if request.path.start_with?('/equipements') %>active<% end %>" href="<%= equipements_path %>"><%= fa_icon("server") %> Équipements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <% if request.path.start_with?('/stock') %>active<% end %>" href="/stock"><%= fa_icon("archive") %> Stock</a>
             </li>
             <li class="nav-item">
               <a class="nav-link <% if request.path.start_with?('/lignes') %>active<% end %>" href="<%= lignes_path %>"><%= fa_icon("phone") %> Lignes</a>
