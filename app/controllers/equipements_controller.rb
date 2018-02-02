@@ -17,7 +17,7 @@ class EquipementsController < ApplicationController
   end
 
   def stock
-    @stock = Equipement.where(ip: '')
+    @stock = Equipement.where(nom: nil).or(Equipement.where(nom: ''))
   end
 
   def create
@@ -25,7 +25,7 @@ class EquipementsController < ApplicationController
 
     respond_to do |format|
       if @equipement.save
-        format.html { redirect_to equipements_path, notice: "L'équipement #{@equipement.nom} a bien été créé" }
+        format.html { redirect_to '/stock', notice: "L'équipement #{@equipement.nom} a bien été créé" }
         format.json { render :show, status: :created, location: @equipement }
       else
         format.html { render :new }
