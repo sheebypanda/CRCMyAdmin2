@@ -13,9 +13,9 @@
       <th><%= fa_icon("home") %> Ville</th>
       <th><%= fa_icon("") %> Nom</th>
       <th><%= fa_icon("map") %> Adresse</th>
-      <th><%= fa_icon("building") %> Étage</th>
-      <th><%= fa_icon("phone") %> Tel</th>
-      <th><%= fa_icon("map-marker") %> Géoloc</th>
+      <th><%= fa_icon("phone") %> Sorties internet</th>
+      <th><%= fa_icon("server") %> Équipements / site</th>
+      <th><%= fa_icon("map-marker") %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -26,8 +26,16 @@
         <td><%= localisation.ville %></td>
         <td><a href="<%= edit_localisation_path(localisation)%>"><%= localisation.nom %></a></td>
         <td><%= localisation.adresse %></td>
-        <td><%= localisation.etage %></td>
-        <td><%= localisation.tel %></td>
+        <td><% if localisation.recettes.last %>
+          <a href="<%= edit_ligne_path(localisation.recettes.last.ligne)%>">
+            <%= localisation.recettes.last.ligne.ndi %>
+          </a>
+        <% end %></td>
+        <td><% if localisation.recettes.last %>
+          <a href="<%= edit_equipement_path(localisation.recettes.last.equipement)%>">
+            <%= localisation.recettes.last.equipement.nom %>
+          </a>
+        <% end %></td>
         <% if localisation.lat %>
           <td class="text-success"><%= fa_icon("check") %></td>
         <% else %>

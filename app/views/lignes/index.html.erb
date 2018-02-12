@@ -16,6 +16,9 @@
       <th><%= fa_icon("phone")%> NDI</th>
       <th><%= fa_icon("cloud-download")%> Débit</th>
       <th><%= fa_icon("at")%> IP publique</th>
+      <th><%= fa_icon("home")%> Ville</th>
+      <th><%= fa_icon("map-marker")%> Adresse</th>
+      <th><%= fa_icon("server")%> Équipements</th>
       <th colspan="2"><%= fa_icon("pencil")%></th>
     </tr>
   </thead>
@@ -29,6 +32,19 @@
         <td><%= ligne.ndi %></td>
         <td><%= ligne.debit %></td>
         <td><%= ligne.ippublique %></td>
+        <td><% if ligne.recettes.last %>
+            <%= ligne.recettes.last.localisation.ville %>
+        <% end %></td>
+        <td><% if ligne.recettes.last %>
+          <a href="<%= edit_localisation_path(ligne.recettes.last.localisation) %>">
+            <%= ligne.recettes.last.localisation.adresse %>
+          </a>
+        <% end %></td>
+        <td><% if ligne.recettes.last %>
+          <a href="<%= edit_equipement_path(ligne.recettes.last.equipement) %>">
+            <%= ligne.recettes.last.equipement.nom %>
+          </a>
+        <% end %></td>
         <td><%= link_to fa_icon("pencil"), edit_ligne_path(ligne), class: "btn btn-outline-warning" %></td>
         <td><%= link_to fa_icon("trash"), ligne, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

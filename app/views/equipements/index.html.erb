@@ -15,8 +15,8 @@
       <th><%= fa_icon("server") %> Modèle</th>
       <th><%= fa_icon("comment") %> Nom</th>
       <th><%= fa_icon("at") %> IP</th>
-      <th><%= fa_icon("tag") %> ID ASAP</th>
-      <th><%= fa_icon("barcode") %> Numéro de série</th>
+      <th><%= fa_icon("globe") %> Sortie internet</th>
+      <th><%= fa_icon("map-marker") %> Localisation</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -28,8 +28,16 @@
         <td><%= equipement.modele %></td>
         <td><a href="<%= edit_equipement_path(equipement) %>"><%= equipement.nom %></a></td>
         <td><%= equipement.ip %></td>
-        <td><%= equipement.asapid %></td>
-        <td><%= equipement.serial %></td>
+        <td><% if equipement.recette %>
+          <a href="<%= edit_ligne_path(equipement.recette.ligne) %>">
+            <%= equipement.recette.ligne.numerocompte %>
+          </a>
+        <% end %></td>
+        <td><% if equipement.recette %>
+          <a href="<%= edit_localisation_path(equipement.recette.localisation) %>">
+            <%= equipement.recette.localisation.nom %>
+          </a>
+        <% end %></td>
         <td><%= link_to fa_icon("pencil"), edit_equipement_path(equipement), class: "btn btn-outline-warning" %></td>
         <td><%= link_to fa_icon("trash"), equipement, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
