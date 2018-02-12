@@ -1,20 +1,32 @@
-<h2>Fiches recettes</h2>
+<h2><%= fa_icon("check-square-o") %> Fiches recettes</h2>
   <h4>Chronologie</h4>
   <%= line_chart Recette.group_by_day(:created_at).count %>
 
-<h2>Équipements</h2>
-  <h4>Répartition par fabricant</h4>
-  <%= pie_chart Equipement.group(:marque).count, donut: true, download: true, legend: "right" %>
+<h2 class="m-3"><%= fa_icon("server") %> Équipements</h2>
+  <div class="row">
+    <div class="col">
+      <h4>Répartition par fabricant</h4>
+      <%= pie_chart Equipement.group(:marque).count, donut: true, download: true, legend: "bottom", width: "500px", height: "450px" %>
+    </div>
+    <div class="col">
+      <h4>Matériel <span class="text-danger">Brocade</span> par modèle</h4>
+      <%= pie_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count, donut: true, download: true, legend: "bottom", width: "500px", height: "350px" %>
+    </div>
+  </div>
 
-  <h4>Matériel Brocade par modèle</h4>
-  <%= pie_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count, donut: true, download: true, legend: "right" %>
+<h2 class="m-3"><%= fa_icon("globe") %> Sorties internet</h2>
+<div class="row">
+  <div class="col">
+    <h4><%= fa_icon("bug") %> Répartition par opérateur</h4>
+    <%= pie_chart Operateur.joins(:lignes).group(:nom).count, donut: true, download: true, legend: "bottom", width: "250px", height: "450px" %>
+  </div>
+  <div class="col">
+    <h4><%= fa_icon("rebel") %> Répartition par technologie</h4>
+    <%= pie_chart Ligne.group(:techno).count, donut: true, download: true, legend: "bottom", width: "250px", height: "450px" %>
+  </div>
+  <div class="col">
+    <h4><%= fa_icon("download") %> Répartition par débit (en Mbs)</h4>
+    <%= column_chart Ligne.all.where("debit > ?", 1 ).order(debit: :desc).group(:debit).count, height: "450px" %>
 
-<h2>Sorties internet</h2>
-  <h4>Répartition par opérateur</h4>
-  <%= pie_chart Operateur.joins(:lignes).group(:nom).count, donut: true, download: true, legend: "right" %>
-
-  <h4>Répartition par technologie</h4>
-  <%= pie_chart Ligne.group(:techno).count, donut: true, download: true, legend: "right" %>
-
-  <h4>Répartition par débit (en Mbs)</h4>
-  <%= pie_chart Ligne.group(:debit).count, donut: true, download: true, legend: "right" %>
+  </div>
+</div>
