@@ -1,5 +1,7 @@
 var ready = function() {
 
+  $('[data-toggle="tooltip"]').tooltip();
+
   function getLocation(){
     var msg;
     if('geolocation' in navigator){
@@ -27,10 +29,6 @@ var ready = function() {
         outputResult(msg); // output message
         $('.pure-button').removeClass('pure-button-primary').addClass('pure-button-success'); // change button style
 
-
-
-
-
         $('#localisation_lat').val(lat);
         $('#localisation_lng').val(lng);
         $('#gps').addClass("active");
@@ -57,7 +55,7 @@ var ready = function() {
     getLocation();
   });
 
-  $("#tablesorter").tablesorter(); 
+  $("#tablesorter").tablesorter();
 };
 
 $(document).ready(ready);
