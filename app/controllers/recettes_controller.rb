@@ -6,7 +6,7 @@ class RecettesController < ApplicationController
 
 
   def index
-    @recettes = Recette.all.order(created_at: :desc)
+    @recettes = Recette.all.order(created_at: :desc).page params[:page]
     @nb = Recette.all.count
   end
 

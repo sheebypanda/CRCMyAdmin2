@@ -27,6 +27,7 @@ gem 'bootstrap', '~> 4.0.0.beta'
 gem 'geocoder'
 gem 'animate-rails'
 gem 'jquery-tablesorter'
+gem 'kaminari'
 
 
 gem "capistrano"

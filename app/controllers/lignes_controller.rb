@@ -4,7 +4,7 @@ class LignesController < ApplicationController
   # GET /lignes
   # GET /lignes.json
   def index
-    @lignes = Ligne.all.order(updated_at: :desc)
+    @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
     @nb = Ligne.all.count
   end
 

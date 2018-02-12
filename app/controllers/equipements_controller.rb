@@ -2,8 +2,8 @@ class EquipementsController < ApplicationController
   before_action :set_equipement, only: [:show, :edit, :update, :destroy]
 
   def index
-    @equipements = Equipement.where.not(ip: '').order(updated_at: :desc)
-    @nb = Equipement.all.count
+    @equipements = Equipement.where.not(ip: '').order(updated_at: :desc).page params[:page]
+    @nb = Equipement.count
   end
 
   def show
