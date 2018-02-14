@@ -12,5 +12,4 @@ class Equipement < ApplicationRecord
     :modele => 'D'
   }
 
-
 end

@@ -3,10 +3,15 @@
     <%= notice %>
   </div>
 <% end %>
-
-<h1><%= @nb %> Localisations</h1>
-<%= link_to fa_icon("plus")+' Ajouter une localisation', new_localisation_path, class: 'btn btn-outline-primary' %>
-
+<% if params[:search] %>
+<div class="alert alert-primary" role="alert">
+  <%= fa_icon("server") %>
+  <strong><%= @nb %></strong> Localisations trouvées correspondantes à la recherche </h1>
+</div>
+<% else %>
+  <h1><%= @nb %> Localisations</h1>
+  <%= link_to fa_icon("plus")+' Ajouter une localisation', new_localisation_path, class: 'btn btn-outline-primary' %>
+<% end %>
 <table id="tablesorter" class="tablesorter table table-sm table-striped">
   <thead>
     <tr>
