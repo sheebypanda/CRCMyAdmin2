@@ -1,29 +1,26 @@
 class LignesController < ApplicationController
   before_action :set_ligne, only: [:show, :edit, :update, :destroy]
 
-  # GET /lignes
-  # GET /lignes.json
   def index
-    @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
-    @nb = Ligne.all.count
+    if params[:search].present?
+     @lignes = Ligne.ligne_search(params[:search]).page params[:page]
+     @nb = Ligne.ligne_search(params[:search]).count
+    else
+      @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
+      @nb = Ligne.all.count
+    end
   end
 
-  # GET /lignes/1
-  # GET /lignes/1.json
   def show
   end
 
-  # GET /lignes/new
   def new
     @ligne = Ligne.new
   end
 
-  # GET /lignes/1/edit
   def edit
   end
 
-  # POST /lignes
-  # POST /lignes.json
   def create
     @ligne = Ligne.new(ligne_params)
 
@@ -38,8 +35,6 @@ class LignesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /lignes/1
-  # PATCH/PUT /lignes/1.json
   def update
     respond_to do |format|
       if @ligne.update(ligne_params)
@@ -52,8 +47,6 @@ class LignesController < ApplicationController
     end
   end
 
-  # DELETE /lignes/1
-  # DELETE /lignes/1.json
   def destroy
     @ligne.destroy
     respond_to do |format|
@@ -63,12 +56,10 @@ class LignesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_ligne
       @ligne = Ligne.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def ligne_params
       params.require(:ligne).permit(:numerocompte, :techno, :cout, :ndi, :debit, :ippublique, :mail, :tel, :identifiantoperateur, :mdpoperateur, :compte, :motdepasse, :operateur_id)
     end

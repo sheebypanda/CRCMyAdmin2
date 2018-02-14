@@ -5,6 +5,12 @@ class Localisation < ApplicationRecord
 
   validates :nom, presence: true
 
+  include PgSearch
+  pg_search_scope :localisation_search, :against => {
+    :nom => 'A',
+    :adresse => 'B',
+    :ville => 'C'
+  }
 
   geocoded_by :adresse
   after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }

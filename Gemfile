@@ -28,6 +28,7 @@ gem 'geocoder'
 gem 'animate-rails'
 gem 'jquery-tablesorter'
 gem 'kaminari'
+gem 'pg_search'
 
 
 gem "capistrano"

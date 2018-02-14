@@ -1,29 +1,26 @@
 class LocalisationsController < ApplicationController
   before_action :set_localisation, only: [:show, :edit, :update, :destroy]
 
-  # GET /localisations
-  # GET /localisations.json
   def index
-    @localisations = Localisation.all.order(updated_at: :desc).page params[:page]
-    @nb = Localisation.all.count
+    if params[:search].present?
+     @localisations = Localisation.localisation_search(params[:search]).page params[:page]
+     @nb = Localisation.localisation_search(params[:search]).count
+    else
+      @localisations = Localisation.all.order(updated_at: :desc).page params[:page]
+      @nb = Localisation.all.count
+    end
   end
 
-  # GET /localisations/1
-  # GET /localisations/1.json
   def show
   end
 
-  # GET /localisations/new
   def new
     @localisation = Localisation.new
   end
 
-  # GET /localisations/1/edit
   def edit
   end
 
-  # POST /localisations
-  # POST /localisations.json
   def create
     @localisation = Localisation.new(localisation_params)
 
@@ -38,8 +35,6 @@ class LocalisationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /localisations/1
-  # PATCH/PUT /localisations/1.json
   def update
     respond_to do |format|
       if @localisation.update(localisation_params)
@@ -52,8 +47,6 @@ class LocalisationsController < ApplicationController
     end
   end
 
-  # DELETE /localisations/1
-  # DELETE /localisations/1.json
   def destroy
     @localisation.destroy
     respond_to do |format|
@@ -63,12 +56,10 @@ class LocalisationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_localisation
       @localisation = Localisation.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def localisation_params
       params.require(:localisation).permit(:nom, :adresse, :codepostal, :ville, :etage, :tel, :mail, :description, :lat, :lng)
     end

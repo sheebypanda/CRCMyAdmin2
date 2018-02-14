@@ -6,8 +6,12 @@ class RecettesController < ApplicationController
 
 
   def index
-    @recettes = Recette.all.order(created_at: :desc).page params[:page]
-    @nb = Recette.all.count
+    if params[:search].present?
+     @recettes = Recette.global_search(params[:search])
+    else
+      @recettes = Recette.all.order(created_at: :desc).page params[:page]
+      @nb = Recette.all.count
+    end
   end
 
   def show
