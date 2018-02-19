@@ -1,3 +1,9 @@
+<% if notice  %>
+  <div class="alert alert-success animated slideInDown" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
 <%= simple_form_for(@equipement) do |f| %>
 
 <%= link_to fa_icon('chevron-left')+' Retour au stock', '/stock', class: "btn btn-outline-primary" %>

@@ -30,7 +30,7 @@ class EquipementsController < ApplicationController
 
     respond_to do |format|
       if @equipement.save
-        format.html { redirect_to '/stock', notice: "L'équipement #{@equipement.nom} a bien été créé" }
+        format.html { redirect_to new_equipement_path, notice: "L'équipement #{@equipement.marque} #{@equipement.modele} #{@equipement.serial} a bien été créé" }
         format.json { render :show, status: :created, location: @equipement }
       else
         format.html { render :new }
@@ -66,5 +66,8 @@ class EquipementsController < ApplicationController
 
     def equipement_params
       params.require(:equipement).permit(:nom, :marque, :modele, :snmpcontact, :dns, :iosv, :ip, :achat, :garantie, :asapid, :serial)
+    end
+
+    def libreNmsAdd(ip)
     end
 end
