@@ -72,15 +72,15 @@ class EquipementsController < ApplicationController
       require 'json'
       require 'openssl'
 
-      uri = URI.parse(Rails.application.secrets.supervision_api_url)
+      uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s)
       request = Net::HTTP::Post.new(uri)
       request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
       request.body = JSON.dump({
         "hostname" => ip.to_s,
         "version" => "v3",
         "authlevel" => "authNoPriv",
-        "authname" => Rails.application.secrets.snmp_auth_name,
-        "authpass" => Rails.application.secrets.snmp_auth_pass,
+        "authname" => Rails.application.secrets.snmp_auth_name.to_s,
+        "authpass" => Rails.application.secrets.snmp_auth_pass.to_s,
         "authalgo" => "SHA"
       })
 
