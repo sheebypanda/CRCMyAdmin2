@@ -38,7 +38,7 @@ class EquipementsController < ApplicationController
   end
 
   def update
-    unless equipement_params[:supervision]
+    unless equipement_params[:supervision] == 1
       libreNmsAdd(equipement_params[:ip])
     end
     respond_to do |format|
@@ -83,12 +83,10 @@ class EquipementsController < ApplicationController
         "authpass" => Rails.application.secrets.snmp_auth_pass.to_s,
         "authalgo" => "SHA"
       })
-
       req_options = {
         use_ssl: uri.scheme == "https",
         verify_mode: OpenSSL::SSL::VERIFY_NONE,
       }
-
       response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
         http.request(request)
       end
