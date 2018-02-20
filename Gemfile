@@ -30,22 +30,15 @@ gem 'jquery-tablesorter'
 gem 'kaminari'
 gem 'pg_search'
 
-
-gem "capistrano"
+gem 'capistrano', '~> 3.10.0'
 gem "capistrano3-puma"
 gem "capistrano-rails", require: false
 gem "capistrano-bundler", require: false
 gem "capistrano-rbenv"
 gem 'capistrano-rails-db'
-gem 'capistrano-secrets-yml', '~> 1.1.0'
-
 
 gem 'groupdate'
 gem "chartkick"
-
-
-
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -53,6 +46,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'capistrano-secrets-yml', '~> 1.1.0'
 end
 
 group :development do
