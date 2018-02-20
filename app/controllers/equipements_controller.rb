@@ -31,22 +31,21 @@ class EquipementsController < ApplicationController
     respond_to do |format|
       if @equipement.save
         format.html { redirect_to new_equipement_path, notice: "L'équipement #{@equipement.marque} #{@equipement.modele} #{@equipement.serial} a bien été créé" }
-        format.json { render :show, status: :created, location: @equipement }
       else
         format.html { render :new }
-        format.json { render json: @equipement.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
+    unless equipement_params[:supervision]
+      libreNmsAdd(equipement_params[:ip])
+    end
     respond_to do |format|
       if @equipement.update(equipement_params)
-        format.html { redirect_to equipements_path, notice: "L'équipement #{@equipement.nom} a bien été modifié" }
-        format.json { render :show, status: :ok, location: @equipement }
+        format.html { redirect_to equipements_path, notice: "L'équipement #{@equipement.nom} a bien été passé en prod. Supervision : #{@response}" }
       else
         format.html { render :edit }
-        format.json { render json: @equipement.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,7 +54,6 @@ class EquipementsController < ApplicationController
     @equipement.destroy
     respond_to do |format|
       format.html { redirect_to equipements_path, notice: "L'équipement #{@equipement.nom} a bien été supprimé" }
-      format.json { head :no_content }
     end
   end
 
@@ -65,9 +63,35 @@ class EquipementsController < ApplicationController
     end
 
     def equipement_params
-      params.require(:equipement).permit(:nom, :marque, :modele, :snmpcontact, :dns, :iosv, :ip, :achat, :garantie, :asapid, :serial)
+      params.require(:equipement).permit(:nom, :marque, :modele, :snmpcontact, :dns, :iosv, :ip, :achat, :garantie, :asapid, :serial, :supervision)
     end
 
     def libreNmsAdd(ip)
+      require 'net/http'
+      require 'uri'
+      require 'json'
+      require 'openssl'
+
+      uri = URI.parse(Rails.application.secrets.supervision_api_url)
+      request = Net::HTTP::Post.new(uri)
+      request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+      request.body = JSON.dump({
+        "hostname" => ip.to_s,
+        "version" => "v3",
+        "authlevel" => "authNoPriv",
+        "authname" => Rails.application.secrets.snmp_auth_name,
+        "authpass" => Rails.application.secrets.snmp_auth_pass,
+        "authalgo" => "SHA"
+      })
+
+      req_options = {
+        use_ssl: uri.scheme == "https",
+        verify_mode: OpenSSL::SSL::VERIFY_NONE,
+      }
+
+      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request)
+      end
+      @response = response.body
     end
 end
