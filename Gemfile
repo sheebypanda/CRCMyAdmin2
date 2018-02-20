@@ -37,6 +37,8 @@ gem "capistrano-rails", require: false
 gem "capistrano-bundler", require: false
 gem "capistrano-rbenv"
 gem 'capistrano-rails-db'
+gem 'capistrano-secrets-yml', '~> 1.1.0'
+
 
 gem 'groupdate'
 gem "chartkick"

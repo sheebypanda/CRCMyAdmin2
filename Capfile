@@ -36,6 +36,7 @@ require "capistrano/rails/migrations"
 require "capistrano/puma"
 require 'capistrano/rails'
 require 'capistrano/rails/db'
+require 'capistrano/secrets_yml'
 
 install_plugin Capistrano::Puma
 # require "capistrano/passenger"
