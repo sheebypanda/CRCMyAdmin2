@@ -48,4 +48,6 @@
   </tbody>
 </table>
 <%= paginate @equipements %>
+<%= link_to fa_icon("file")+' Export CSV', equipements_path(format: :csv), class: 'btn btn-outline-success' %>
+
 <br>

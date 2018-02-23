@@ -8,6 +8,16 @@ class EquipementsController < ApplicationController
     else
       @equipements = Equipement.where.not(ip: '').order(updated_at: :desc).page params[:page]
       @nb = Equipement.count
+
+      @eq = Equipement.all
+      respond_to do |format|
+        format.html
+        format.csv do
+          headers['Content-Disposition'] = "attachment; filename=\"InventaireEquipements.csv\""
+          headers['Content-Type'] ||= 'text/csv'
+        end
+      end
+
     end
   end
 
