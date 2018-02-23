@@ -1,0 +1,27 @@
+<%- headers = [
+  "Ville",
+  "Nom",
+  "Adresse",
+  "CP",
+  "Etage",
+  "Tel de contact",
+  "Mail de contact",
+  "Description",
+  "latitude",
+  "longitude"
+] -%>
+<%= CSV.generate_line headers %>
+<%- @lo.each do |lo| -%>
+<%= CSV.generate_line([
+  lo.ville,
+  lo.nom,
+  lo.adresse,
+  lo.codepostal,
+  lo.etage,
+  lo.tel,
+  lo.mail,
+  lo.description,
+  lo.lat,
+  lo.lng
+  ]).html_safe -%>
+<%- end -%>

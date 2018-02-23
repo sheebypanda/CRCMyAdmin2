@@ -8,6 +8,17 @@ class LocalisationsController < ApplicationController
     else
       @localisations = Localisation.all.order(updated_at: :desc).page params[:page]
       @nb = Localisation.all.count
+
+      @lo = Localisation.all
+      respond_to do |format|
+        format.html
+        format.csv do
+          headers['Content-Disposition'] = "attachment; filename=\"InventaireLocalisation.csv\""
+          headers['Content-Type'] ||= 'text/csv'
+        end
+      end
+
+
     end
   end
 

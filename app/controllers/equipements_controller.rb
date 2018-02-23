@@ -33,6 +33,14 @@ class EquipementsController < ApplicationController
 
   def stock
     @stock = Equipement.where(nom: nil).or(Equipement.where(nom: ''))
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"EtatStock.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
+
   end
 
   def create

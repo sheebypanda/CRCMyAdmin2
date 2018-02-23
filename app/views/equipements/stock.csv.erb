@@ -1,0 +1,5 @@
+<%- headers = ['Marque', 'Modele', 'Numéro de série'] -%>
+<%= CSV.generate_line headers %>
+<%- @eq.each do |eq| -%>
+<%= CSV.generate_line([eq.marque, eq.modele, eq.serial]).html_safe -%>
+<%- end -%>
