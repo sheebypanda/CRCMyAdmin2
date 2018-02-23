@@ -1,55 +1,27 @@
-<header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="<%= root_path %>"><%= fa_icon "dashboard"%> CRCMyAdmin</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+  <a class="navbar-brand  col-sm-3 col-md-2 mr-0" href="<%= root_path %>">
+    <%= fa_icon "heart", class: "text-danger animated pulse infinite"%> <span class="text-info">CRC</span>my<span class="text-danger">Admin</span>
+  </a>
+  <form>
+    <input class="form-control form-control-dark w-100" type="text" name="search" placeholder="Rechercher" aria-label="Rechercher">
+  </form>
+  <ul class="navbar-nav px-3">
+    <% if user_signed_in? %>
+      <!-- <li class="nav-item  text-nowrap"> -->
+        <!-- <%= link_to fa_icon("user-circle-o") + " " + current_user.email , edit_user_registration_path, :class => 'nav-link' %> -->
+      <!-- </li> -->
+      <li class="nav-item text-nowrap">
+        <%= link_to fa_icon("sign-out") + "Déconnexion", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
+      </li>
+    <% else %>
+    <!-- <li class="nav-item text-nowrap">
+      <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link'  %>
+    </li>
+    <li class="nav-item text-nowrap">
+      <%= link_to "Login", new_user_session_path, :class => 'nav-link'  %>
+    </li> -->
+    <% end %>
+  </ul>
 
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link <% if request.path.start_with?('/recettes') %>active<% end %>" href="<%= recettes_path %>"><%= fa_icon("check-square-o") %> Fiches recettes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <% if request.path.start_with?('/equipements') %>active<% end %>" href="<%= equipements_path %>"><%= fa_icon("server") %> Équipements</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <% if request.path.start_with?('/stock') %>active<% end %>" href="/stock"><%= fa_icon("archive") %> Stock</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <% if request.path.start_with?('/lignes') %>active<% end %>" href="<%= lignes_path %>"><%= fa_icon("phone") %> Lignes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <% if request.path.start_with?('/operateurs') %>active<% end %>" href="<%= operateurs_path %>"><%= fa_icon("bug") %> Opérateurs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <% if request.path.start_with?('/localisations') %>active<% end %>" href="<%= localisations_path %>"><%= fa_icon("home") %> Localisations</a>
-            </li>
-          </ul>
 
-          <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" aria-label="Search" name="search">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Rechercher</button>
-          </form>
-
-          <ul class="navbar-nav my-2 my-lg-0">
-            <% if user_signed_in? %>
-              <li class="nav-item  mr-2 mb-1">
-                <%= link_to fa_icon("user-circle-o") + " " + current_user.email , edit_user_registration_path, :class => 'nav-link' %>
-              </li>
-              <li class="nav-item">
-                <%= link_to fa_icon("sign-out") + "Déconnexion", destroy_user_session_path, method: :delete, :class => 'nav-link text-danger'  %>
-              </li>
-            <% else %>
-            <li class="nav-item">
-              <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link'  %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Login", new_user_session_path, :class => 'nav-link'  %>
-            </li>
-          <% end %>
-        </ul>
-
-        </div>
-      </nav>
-    </header>
+</nav>

@@ -2,22 +2,31 @@
 <html>
   <head>
     <title>CRCMyAdmin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
   </head>
 
-  <body class="bg-secondary">
+  <body>
+    <% if user_signed_in? %>
+      <%= render "shared/navbar" %>
+    <% end %>
     <div class="container-fluid bg-light p-3 card">
-      <% if user_signed_in? %>
-        <%= render "shared/navbar" %>
-      <% end %>
-      <%= yield %>
+      <div class="row">
+        <% if user_signed_in? %>
+          <%= render "shared/sidebar" %>
+        <% end %>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <%= yield %>
+        </main>
+      </div>
     </div>
   </body>
 </html>

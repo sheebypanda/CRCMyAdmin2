@@ -1,44 +1,40 @@
-<div class="row">
-  <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-    <ul class="nav nav-pills flex-column">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+        <a class="nav-link <% if current_page?(root_url) %>active<% end %>" href="<%= root_path %>"><%= fa_icon("dashboard") %> Tableau de bord</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Reports</a>
+        <a class="nav-link <% if request.path.start_with?('/recettes') %>active<% end %>" href="<%= recettes_path %>"><%= fa_icon("check-square-o") %> Fiches recettes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Analytics</a>
+        <a class="nav-link <% if request.path.start_with?('/equipements') %>active<% end %>" href="<%= equipements_path %>"><%= fa_icon("server") %> Équipements</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Export</a>
+        <a class="nav-link <% if request.path.start_with?('/stock') %>active<% end %>" href="/stock"><%= fa_icon("truck") %> Stock</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <% if request.path.start_with?('/lignes') %>active<% end %>" href="<%= lignes_path %>"><%= fa_icon("phone") %> Lignes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <% if request.path.start_with?('/operateurs') %>active<% end %>" href="<%= operateurs_path %>"><%= fa_icon("user-secret") %> Opérateurs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <% if request.path.start_with?('/localisations') %>active<% end %>" href="<%= localisations_path %>"><%= fa_icon("map-marker") %> Localisations</a>
       </li>
     </ul>
 
-    <ul class="nav nav-pills flex-column">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Nav item</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Nav item again</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">One more nav</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Another nav item</a>
-      </li>
-    </ul>
 
-    <ul class="nav nav-pills flex-column">
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span><%= fa_icon('download')%> Export CSV</span>
+    </h6>
+
+
+    <ul class="nav flex-column mb-2">
       <li class="nav-item">
-        <a class="nav-link" href="#">Nav item again</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">One more nav</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Another nav item</a>
+        <%= link_to fa_icon("file-excel-o")+' Équipements', equipements_path(format: :csv), class: 'nav-link'%>
       </li>
     </ul>
-  </nav>
+  </div>
+</nav>
