@@ -8,6 +8,16 @@ class LignesController < ApplicationController
     else
       @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
       @nb = Ligne.all.count
+
+      @li = Ligne.all
+      respond_to do |format|
+        format.html
+        format.csv do
+          headers['Content-Disposition'] = "attachment; filename=\"InventaireLignes.csv\""
+          headers['Content-Type'] ||= 'text/csv'
+        end
+      end
+
     end
   end
 

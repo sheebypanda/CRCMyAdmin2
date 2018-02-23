@@ -1,0 +1,26 @@
+<%- headers = [
+  'Opérateur',
+  'Techno',
+  'Référence opérateur',
+  'NDI',
+  'IP',
+  'Identifiant de connexion (fti)',
+  'Mot de passe de connexion',
+  'Débit',
+  'Vlans',
+  'Coût'] -%>
+<%= CSV.generate_line headers %>
+<%- @li.each do |li| -%>
+<%= CSV.generate_line([
+  li.operateur_id,
+  li.techno,
+  li.numerocompte,
+  li.ndi,
+  li.ippublique,
+  li.identifiantoperateur,
+  li.mdpoperateur,
+  li.debit,
+  li.vlan,
+  li.cout
+  ]).html_safe -%>
+<%- end -%>
