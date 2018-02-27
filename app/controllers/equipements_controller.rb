@@ -28,11 +28,64 @@ class EquipementsController < ApplicationController
     @equipement = Equipement.new
   end
 
+  def serials_update
+    require 'net/http'
+    require 'uri'
+    require 'openssl'
+    require 'json'
+
+    uri = URI.parse("https://librenms.mbx.fr/api/v0/devices/")
+    req_options = {
+      use_ssl: uri.scheme == "https",
+      verify_mode: OpenSSL::SSL::VERIFY_NONE,
+    }
+    @serial_success = []
+    @serial_errors = []
+
+    equipements = Equipement.all.select(:id, :serial, :ip, :marque).where("marque LIKE ?","%Brocade%").where(serial: [nil, '']).limit(100)
+    # equipements = Equipement.select(:ip, :serial).distinct.order(updated_at: :desc).limit(30)
+    equipements.each do |e|
+      if e.ip
+        if e.serial.to_s.empty?
+          request = Net::HTTP::Get.new(uri+e.ip)
+          request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+          response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+            http.request(request)
+          end
+
+          if response.code == "200"
+            hash = JSON.parse(response.body)
+            if !hash["devices"][0]["serial"].nil?
+              if !hash["devices"][0]["serial"].empty?
+                e.serial = hash["devices"][0]["serial"]
+                if e.save!
+                  @serial_success << e
+                else
+                  @serial_errors << e
+                end
+              else
+                @serial_errors << e
+              end
+            else
+              byebug
+              @serial_errors << e
+            end
+          else
+            @serial_errors << e
+          end
+        end
+      end
+    end
+
+  end
+
   def edit
   end
 
   def stock
-    @stock = Equipement.where(nom: nil).or(Equipement.where(nom: ''))
+    @stock_brocade = Equipement.where("marque = ?", 'Brocade' ).where(nom: nil).or(Equipement.where(nom: ''))
+    @stock_cisco = Equipement.where("marque = ?", 'Cisco' ).where(nom: nil).or(Equipement.where(nom: ''))
+    @stock_aerohive = Equipement.where("marque = ?", 'Aerohive' ).where(nom: nil).or(Equipement.where(nom: ''))
     respond_to do |format|
       format.html
       format.csv do
