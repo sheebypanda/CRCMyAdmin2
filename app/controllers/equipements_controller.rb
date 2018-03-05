@@ -34,7 +34,7 @@ class EquipementsController < ApplicationController
     require 'openssl'
     require 'json'
 
-    uri = URI.parse("https://librenms.mbx.fr/api/v0/devices/")
+    uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s)
     req_options = {
       use_ssl: uri.scheme == "https",
       verify_mode: OpenSSL::SSL::VERIFY_NONE,
@@ -42,7 +42,7 @@ class EquipementsController < ApplicationController
     @serial_success = []
     @serial_errors = []
 
-    equipements = Equipement.all.select(:id, :serial, :ip, :marque).where("marque LIKE ?","%Brocade%").where(serial: [nil, '']).limit(100)
+    equipements = Equipement.all.select(:id, :serial, :ip, :marque).where("marque LIKE ?","%Brocade%").where(serial: [nil, '']).limit(160)
     # equipements = Equipement.select(:ip, :serial).distinct.order(updated_at: :desc).limit(30)
     equipements.each do |e|
       if e.ip
@@ -86,6 +86,7 @@ class EquipementsController < ApplicationController
     @stock_brocade = Equipement.where("marque = ?", 'Brocade' ).where(nom: nil).or(Equipement.where(nom: ''))
     @stock_cisco = Equipement.where("marque = ?", 'Cisco' ).where(nom: nil).or(Equipement.where(nom: ''))
     @stock_aerohive = Equipement.where("marque = ?", 'Aerohive' ).where(nom: nil).or(Equipement.where(nom: ''))
+    @stock_all = Equipement.where(nom: nil).or(Equipement.where(nom: ''))
     respond_to do |format|
       format.html
       format.csv do
