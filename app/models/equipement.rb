@@ -13,7 +13,11 @@ class Equipement < ApplicationRecord
       :modele => 'D'
     },
     using: {
-            tsearch: { prefix: true, any_word: true }
-        }
+      tsearch: {
+        prefix: true,
+        any_word: true
+      }
+    }
+
 
 end

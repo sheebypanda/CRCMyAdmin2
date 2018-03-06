@@ -7,7 +7,7 @@ class RecettesController < ApplicationController
 
   def index
     if params[:search].present?
-     @recettes = Recette.global_search(params[:search])
+     @recettes = Recette.recette_search(params[:search])
     else
       @recettes = Recette.all.order(created_at: :desc).page params[:page]
       @nb = Recette.all.count
