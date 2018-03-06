@@ -19,6 +19,8 @@
       <th><%= fa_icon("tag") %> Marque</th>
       <th><%= fa_icon("server") %> Modèle</th>
       <th><%= fa_icon("comment") %> Nom</th>
+      <th><%= fa_icon("home") %> IP</th>
+      <th><%= fa_icon("tag") %> Net</th>
       <th><%= fa_icon("globe") %> Sortie internet</th>
       <th><%= fa_icon("map-marker") %> Localisation</th>
       <th colspan="2"></th>
@@ -31,6 +33,8 @@
         <td><%= equipement.marque %></td>
         <td><%= equipement.modele %></td>
         <td><a href="<%= edit_equipement_path(equipement) %>" data-toggle="tooltip" data-placement="top" title="<%= equipement.ip %>"><%= equipement.nom %></a></td>
+        <td><a href="<%= edit_equipement_path(equipement) %>" data-toggle="tooltip" data-placement="top" title="<%= equipement.ip %>"><%= equipement.ip %></a></td>
+        <td><a href="<%= edit_equipement_path(equipement) %>" data-toggle="tooltip" data-placement="top" title="<%= equipement.ip %>"><%= equipement.asapid %></a></td>
         <td><% if equipement.recette %>
           <a href="<%= edit_ligne_path(equipement.recette.ligne) %>">
             <%= equipement.recette.ligne.numerocompte %>
