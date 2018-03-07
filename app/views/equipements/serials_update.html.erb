@@ -1,0 +1,11 @@
+<% if @serial_success %>
+<button type="button" class="btn btn-success">Mises à jour réussies : <span class="badge badge-light"><%= @serial_success.count %></span></button>
+  <% @serial_success.each do |s| %>
+    <div class="alert alert-success" role="alert"><%= s.ip %> <%= s.serial %> a été mis à jour</div>
+  <% end %>
+<% elsif @serial_errors %>
+<button type="button" class="btn btn-danger">Mises à jour échouées : <span class="badge badge-light"><%= @serial_errors.count %></span></button>
+  <% @serial_errors.each do |e| %>
+    <div class="alert alert-danger" role="alert"><%= e.ip %> <%= e.serial %> a encontré une erreur</div>
+  <% end %>
+<% end %>

@@ -7,9 +7,7 @@ class EquipementsController < ApplicationController
      @nb = Equipement.equipement_search(params[:search]).count
     else
       @equipements = Equipement.where.not(ip: '').order(updated_at: :desc).page params[:page]
-      @nb = Equipement.count
-
-      @eq = Equipement.all
+      @nb = @equipements.count
       respond_to do |format|
         format.html
         format.csv do
@@ -78,6 +76,20 @@ class EquipementsController < ApplicationController
     end
 
   end
+
+  def hosts_update
+    @add_response = []
+    @add_response2 = []
+    eqs = Equipement.all
+    eqs.each do |e|
+      libreNmsAdd(e.ip)
+      @add_response << e
+      @add_response2 << @response
+    end
+
+  end
+
+
 
   def edit
   end
@@ -153,7 +165,8 @@ class EquipementsController < ApplicationController
         "authlevel" => "authNoPriv",
         "authname" => Rails.application.secrets.snmp_auth_name.to_s,
         "authpass" => Rails.application.secrets.snmp_auth_pass.to_s,
-        "authalgo" => "SHA"
+        "authalgo" => "SHA",
+        "force_add" => "true"
       })
       req_options = {
         use_ssl: uri.scheme == "https",
