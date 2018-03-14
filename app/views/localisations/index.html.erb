@@ -33,7 +33,11 @@
         <td><%= localisation.adresse %></td>
         <td><% if localisation.recettes.last %>
           <a href="<%= edit_ligne_path(localisation.recettes.last.ligne)%>">
-            <%= localisation.recettes.last.ligne.ndi %>
+            <% if localisation.recettes.last.ligne.ndi %>
+              <%= localisation.recettes.last.ligne.ndi %>
+            <% else %>
+              <%= localisation.recettes.last.ligne.identifiantoperateur %>
+            <% end %>
           </a>
         <% end %></td>
         <td><% if localisation.recettes.last %>
