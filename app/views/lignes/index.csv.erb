@@ -8,9 +8,19 @@
   'Mot de passe de connexion',
   'Débit',
   'Vlans',
-  'Coût'] -%>
+  'Coût',
+  'Nom du site',
+  'Adresse',
+  'CP',
+  'Ville'] -%>
 <%= CSV.generate_line headers %>
 <%- @li.each do |li| -%>
+  <% if li.recettes.first %>
+    <% nom = li.recettes.first.localisation.nom %>
+    <% adresse = li.recettes.first.localisation.adresse %>
+    <% cp = li.recettes.first.localisation.codepostal %>
+    <% ville = li.recettes.first.localisation.ville %>
+  <% end %>
 <%= CSV.generate_line([
   li.operateur_id,
   li.techno,
@@ -21,6 +31,10 @@
   li.mdpoperateur,
   li.debit,
   li.vlan,
-  li.cout
+  li.cout,
+  nom,
+  adresse,
+  cp,
+  ville
   ]).html_safe -%>
 <%- end -%>
