@@ -6,10 +6,10 @@
 <% if params[:search] %>
 <div class="alert alert-primary" role="alert">
   <%= fa_icon("server") %>
-  <strong><%= @nb %></strong> Équipements trouvés correspondants à la recherche </h1>
+  <strong><%= @equipements.count %></strong> Équipements trouvés correspondants à la recherche </h1>
 </div>
 <% else %>
-  <h1><%= fa_icon("server") %> <%= @nb %> Équipements en production</h1>
+  <h1><%= fa_icon("server") %> <%= @equipements.count %> Équipements en production</h1>
   <%= link_to fa_icon("plus")+' Ajouter un équipement', new_equipement_path, class: 'btn btn-outline-primary' %>
 <% end %>
 

@@ -4,10 +4,8 @@ class EquipementsController < ApplicationController
   def index
     if params[:search].present?
      @equipements = Equipement.equipement_search(params[:search]).page params[:page]
-     @nb = Equipement.equipement_search(params[:search]).count
     else
       @equipements = Equipement.where.not(ip: '').order(updated_at: :desc).page params[:page]
-      @nb = @equipements.count
       respond_to do |format|
         format.html
         format.csv do
@@ -15,7 +13,6 @@ class EquipementsController < ApplicationController
           headers['Content-Type'] ||= 'text/csv'
         end
       end
-
     end
   end
 
@@ -32,48 +29,17 @@ class EquipementsController < ApplicationController
     require 'openssl'
     require 'json'
 
-    uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s)
-    req_options = {
-      use_ssl: uri.scheme == "https",
-      verify_mode: OpenSSL::SSL::VERIFY_NONE,
-    }
     @serial_success = []
     @serial_errors = []
 
-    equipements = Equipement.all.select(:id, :serial, :ip, :marque).where("marque LIKE ?","%Brocade%").where(serial: [nil, '']).limit(160)
-    # equipements = Equipement.select(:ip, :serial).distinct.order(updated_at: :desc).limit(30)
-    equipements.each do |e|
-      if e.ip
-        if e.serial.to_s.empty?
-          request = Net::HTTP::Get.new(uri+e.ip)
-          request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
-          response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-            http.request(request)
-          end
-
-          if response.code == "200"
-            hash = JSON.parse(response.body)
-            if !hash["devices"][0]["serial"].nil?
-              if !hash["devices"][0]["serial"].empty?
-                e.serial = hash["devices"][0]["serial"]
-                if e.save!
-                  @serial_success << e
-                else
-                  @serial_errors << e
-                end
-              else
-                @serial_errors << e
-              end
-            else
-              byebug
-              @serial_errors << e
-            end
-          else
-            @serial_errors << e
-          end
-        end
-      end
-    end
+    brocades = Equipement.where("marque LIKE ?","%Brocade%").where(serial: [nil, ''])
+    brosco_update(brocades)
+    ciscos = Equipement.where("marque LIKE ?","%Cisco%").where(serial: [nil, ''])
+    brosco_update(ciscos)
+    hps = Equipement.where("marque LIKE ?","%HP%").where(serial: [nil, ''])
+    brosco_update(hps)
+    # equipements = Equipement.select(:ip, :serial).distinct.order(updated_at: :desc).limit(100)
+    # equipements = Equipement.where(serial: [nil, ''])
 
   end
 
@@ -177,4 +143,46 @@ class EquipementsController < ApplicationController
       end
       @response = response.body
     end
+
+    def brosco_update(brosco)
+      brosco.each do |e|
+        if e.ip
+          if e.serial.to_s.empty?
+            uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s+"/"+e.ip)
+            req_options = {
+              use_ssl: uri.scheme == "https",
+              verify_mode: OpenSSL::SSL::VERIFY_NONE,
+            }
+            request = Net::HTTP::Get.new(uri)
+            request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+            response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+              http.request(request)
+            end
+            if response.code == "200"
+              hash = JSON.parse(response.body)
+              if !hash["devices"][0]["serial"].to_s.empty?
+                e.serial = hash["devices"][0]["serial"]
+                if e.save!
+                  @serial_success << e
+                else
+                  e.errors[:base] << "Erreur lors de l'enregistrement"
+                  @serial_errors << e
+                end
+              else
+                e.errors[:base] << "LibreNMS n'arrive pas à trouver de Serial pour cet equipement"
+                @serial_errors << e
+              end
+            else
+              e.errors[:base] << "LibreNMS ne connait pas cet hôte, ou n'arrive pas à le joindre"
+              @serial_errors << e
+            end
+          else
+            e.errors[:base] << "Le serial de cet hote est déjà connu, et n'a donc pas été mis à jour"
+            @serial_errors << e
+          end
+        end
+      end
+
+    end
+
 end
