@@ -1,5 +1,9 @@
 class EquipementsController < ApplicationController
   before_action :set_equipement, only: [:show, :edit, :update, :destroy]
+  require 'net/http'
+  require 'uri'
+  require 'json'
+  require 'openssl'
 
   def index
     if params[:search].present?
@@ -24,23 +28,18 @@ class EquipementsController < ApplicationController
   end
 
   def serials_update
-    require 'net/http'
-    require 'uri'
-    require 'openssl'
-    require 'json'
-
     @serial_success = []
     @serial_errors = []
-
     brocades = Equipement.where("marque LIKE ?","%Brocade%").where(serial: [nil, ''])
-    brosco_update(brocades)
+    devices_update(brocades)
     ciscos = Equipement.where("marque LIKE ?","%Cisco%").where(serial: [nil, ''])
-    brosco_update(ciscos)
+    devices_update(ciscos)
     hps = Equipement.where("marque LIKE ?","%HP%").where(serial: [nil, ''])
-    brosco_update(hps)
-    # equipements = Equipement.select(:ip, :serial).distinct.order(updated_at: :desc).limit(100)
-    # equipements = Equipement.where(serial: [nil, ''])
-
+    devices_update(hps)
+    avayas = Equipement.where("marque LIKE ?","%Synoptic%").where(serial: [nil, ''])
+    inventory_update(avayas)
+    nortels = Equipement.where("marque LIKE ?","%Nortel%").where(serial: [nil, ''])
+    inventory_update(nortels)
   end
 
   def hosts_update
@@ -52,10 +51,7 @@ class EquipementsController < ApplicationController
       @add_response << e
       @add_response2 << @response
     end
-
   end
-
-
 
   def edit
   end
@@ -117,11 +113,6 @@ class EquipementsController < ApplicationController
     end
 
     def libreNmsAdd(ip)
-      require 'net/http'
-      require 'uri'
-      require 'json'
-      require 'openssl'
-
       uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s)
       request = Net::HTTP::Post.new(uri)
       request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
@@ -144,7 +135,7 @@ class EquipementsController < ApplicationController
       @response = response.body
     end
 
-    def brosco_update(brosco)
+    def devices_update(brosco)
       brosco.each do |e|
         if e.ip
           if e.serial.to_s.empty?
@@ -162,6 +153,48 @@ class EquipementsController < ApplicationController
               hash = JSON.parse(response.body)
               if !hash["devices"][0]["serial"].to_s.empty?
                 e.serial = hash["devices"][0]["serial"]
+                if e.save!
+                  @serial_success << e
+                else
+                  e.errors[:base] << "Erreur lors de l'enregistrement"
+                  @serial_errors << e
+                end
+              else
+                e.errors[:base] << "LibreNMS n'arrive pas à trouver de Serial pour cet equipement"
+                @serial_errors << e
+              end
+            else
+              e.errors[:base] << "LibreNMS ne connait pas cet hôte, ou n'arrive pas à le joindre"
+              @serial_errors << e
+            end
+          else
+            e.errors[:base] << "Le serial de cet hote est déjà connu, et n'a donc pas été mis à jour"
+            @serial_errors << e
+          end
+        end
+      end
+    end
+
+    def inventory_update(avayas)
+      avayas.each do |e|
+        if e.ip
+          if e.serial.to_s.empty?
+            uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip)
+            req_options = {
+              use_ssl: uri.scheme == "https",
+              verify_mode: OpenSSL::SSL::VERIFY_NONE,
+            }
+            request = Net::HTTP::Get.new(uri)
+            request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+            response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+              http.request(request)
+            end
+            if response.code == "200"
+              hash = JSON.parse(response.body)
+              if !hash["inventory"][0].to_s.empty?
+                e.serial = hash["inventory"][0]["entPhysicalSerialNum"]
+                e.modele = hash["inventory"][0]["entPhysicalDescr"]
+                e.marque = hash["inventory"][0]["entPhysicalMfgName"]
                 if e.save!
                   @serial_success << e
                 else
