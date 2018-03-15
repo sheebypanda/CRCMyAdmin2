@@ -35,7 +35,7 @@ class EquipementsController < ApplicationController
     devices_update(brocades)
     ciscos = Equipement.where("marque LIKE ?","%Cisco%").where(serial: [nil, ''])
     devices_update(ciscos)
-    hps = Equipement.where("marque LIKE ?","%HP%").where(serial: [nil, ''])
+    hps = Equipement.where("marque LIKE ?","%HP%").where(serial: [nil, '', 'TODO'])
     devices_update(hps)
     avayas = Equipement.where("marque LIKE ?","%Synoptic%").where(serial: [nil, ''])
     inventory_update(avayas)
