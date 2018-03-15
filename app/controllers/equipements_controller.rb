@@ -139,7 +139,7 @@ class EquipementsController < ApplicationController
     def devices_update(brosco)
       brosco.each do |e|
         if e.ip
-          if e.serial.to_s.empty?
+          if e.serial.to_s.empty? or e.serial.to_s == 'TODO'
             uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s+"/"+e.ip)
             req_options = {
               use_ssl: uri.scheme == "https",
