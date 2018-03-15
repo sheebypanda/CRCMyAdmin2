@@ -1,5 +1,36 @@
-<%- headers = ['Marque', 'Modele', 'Nom', 'Numéro de série', 'Identifiant ASAP', 'IP', 'Version IOS'] -%>
+<%- headers = [
+  'Marque',
+  'Modele',
+  'Nom',
+  'Numéro de série',
+  'Identifiant ASAP',
+  'IP',
+  'Version IOS',
+  'Sortie Internet',
+  'Localisation',
+  'Adresse',
+  'CP',
+  'Ville'] -%>
 <%= CSV.generate_line headers %>
 <%- @all.each do |eq| -%>
-<%= CSV.generate_line([eq.marque, eq.modele, eq.nom, eq.serial, eq.asapid, eq.ip, eq.iosv ]).html_safe -%>
+  <% if eq.recette %>
+    <% internet = eq.recette.ligne.identifiantoperateur %>
+    <% localisation = eq.recette.localisation.nom %>
+    <% adresse = eq.recette.localisation.adresse %>
+    <% codepostal = eq.recette.localisation.codepostal %>
+    <% ville = eq.recette.localisation.ville %>
+  <% end %>
+  <%= CSV.generate_line([
+    eq.marque,
+    eq.modele,
+    eq.nom,
+    eq.serial,
+    eq.asapid,
+    eq.ip,
+    eq.iosv,
+    internet,
+    localisation,
+    adresse,
+    codepostal,
+    ville]).html_safe -%>
 <%- end -%>
