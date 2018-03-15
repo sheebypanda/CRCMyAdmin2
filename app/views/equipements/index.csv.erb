@@ -7,6 +7,7 @@
   'IP',
   'Version IOS',
   'Sortie Internet',
+  'Référence opérateur',
   'Localisation',
   'Adresse',
   'CP',
@@ -14,6 +15,7 @@
 <%= CSV.generate_line headers %>
 <%- @all.each do |eq| -%>
   <% if eq.recette %>
+    <% ndi = eq.recette.ligne.ndi %>
     <% internet = eq.recette.ligne.identifiantoperateur %>
     <% localisation = eq.recette.localisation.nom %>
     <% adresse = eq.recette.localisation.adresse %>
@@ -28,6 +30,7 @@
     eq.asapid,
     eq.ip,
     eq.iosv,
+    ndi,
     internet,
     localisation,
     adresse,
