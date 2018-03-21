@@ -11,7 +11,11 @@
   'Localisation',
   'Adresse',
   'CP',
-  'Ville'] -%>
+  'Ville',
+  'SLA',
+  'Equipement maintenu ?',
+  'Coût mensuel',
+  'Date de début de maintenance'] -%>
 <%= CSV.generate_line headers %>
 <%- @all.each do |eq| -%>
   <% if eq.recette %>
@@ -35,5 +39,9 @@
     localisation,
     adresse,
     codepostal,
-    ville]).html_safe -%>
+    ville,
+    eq.sla,
+    eq.maintenance,
+    eq.coutmaintenance,
+    eq.datemaintenance]).html_safe -%>
 <%- end -%>
