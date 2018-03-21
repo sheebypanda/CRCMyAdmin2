@@ -50,7 +50,7 @@
 
         <td><% if equipement.recette %>
           <a href="<%= edit_localisation_path(equipement.recette.localisation) %>">
-            <%= equipement.recette.localisation.ville equipement.recette.localisation.nom %>
+            <%= equipement.recette.localisation.ville %> <%= equipement.recette.localisation.nom %>
           </a>
         <% end %></td>
         <td><%= link_to fa_icon("pencil"), edit_equipement_path(equipement), class: "btn btn-outline-warning" %></td>
