@@ -32,7 +32,7 @@
   </div>
 
 
-  <div class="card text-white bg-info mb-3">
+  <div class="card text-white bg-secondary mb-3">
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("wrench") %> Configuration</h4>
       <div class="form-row">
@@ -56,6 +56,26 @@
           <div class="form-check">
             <%= f.input :supervision, as: :boolean, label: "Ne pas superviser l'équipement (borne Wifi)"%>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-dark text-white mb-3">
+    <div class="card-body">
+      <h4 class="card-title"><%= fa_icon("umbrella") %> Maintenance</h4>
+      <div class="form-row">
+        <div class='col-lg-3 col-sm-4'>
+          <%= f.input :maintenance, as: :boolean, label: fa_icon('umbrella')+'Équipement maintenu ?' %>
+        </div>
+        <div class='col-lg-3 col-sm-4'>
+          <%= f.input :sla, id: :equipement_sla, label: fa_icon('thermometer-empty')+' SLA' %>
+        </div>
+        <div class='col-lg-3 col-sm-4'>
+          <%= f.input :coutmaintenance, id: :equipement_coutmaintenance, label: fa_icon('money')+' Coût mensuel de maintenance' %>
+        </div>
+        <div class='col-lg-3 col-sm-4'>
+          <%= f.input :datemaintenance, id: :equipement_datemaintenance, label: fa_icon('calendar')+" Date de début de maintenance" %>
         </div>
       </div>
     </div>

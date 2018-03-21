@@ -110,7 +110,23 @@ class EquipementsController < ApplicationController
     end
 
     def equipement_params
-      params.require(:equipement).permit(:nom, :marque, :modele, :snmpcontact, :dns, :iosv, :ip, :achat, :garantie, :asapid, :serial, :supervision)
+      params.require(:equipement).permit(
+        :nom,
+        :marque,
+        :modele,
+        :snmpcontact,
+        :dns,
+        :iosv,
+        :ip,
+        :achat,
+        :garantie,
+        :asapid,
+        :serial,
+        :supervision,
+        :sla,
+        :maintenance,
+        :coutmaintenance,
+        :datemaintenance)
     end
 
     def libreNmsAdd(ip)
