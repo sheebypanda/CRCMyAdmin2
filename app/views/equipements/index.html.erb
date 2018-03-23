@@ -9,7 +9,7 @@
   <strong><%= @equipements.count %></strong> Équipements trouvés correspondants à la recherche </h1>
 </div>
 <% else %>
-  <h1><%= fa_icon("server") %> <%= @equipements.count %> Équipements en production</h1>
+  <h1><%= fa_icon("server") %> <%= @all.count %> Équipements en production</h1>
   <%= link_to fa_icon("plus")+' Ajouter un équipement', new_equipement_path, class: 'btn btn-outline-primary' %>
 <% end %>
 
@@ -61,3 +61,10 @@
 </table>
 <%= paginate @equipements %>
 <br>
+
+
+<h3>Importer un fichier CSV</h3>
+  <%= form_tag import_equipements_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Importer le CSV" %>
+  <% end %>

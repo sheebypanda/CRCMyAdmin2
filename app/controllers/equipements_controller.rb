@@ -24,6 +24,15 @@ class EquipementsController < ApplicationController
   def show
   end
 
+  def import
+    # begin
+      Equipement.import(params[:file])
+      redirect_to equipements_path, notice: 'Equipements importés ! :-)'
+    # rescue
+      # redirect_to equipements_path, notice: 'CSV invalide ! :-('
+    #  end
+  end
+
   def new
     @equipement = Equipement.new
   end

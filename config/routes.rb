@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :localisations
   resources :lignes
   resources :operateurs
-  resources :equipements
+  resources :equipements do
+    collection { post :import }
+  end
 
   resources :search, only: [:index]
 
