@@ -25,12 +25,12 @@ class EquipementsController < ApplicationController
   end
 
   def import
-    # begin
+    begin
       Equipement.import(params[:file])
       redirect_to equipements_path, notice: 'Equipements importés ! :-)'
-    # rescue
-      # redirect_to equipements_path, notice: 'CSV invalide ! :-('
-    #  end
+    rescue
+      redirect_to equipements_path, notice: 'CSV invalide ! :-('
+    end
   end
 
   def new
@@ -52,16 +52,16 @@ class EquipementsController < ApplicationController
     inventory_update(nortels)
   end
 
-  def hosts_update
-    @add_response = []
-    @add_response2 = []
-    eqs = Equipement.all
-    eqs.each do |e|
-      libreNmsAdd(e.ip)
-      @add_response << e
-      @add_response2 << @response
-    end
-  end
+  # def hosts_update
+  #   @add_response = []
+  #   @add_response2 = []
+  #   eqs = Equipement.all
+  #   eqs.each do |e|
+  #     libreNmsAdd(e.ip)
+  #     @add_response << e
+  #     @add_response2 << @response
+  #   end
+  # end
 
   def edit
   end

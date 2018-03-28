@@ -10,7 +10,7 @@ class Equipement < ApplicationRecord
       :ip => 'A',
       :nom => 'B',
       :asapid => 'C',
-      :modele => 'D'
+      :serial => 'D'
     },
     using: {
       tsearch: {
@@ -22,12 +22,14 @@ class Equipement < ApplicationRecord
   require 'csv'
 
   def self.import(file)
+    @equipement_updated = 0
+    @equipement_created = 0
     CSV.foreach(file.path, headers: true) do |row|
       equipement_hash = row.to_hash
       unless equipement_hash["serial"].to_s.empty?
         equipement = Equipement.where(serial: equipement_hash["serial"])
-        # TODO controler le format de la date avec Date.parse("24/12/2985")
         if equipement.count == 1
+          equipement_hash["datemaintenance"] = Date.parse(equipement_hash["datemaintenance"]) if equipement_hash["datemaintenance"]
           equipement.first.update_attributes(equipement_hash)
         elsif equipement.count == 0
           Equipement.create!(equipement_hash)
