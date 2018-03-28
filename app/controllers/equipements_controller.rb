@@ -10,7 +10,7 @@ class EquipementsController < ApplicationController
      @equipements = Equipement.equipement_search(params[:search]).page params[:page]
     else
       @equipements = Equipement.where.not(ip: '').order(updated_at: :desc).page params[:page]
-      @all = Equipement.all
+      @all = Equipement.where.not(ip: '').order(updated_at: :desc)
       respond_to do |format|
         format.html
         format.csv do

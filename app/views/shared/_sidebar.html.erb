@@ -1,64 +1,42 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
 
   <div class="sidebar-sticky">
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link <% if current_page?(root_url) %>active<% end %>" href="<%= root_path %>"><%= fa_icon("dashboard") %> Tableau de bord</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <% if request.path.start_with?('/recettes') %>active<% end %>" href="<%= recettes_path %>"><%= fa_icon("check-square-o") %> Fiches recettes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <% if request.path.start_with?('/equipements') %>active<% end %>" href="<%= equipements_path %>"><%= fa_icon("server") %> Équipements</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <% if request.path.start_with?('/stock') %>active<% end %>" href="/stock"><%= fa_icon("truck") %> Stock</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <% if request.path.start_with?('/lignes') %>active<% end %>" href="<%= lignes_path %>"><%= fa_icon("phone") %> Lignes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <% if request.path.start_with?('/operateurs') %>active<% end %>" href="<%= operateurs_path %>"><%= fa_icon("user-secret") %> Opérateurs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <% if request.path.start_with?('/localisations') %>active<% end %>" href="<%= localisations_path %>"><%= fa_icon("map-marker") %> Localisations</a>
-      </li>
-    </ul>
+    <div class="list-group list-group-flush">
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if current_page?(root_url) %>active<% end %>" href="<%= root_path %>">
+        <%= fa_icon("dashboard 2x") %> Tableau de bord <span></span>
+      </a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/recettes') %>active<% end %>" href="<%= recettes_path %>">
+        <%= fa_icon("check-square-o 2x") %> Fiches recettes <span class="badge badge-pill <% if request.path.start_with?('/recettes') %>badge-light<% else %>badge-primary<% end %>"><%= Recette.all.count %></span>
+      </a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/equipements') %>active<% end %>" href="<%= equipements_path %>">
+        <%= fa_icon("server 2x") %> Équipements <span class="badge badge-pill <% if request.path.start_with?('/equipements') %>badge-light<% else %>badge-primary<% end %>"><%= Equipement.all.count %></span>
+      </a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/stock') %>active<% end %>" href="/stock">
+        <%= fa_icon("truck 2x") %> Stock <span class="badge badge-pill <% if request.path.start_with?('/stock') %>badge-light<% else %>badge-primary<% end %>"><%= Equipement.where(nom: nil).or(Equipement.where(nom: '')).count %></span>
+      </a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/lignes') %>active<% end %>" href="<%= lignes_path %>">
+        <%= fa_icon("phone 2x") %> Lignes <span class="badge badge-pill <% if request.path.start_with?('/lignes') %>badge-light<% else %>badge-primary<% end %>"><%= Ligne.all.count %></span>
+      </a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/localisations') %>active<% end %>" href="<%= localisations_path %>">
+        <%= fa_icon("map-marker 2x") %> Localisations <span class="badge badge-pill <% if request.path.start_with?('/localisations') %>badge-light<% else %>badge-primary<% end %>"><%= Localisation.all.count %></span>
+      </a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/operateurs') %>active<% end %>" href="<%= operateurs_path %>">
+        <%= fa_icon("user-secret 2x") %> Opérateurs <span class="badge badge-pill <% if request.path.start_with?('/operateurs') %>badge-light<% else %>badge-primary<% end %>"><%= Operateur.all.count %></span>
+      </a>
 
 
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span><%= fa_icon('download')%> Export CSV</span>
-    </h6>
-
-
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <%= link_to fa_icon("file-excel-o")+' Équipements', equipements_path(format: :csv), class: 'nav-link'%>
-      </li>
-      <li class="nav-item">
-        <%= link_to fa_icon("file-excel-o")+' Lignes', lignes_path(format: :csv), class: 'nav-link'%>
-      </li>
-      <li class="nav-item">
-        <%= link_to fa_icon("file-excel-o")+' Localisations', localisations_path(format: :csv), class: 'nav-link'%>
-      </li>
-      <li class="nav-item">
-        <%= link_to fa_icon("file-excel-o")+' État du stock', '/stock.csv', format: :csv, class: 'nav-link'%>
-      </li>
-    </ul>
-
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span><%= fa_icon('download')%> LibreNMS</span>
-    </h6>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <%= link_to fa_icon("refresh")+' Maj Serials', '/serials_update', class: 'nav-link'%>
-      </li>
-      <!-- <li class="nav-item">
-        <%= link_to fa_icon("plus")+' Maj hôtes', '/hosts_update', class: 'nav-link'%>
-      </li> -->
-
-    </ul>
-
-
+      <div class="dropright">
+        <a class="list-group-item list-group-item-action list-group-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= fa_icon("download")%> Exports CSV
+        </a>
+        <div class="dropdown-menu">
+          <%= link_to fa_icon("file-excel-o")+' Équipements', equipements_path(format: :csv), class: 'list-group-item list-group-item-action'%>
+          <%= link_to fa_icon("file-excel-o")+' Lignes', lignes_path(format: :csv), class: 'list-group-item list-group-item-action'%>
+          <%= link_to fa_icon("file-excel-o")+' Localisations', localisations_path(format: :csv), class: 'list-group-item list-group-item-action'%>
+          <%= link_to fa_icon("file-excel-o")+' État du stock', '/stock.csv', format: :csv, class: 'list-group-item list-group-item-action'%>
+        </div>
+      </div>
+      <%= link_to fa_icon("refresh")+' Maj Serials', '/serials_update', class: 'list-group-item list-group-item-action'%>
+    </div>
   </div>
 </nav>
