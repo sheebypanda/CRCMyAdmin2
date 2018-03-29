@@ -1,14 +1,14 @@
 <%- headers = [
-  "Ville",
-  "Nom",
-  "Adresse",
-  "CP",
-  "Etage",
-  "Tel de contact",
-  "Mail de contact",
-  "Description",
-  "latitude",
-  "longitude"
+  "ville",
+  "nom",
+  "adresse",
+  "codepostal",
+  "etage",
+  "tel",
+  "mail",
+  "description",
+  "lat",
+  "lng"
 ] -%>
 <%= CSV.generate_line headers %>
 <%- @lo.each do |lo| -%>

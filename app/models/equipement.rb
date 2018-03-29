@@ -22,8 +22,6 @@ class Equipement < ApplicationRecord
   require 'csv'
 
   def self.import(file)
-    @equipement_updated = 0
-    @equipement_created = 0
     CSV.foreach(file.path, headers: true) do |row|
       equipement_hash = row.to_hash
       unless equipement_hash["serial"].to_s.empty?

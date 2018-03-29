@@ -22,14 +22,20 @@ class LocalisationsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def new
     @localisation = Localisation.new
   end
 
   def edit
+  end
+
+  def import
+    begin
+      Localisation.import(params[:file])
+      redirect_to localisations_path, notice: 'Localisations importés ! :-)'
+    rescue
+      redirect_to localisations_path, notice: 'CSV invalide ! :-('
+    end
   end
 
   def create
@@ -72,6 +78,17 @@ class LocalisationsController < ApplicationController
     end
 
     def localisation_params
-      params.require(:localisation).permit(:nom, :adresse, :codepostal, :ville, :etage, :tel, :mail, :description, :lat, :lng)
+      params.require(:localisation).permit(
+        :nom,
+        :adresse,
+        :codepostal,
+        :ville,
+        :etage,
+        :tel,
+        :mail,
+        :horaires,
+        :description,
+        :lat,
+        :lng)
     end
 end

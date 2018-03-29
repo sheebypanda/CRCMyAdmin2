@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :recettes
-  resources :localisations
+  resources :localisations do
+    collection { post :import }
+  end
   resources :lignes
   resources :operateurs
   resources :equipements do

@@ -20,16 +20,16 @@
     <% codepostal = eq.recette.localisation.codepostal %>
     <% ville = eq.recette.localisation.ville %>
   <% end %>
-  <%= CSV.generate_line([
-    eq.marque,
-    eq.modele,
-    eq.nom,
-    eq.serial,
-    eq.asapid,
-    eq.ip,
-    eq.iosv,
-    eq.sla,
-    eq.maintenance,
-    eq.coutmaintenance,
-    eq.datemaintenance]).html_safe -%>
+<%= CSV.generate_line([
+  eq.marque,
+  eq.modele,
+  eq.nom,
+  eq.serial,
+  eq.asapid,
+  eq.ip,
+  eq.iosv,
+  eq.sla,
+  eq.maintenance,
+  eq.coutmaintenance,
+  eq.datemaintenance]).html_safe -%>
 <%- end -%>

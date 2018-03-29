@@ -9,7 +9,6 @@
   <strong><%= @nb %></strong> Localisations trouvées correspondantes à la recherche </h1>
 </div>
 <% else %>
-  <h1><%= @nb %> Localisations</h1>
   <%= link_to fa_icon("plus")+' Ajouter une localisation', new_localisation_path, class: 'btn btn-outline-primary' %>
 <% end %>
 <table id="tablesorter" class="tablesorter table table-sm table-striped">
@@ -59,3 +58,8 @@
 <%= paginate @localisations %>
 
 <br>
+<h3>Importer un fichier CSV</h3>
+  <%= form_tag import_localisations_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Importer le CSV" %>
+  <% end %>
