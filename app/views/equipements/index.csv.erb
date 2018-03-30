@@ -13,7 +13,14 @@
   "localisation",
   "adresse",
   "codepostal",
-  "ville"] -%>
+  "ville",
+  "etage",
+  "tel",
+  "mail",
+  "description",
+  "lat",
+  "lng",
+  "horaires"] -%>
 <%= CSV.generate_line headers %>
 <%- @all.each do |eq| -%>
   <% if eq.recette %>

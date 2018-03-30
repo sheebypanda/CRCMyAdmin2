@@ -39,7 +39,6 @@ class Localisation < ApplicationRecord
       unless localisation_hash["nom"].to_s.empty?
         localisation = Localisation.where(nom: localisation_hash["nom"], ville: localisation_hash['ville'])
         if localisation.count == 1
-          localisation_hash["datemaintenance"] = Date.parse(localisation_hash["datemaintenance"]) if localisation_hash["datemaintenance"]
           localisation.first.update_attributes(localisation_hash)
         elsif localisation.count == 0
           Localisation.create!(localisation_hash)
