@@ -9,7 +9,11 @@
   "sla",
   "maintenance",
   "coutmaintenance",
-  "datemaintenance"] -%>
+  "datemaintenance",
+  "localisation",
+  "adresse",
+  "codepostal",
+  "ville"] -%>
 <%= CSV.generate_line headers %>
 <%- @all.each do |eq| -%>
   <% if eq.recette %>
@@ -31,5 +35,9 @@
   eq.sla,
   eq.maintenance,
   eq.coutmaintenance,
-  eq.datemaintenance]).html_safe -%>
+  eq.datemaintenance,
+  localisation,
+  adresse,
+  codepostal,
+  ville]).html_safe -%>
 <%- end -%>
