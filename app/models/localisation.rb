@@ -10,8 +10,14 @@ class Localisation < ApplicationRecord
     :adresse => 'B',
     :ville => 'C',
     :description => 'D'
+  },
+  using: {
+    tsearch: {
+      prefix: true,
+      any_word: true
+    }
   }
-  # 
+  #
   # geocoded_by :adresse
   # after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }
   #
