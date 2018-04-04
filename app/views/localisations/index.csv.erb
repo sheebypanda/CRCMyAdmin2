@@ -1,4 +1,5 @@
 <%- headers = [
+  "bp",
   "ville",
   "nom",
   "adresse",
@@ -14,6 +15,7 @@
 <%= CSV.generate_line headers %>
 <%- @lo.each do |lo| -%>
 <%= CSV.generate_line([
+  lo.bp,
   lo.ville,
   lo.nom,
   lo.adresse,

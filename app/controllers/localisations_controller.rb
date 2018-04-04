@@ -17,8 +17,6 @@ class LocalisationsController < ApplicationController
           headers['Content-Type'] ||= 'text/csv'
         end
       end
-
-
     end
   end
 
@@ -89,6 +87,7 @@ class LocalisationsController < ApplicationController
         :horaires,
         :description,
         :lat,
-        :lng)
+        :lng,
+        :bp)
     end
 end
