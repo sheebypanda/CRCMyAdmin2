@@ -19,7 +19,7 @@
       <th><%= fa_icon("map") %> Adresse</th>
       <th><%= fa_icon("phone") %> Sorties internet</th>
       <th><%= fa_icon("server") %> Équipements / site</th>
-      <th><%= fa_icon("map-marker") %></th>
+      <th><%= fa_icon("barcode") %> BP</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -44,11 +44,9 @@
             <%= localisation.recettes.last.equipement.nom %>
           </a>
         <% end %></td>
-        <% if localisation.lat %>
-          <td class="text-success"><%= fa_icon("check") %></td>
-        <% else %>
-          <td class="text-danger"><%= fa_icon("close") %></td>
-        <% end %>
+
+          <td class="text-info"><%= localisation.bp %></td>
+
         <td><%= link_to fa_icon("pencil"), edit_localisation_path(localisation), class: "btn btn-outline-warning" %></td>
         <td><%= link_to fa_icon("trash"), localisation, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
