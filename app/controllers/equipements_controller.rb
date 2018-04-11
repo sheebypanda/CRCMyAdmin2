@@ -40,16 +40,11 @@ class EquipementsController < ApplicationController
   def serials_update
     @serial_success = []
     @serial_errors = []
-    brocades = Equipement.where("marque LIKE ?","%Brocade%").where(serial: [nil, ''])
-    devices_update(brocades)
-    ciscos = Equipement.where("marque LIKE ?","%Cisco%").where(serial: [nil, ''])
-    devices_update(ciscos)
-    hps = Equipement.where("marque LIKE ?","%HP%").where(serial: [nil, '', 'TODO'])
-    devices_update(hps)
-    avayas = Equipement.where("marque LIKE ?","%Synoptic%").where(serial: [nil, ''])
-    inventory_update(avayas)
-    nortels = Equipement.where("marque LIKE ?","%Nortel%").where(serial: [nil, ''])
-    inventory_update(nortels)
+    equipements = Equipement.where.not(ip: [nil, ''])
+    equipements.each do |e|
+      devices_update(e)
+      stack_update(e)
+    end
   end
 
   # def hosts_update
@@ -78,12 +73,10 @@ class EquipementsController < ApplicationController
         headers['Content-Type'] ||= 'text/csv'
       end
     end
-
   end
 
   def create
     @equipement = Equipement.new(equipement_params)
-
     respond_to do |format|
       if @equipement.save
         format.html { redirect_to new_equipement_path, notice: "L'équipement #{@equipement.marque} #{@equipement.modele} #{@equipement.serial} a bien été créé" }
@@ -161,87 +154,104 @@ class EquipementsController < ApplicationController
       @response = response.body
     end
 
-    def devices_update(brosco)
-      brosco.each do |e|
-        if e.ip
-          if e.serial.to_s.empty? or e.serial.to_s == 'TODO'
-            uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s+"/"+e.ip)
-            req_options = {
-              use_ssl: uri.scheme == "https",
-              verify_mode: OpenSSL::SSL::VERIFY_NONE,
-            }
-            request = Net::HTTP::Get.new(uri)
-            request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
-            response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-              http.request(request)
-            end
-            if response.code == "200"
-              hash = JSON.parse(response.body)
-              if !hash["devices"][0]["serial"].to_s.empty?
-                e.serial = hash["devices"][0]["serial"]
-                if e.save!
-                  @serial_success << e
-                else
-                  e.errors[:base] << "Erreur lors de l'enregistrement"
-                  @serial_errors << e
-                end
-              else
-                e.errors[:base] << "LibreNMS n'arrive pas à trouver de Serial pour cet equipement"
-                @serial_errors << e
-              end
+    def devices_update(e)
+      if e.ip
+        uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s+"/"+e.ip)
+        req_options = {
+          use_ssl: uri.scheme == "https",
+          verify_mode: OpenSSL::SSL::VERIFY_NONE,
+        }
+        request = Net::HTTP::Get.new(uri)
+        request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+        response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+          http.request(request)
+        end
+        if response.code == "200"
+          hash = JSON.parse(response.body)
+          if !hash["devices"][0]["serial"].to_s.empty?
+            e.serial = hash["devices"][0]["serial"]
+            if e.save!
+              @serial_success << e
             else
-              e.errors[:base] << "LibreNMS ne connait pas cet hôte, ou n'arrive pas à le joindre"
+              e.errors[:base] << "Erreur lors de l'enregistrement"
               @serial_errors << e
             end
           else
-            e.errors[:base] << "Le serial de cet hote est déjà connu, et n'a donc pas été mis à jour"
-            @serial_errors << e
+            inventory_update(e)
           end
+        else
+          e.errors[:base] << "LibreNMS ne connait pas cet hôte, ou n'arrive pas à le joindre"
+          @serial_errors << e
         end
       end
     end
 
-    def inventory_update(avayas)
-      avayas.each do |e|
-        if e.ip
-          if e.serial.to_s.empty?
-            uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip)
-            req_options = {
-              use_ssl: uri.scheme == "https",
-              verify_mode: OpenSSL::SSL::VERIFY_NONE,
-            }
-            request = Net::HTTP::Get.new(uri)
-            request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
-            response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-              http.request(request)
-            end
-            if response.code == "200"
-              hash = JSON.parse(response.body)
-              if !hash["inventory"][0].to_s.empty?
-                e.serial = hash["inventory"][0]["entPhysicalSerialNum"]
-                e.modele = hash["inventory"][0]["entPhysicalDescr"]
-                e.marque = hash["inventory"][0]["entPhysicalMfgName"]
-                if e.save!
-                  @serial_success << e
-                else
-                  e.errors[:base] << "Erreur lors de l'enregistrement"
-                  @serial_errors << e
-                end
-              else
-                e.errors[:base] << "LibreNMS n'arrive pas à trouver de Serial pour cet equipement"
-                @serial_errors << e
-              end
+    def inventory_update(e)
+      if e.ip
+        uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip)
+        req_options = {
+          use_ssl: uri.scheme == "https",
+          verify_mode: OpenSSL::SSL::VERIFY_NONE,
+        }
+        request = Net::HTTP::Get.new(uri)
+        request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+        response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+          http.request(request)
+        end
+        if response.code == "200"
+          hash = JSON.parse(response.body)
+          if !hash["inventory"][0].to_s.empty?
+            e.serial = hash["inventory"][0]["entPhysicalSerialNum"]
+            if e.save!
+              @serial_success << e
             else
-              e.errors[:base] << "LibreNMS ne connait pas cet hôte, ou n'arrive pas à le joindre"
+              e.errors[:base] << "Erreur lors de l'enregistrement"
               @serial_errors << e
             end
           else
-            e.errors[:base] << "Le serial de cet hote est déjà connu, et n'a donc pas été mis à jour"
+            e.errors[:base] << "LibreNMS n'arrive pas à trouver de Serial pour cet equipement"
+            @serial_errors << e
+          end
+        else
+          e.errors[:base] << "LibreNMS ne connait pas cet hôte, ou n'arrive pas à le joindre"
+          @serial_errors << e
+        end
+      end
+    end
+
+    def stack_update(e)
+      if e.ip
+        uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip+"?entPhysicalContainedIn=1")
+        req_options = {
+          use_ssl: uri.scheme == "https",
+          verify_mode: OpenSSL::SSL::VERIFY_NONE,
+        }
+        request = Net::HTTP::Get.new(uri)
+        request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+        response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+          http.request(request)
+        end
+        if response.code == "200"
+          hash = JSON.parse(response.body)
+          for indexStack in 0..4
+            if hash["inventory"]
+              if !hash["inventory"][indexStack].to_s.empty?
+                if !hash["inventory"][indexStack]["entPhysicalSerialNum"].empty?
+                  if e.serial != hash["inventory"][indexStack]["entPhysicalSerialNum"]
+                    e.serial = e.serial + " | " + hash["inventory"][indexStack]["entPhysicalSerialNum"]
+                  end
+                end
+              end
+            end
+          end
+          if e.save!
+            @serial_success << e
+          else
+            e.errors[:base] << "Erreur lors de l'enregistrement"
             @serial_errors << e
           end
         end
       end
-
     end
 
 end
