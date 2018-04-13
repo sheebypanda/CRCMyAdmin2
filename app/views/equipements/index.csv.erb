@@ -10,6 +10,7 @@
   "maintenance",
   "coutmaintenance",
   "datemaintenance",
+  "id_localisation",
   "localisation",
   "adresse",
   "codepostal",
@@ -26,6 +27,7 @@
   <% if eq.recette %>
     <% ndi = eq.recette.ligne.ndi %>
     <% internet = eq.recette.ligne.identifiantoperateur %>
+    <% loc_id = eq.recette.localisation.id %>
     <% localisation = eq.recette.localisation.nom %>
     <% adresse = eq.recette.localisation.adresse %>
     <% codepostal = eq.recette.localisation.codepostal %>
@@ -43,6 +45,7 @@
   eq.maintenance,
   eq.coutmaintenance,
   eq.datemaintenance,
+  loc_id,
   localisation,
   adresse,
   codepostal,
