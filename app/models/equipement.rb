@@ -67,7 +67,7 @@ class Equipement < ApplicationRecord
       if equipement_hash["ip"].present? and (equipement_hash["id_localisation"].present? or (equipement_hash["localisation"].present? and equipement_hash['ville'].present?))
         recette_hash = Hash.new
         recette = Recette.joins(:equipement).where('equipements.ip' => equipement_hash["ip"])
-        equipement = Equipement.where(serial: equipement_hash["ip"])
+        equipement = Equipement.where(ip: equipement_hash["ip"])
         if equipement_hash['id_localisation'].present?
           begin
             localisation = Localisation.find(equipement_hash['id_localisation'])
