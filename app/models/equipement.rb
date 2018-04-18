@@ -64,10 +64,10 @@ class Equipement < ApplicationRecord
 
       equipement_hash = row.to_hash
       # Check si une recette lie la localisation à l'equipement. Sinon, on la créée
-      if equipement_hash["serial"].present? and (equipement_hash["id_localisation"].present? or (equipement_hash["localisation"].present? and equipement_hash['ville'].present?))
+      if equipement_hash["ip"].present? and (equipement_hash["id_localisation"].present? or (equipement_hash["localisation"].present? and equipement_hash['ville'].present?))
         recette_hash = Hash.new
-        recette = Recette.joins(:equipement).where('equipements.serial' => equipement_hash["serial"])
-        equipement = Equipement.where(serial: equipement_hash["serial"])
+        recette = Recette.joins(:equipement).where('equipements.ip' => equipement_hash["ip"])
+        equipement = Equipement.where(serial: equipement_hash["ip"])
         if equipement_hash['id_localisation'].present?
           begin
             localisation = Localisation.find(equipement_hash['id_localisation'])
