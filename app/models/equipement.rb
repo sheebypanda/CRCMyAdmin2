@@ -31,7 +31,7 @@ class Equipement < ApplicationRecord
       if equipement_hash["serial"].present?
         equipement = Equipement.where(serial: equipement_hash["serial"])
         equipement_hash["datemaintenance"] = Date.parse(equipement_hash["datemaintenance"]) if equipement_hash["datemaintenance"]
-        equipement_hash = equipement_hash.except!('id_localisation', 'localisation', 'adresse', 'codepostal', 'ville', 'etage', 'tel', 'mail', 'description', 'lat', 'lng', 'horaires')
+        equipement_hash = equipement_hash.except!('id_localisation', 'localisation', 'adresse', 'codepostal', 'ville', 'etage', 'tel', 'mail', 'description', 'lat', 'lng', 'horaires').reject{|k,v| v.blank?}
         if equipement.count == 1
           equipement.first.update_attributes(equipement_hash)
         elsif equipement.count == 0
@@ -50,7 +50,7 @@ class Equipement < ApplicationRecord
       elsif equipement_hash["localisation"].present?
         localisations = Localisation.where(nom: equipement_hash["localisation"], ville: equipement_hash['ville'])
       end
-      equipement_hash = equipement_hash.except!('marque', 'modele', 'nom', 'serial', 'asapid', 'ip', 'iosv', 'sla', 'maintenance', 'coutmaintenance', 'datemaintenance')
+      equipement_hash = equipement_hash.except!('marque', 'modele', 'nom', 'serial', 'asapid', 'ip', 'iosv', 'sla', 'maintenance', 'coutmaintenance', 'datemaintenance').reject{|k,v| v.blank?}
       equipement_hash["nom"] = equipement_hash.delete("localisation")
       equipement_hash["id"] = equipement_hash.delete("id_localisation")
       if localisation.present?

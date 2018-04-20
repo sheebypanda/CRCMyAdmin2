@@ -87,7 +87,7 @@ class EquipementsController < ApplicationController
   end
 
   def update
-    unless equipement_params[:supervision] == 1
+    unless equipement_params[:supervision]
       libreNmsAdd(equipement_params[:ip])
     end
     respond_to do |format|
