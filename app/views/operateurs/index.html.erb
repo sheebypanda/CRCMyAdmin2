@@ -9,6 +9,7 @@
 <table>
   <thead>
     <tr>
+      <th>Identifiant</th>
       <th>Nom</th>
       <th>Hotline</th>
       <th colspan="3"></th>
@@ -18,6 +19,7 @@
   <tbody>
     <% @operateurs.each do |operateur| %>
       <tr>
+        <td><%= operateur.id %></td>
         <td><%= operateur.nom %></td>
         <td><%= operateur.hotline %></td>
         <td><%= link_to 'Show', operateur %></td>
