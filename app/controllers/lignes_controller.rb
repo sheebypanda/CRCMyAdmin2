@@ -32,12 +32,12 @@ class LignesController < ApplicationController
   end
 
   def import
-    # begin
+    begin
       Ligne.import(params[:file])
       redirect_to lignes_path, notice: 'Lignes importés ! :-)'
-    # rescue
-      # redirect_to lignes_path, notice: 'CSV invalide ! :-('
-    # end
+    rescue
+      redirect_to lignes_path, notice: 'CSV invalide ! :-('
+    end
   end
 
   def create
