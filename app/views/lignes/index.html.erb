@@ -60,6 +60,6 @@
 <br>
 <h3>Importer un fichier CSV</h3>
   <%= form_tag import_lignes_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag "Importer le CSV" %>
+    <%= file_field_tag :file, class: "btn" %>
+    <%= submit_tag "Importer le CSV", class: "btn" %>
   <% end %>
