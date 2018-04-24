@@ -23,13 +23,13 @@ class Equipement < ApplicationRecord
 
   def self.import(file)
     # Choper l'ID de la fibre BM pour la création de recettes
-    fibreBM = Ligne.where(numerocompte: 'Fibre privée BM')
+      fibreBM = Ligne.where(numerocompte: 'Fibre privée BM')
     CSV.foreach(file.path, headers: true) do |row|
       equipement_hash = row.to_hash
 
       #Check si equipement existe par le SN ; Sinon on le créé
-      if equipement_hash["serial"].present?
-        equipement = Equipement.where(serial: equipement_hash["serial"])
+      if equipement_hash["ip"].present?
+        equipement = Equipement.where(ip: equipement_hash["ip"])
         equipement_hash["datemaintenance"] = Date.parse(equipement_hash["datemaintenance"]) if equipement_hash["datemaintenance"]
         equipement_hash = equipement_hash.except!('id_localisation', 'localisation', 'adresse', 'codepostal', 'ville', 'etage', 'tel', 'mail', 'description', 'lat', 'lng', 'horaires').reject{|k,v| v.blank?}
         if equipement.count == 1
