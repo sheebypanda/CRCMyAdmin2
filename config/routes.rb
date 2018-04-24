@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :localisations do
     collection { post :import }
   end
-  resources :lignes
+  resources :lignes do
+    collection { post :import }
+  end
   resources :operateurs
   resources :equipements do
     collection { post :import }

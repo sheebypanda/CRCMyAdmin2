@@ -1,18 +1,18 @@
 <%- headers = [
-  'Opérateur',
-  'Techno',
-  'Référence opérateur',
-  'NDI',
-  'IP',
-  'Identifiant de connexion (fti)',
-  'Mot de passe de connexion',
-  'Débit',
-  'Vlans',
-  'Coût',
-  'Nom du site',
-  'Adresse',
-  'CP',
-  'Ville'] -%>
+  "operateur_id",
+  "techno",
+  "numerocompte",
+  "ndi",
+  "ippublique",
+  "identifiantoperateur",
+  "mdpoperateur",
+  "debit",
+  "vlan",
+  "cout",
+  'nom site',
+  'adresse',
+  'cp',
+  'ville'] -%>
 <%= CSV.generate_line headers %>
 <%- @li.each do |li| -%>
   <% if li.recettes.first %>

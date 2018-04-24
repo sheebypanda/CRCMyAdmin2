@@ -31,6 +31,15 @@ class LignesController < ApplicationController
   def edit
   end
 
+  def import
+    # begin
+      Ligne.import(params[:file])
+      redirect_to lignes_path, notice: 'Lignes importés ! :-)'
+    # rescue
+      # redirect_to lignes_path, notice: 'CSV invalide ! :-('
+    # end
+  end
+
   def create
     @ligne = Ligne.new(ligne_params)
 
