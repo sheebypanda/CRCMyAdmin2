@@ -47,16 +47,16 @@ class EquipementsController < ApplicationController
     end
   end
 
-  # def hosts_update
-  #   @add_response = []
-  #   @add_response2 = []
-  #   eqs = Equipement.all
-  #   eqs.each do |e|
-  #     libreNmsAdd(e.ip)
-  #     @add_response << e
-  #     @add_response2 << @response
-  #   end
-  # end
+  def hosts_update
+    @add_response = []
+    @add_response2 = []
+    eqs = Equipement.where.not(ip: [nil, ''])
+    eqs.each do |e|
+      libreNmsAdd(e.ip)
+      @add_response << e
+      @add_response2 << @response
+    end
+  end
 
   def edit
   end
@@ -134,7 +134,7 @@ class EquipementsController < ApplicationController
     def libreNmsAdd(ip)
       uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s)
       request = Net::HTTP::Post.new(uri)
-      request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+      request["X-Auth-Token"] = Rails.application.secrets.token
       request.body = JSON.dump({
         "hostname" => ip.to_s,
         "version" => "v3",
@@ -162,7 +162,7 @@ class EquipementsController < ApplicationController
           verify_mode: OpenSSL::SSL::VERIFY_NONE,
         }
         request = Net::HTTP::Get.new(uri)
-        request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+        request["X-Auth-Token"] = Rails.application.secrets.token
         response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
           http.request(request)
         end
@@ -194,7 +194,7 @@ class EquipementsController < ApplicationController
           verify_mode: OpenSSL::SSL::VERIFY_NONE,
         }
         request = Net::HTTP::Get.new(uri)
-        request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+        request["X-Auth-Token"] = Rails.application.secrets.token
         response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
           http.request(request)
         end
@@ -227,7 +227,7 @@ class EquipementsController < ApplicationController
           verify_mode: OpenSSL::SSL::VERIFY_NONE,
         }
         request = Net::HTTP::Get.new(uri)
-        request["X-Auth-Token"] = "b3b2799398c9221257eb23d5d2189c89"
+        request["X-Auth-Token"] = Rails.application.secrets.token
         response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
           http.request(request)
         end
