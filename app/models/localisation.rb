@@ -18,18 +18,21 @@ class Localisation < ApplicationRecord
     }
   }
 
-  geocoded_by :adresse
-  after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }
+  # after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }
+  # def full_address
+  #   ['France', ville, adresse].compact.join(‘, ‘)
+  # end
+  # geocoded_by full_adress
 
-  reverse_geocoded_by :lat, :lng, :address => :adresse do |obj,results|
-    if geo = results.first
-      obj.adresse = geo.street_number+" "+geo.route
-      obj.ville = geo.city
-      obj.codepostal = geo.postal_code
-    end
-  end
+  # reverse_geocoded_by :lat, :lng, :address => :adresse do |obj,results|
+  #   if geo = results.first
+  #     obj.adresse = geo.street_number+" "+geo.route
+  #     obj.ville = geo.city
+  #     obj.codepostal = geo.postal_code
+  #   end
+  # end
 
-  after_validation :reverse_geocode, :if => lambda{ |obj| obj.lat_changed? }
+  # after_validation :reverse_geocode, :if => lambda{ |obj| obj.lat_changed? }
 
   require 'csv'
 
