@@ -156,7 +156,8 @@ class EquipementsController < ApplicationController
 
     def devices_update(e)
       if e.ip
-        uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s+"/"+e.ip)
+        url = URI.encode(Rails.application.secrets.supervision_api_url.to_s+"/"+e.ip)
+        uri = URI.parse(url)
         req_options = {
           use_ssl: uri.scheme == "https",
           verify_mode: OpenSSL::SSL::VERIFY_NONE,
@@ -188,7 +189,8 @@ class EquipementsController < ApplicationController
 
     def inventory_update(e)
       if e.ip
-        uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip)
+        url = URI.encode(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip)
+        uri = URI.parse(url)
         req_options = {
           use_ssl: uri.scheme == "https",
           verify_mode: OpenSSL::SSL::VERIFY_NONE,
@@ -221,7 +223,8 @@ class EquipementsController < ApplicationController
 
     def stack_update(e)
       if e.ip
-        uri = URI.parse(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip+"?entPhysicalContainedIn=1")
+        url = URI.encode(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip+"?entPhysicalContainedIn=1")
+        uri = URI.parse(url)
         req_options = {
           use_ssl: uri.scheme == "https",
           verify_mode: OpenSSL::SSL::VERIFY_NONE,
