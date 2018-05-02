@@ -15,6 +15,7 @@
   "adresse",
   "codepostal",
   "ville",
+  "bp",
   "etage",
   "tel",
   "mail",
@@ -31,6 +32,7 @@
     <% localisation = eq.recette.localisation.nom %>
     <% adresse = eq.recette.localisation.adresse %>
     <% codepostal = eq.recette.localisation.codepostal %>
+    <% bp = eq.recette.localisation.bp %>
     <% ville = eq.recette.localisation.ville %>
   <% end %>
 <%= CSV.generate_line([
@@ -49,5 +51,6 @@
   localisation,
   adresse,
   codepostal,
-  ville]).html_safe -%>
+  ville,
+  bp]).html_safe -%>
 <%- end -%>
