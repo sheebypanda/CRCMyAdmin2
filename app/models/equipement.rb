@@ -2,7 +2,7 @@ class Equipement < ApplicationRecord
   has_one :recette, dependent: :destroy
   has_one :localisation, through: :recette
   has_one :ligne, through: :recette
-  # validates :serial, uniqueness: true
+  validates :serial, uniqueness: true
 
   include PgSearch
   pg_search_scope :equipement_search, :against =>
