@@ -171,7 +171,9 @@ class EquipementsController < ApplicationController
           hash = JSON.parse(response.body)
           if !hash["devices"][0]["serial"].to_s.empty?
             e.serial = hash["devices"][0]["serial"]
-            if hash["devices"][0]["hardware"].present? e.modele = hash["devices"][0]["hardware"]
+            if hash["devices"][0]["hardware"].present?
+              e.modele = hash["devices"][0]["hardware"]
+            end
             if e.save!
               @serial_success << e
             else
