@@ -1,7 +1,9 @@
-<!-- <%= geo_chart Recette.joins(:equipement).where.not('equipements.nom' => 'Cimetière Chartreuse-Loge').joins(:localisation).group(:ville).count,
-  library: {region: "FR", displayMode: "markers", resolution: 'provinces'},
-  width: "900px", height: "450px", download: true %> -->
-
+<% if params[:search] %>
+  <div class="alert alert-primary" role="alert">
+  <%= fa_icon("server") %>
+  <strong><%= @recettes.count %></strong> Fiches recettes trouvées correspondants à la recherche "<%= params[:search] %>"</h1>
+</div>
+<% else %>
 
 <h2><%= fa_icon("server") %> Équipements</h2>
 <div class="row">
@@ -37,3 +39,4 @@
     <%= pie_chart Operateur.joins(:lignes).group(:nom).count, donut: true, download: true, legend: "bottom", width: "500px", height: "450px" %>
   </div>
 </div>
+<% end %>

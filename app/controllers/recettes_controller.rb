@@ -3,11 +3,12 @@ class RecettesController < ApplicationController
   before_action :get_localisations, :get_lignes, only: [:new, :edit, :create]
   before_action :get_enr, only:[:new]
   before_action :get_equipements, only:[:edit]
+  before_action :check_search
 
 
   def index
     if params[:search].present?
-     @recettes = Recette.recette_search(params[:search])
+      @recettes = PgSearch.multisearch(params[:search]).page params[:page]
     else
       @recettes = Recette.all.order(created_at: :desc).page params[:page]
       @nb = Recette.all.count
@@ -18,7 +19,6 @@ class RecettesController < ApplicationController
   end
 
   def dashboard
-    @brocades = Equipement.where(marque:"Brocade")
   end
 
   def new
@@ -95,6 +95,13 @@ class RecettesController < ApplicationController
         unless e.recette
           @equipements.push(e)
         end
+      end
+    end
+
+    def check_search
+      if params[:search].present?
+        @recettes = PgSearch.multisearch(params[:search]).page params[:page]
+        render :index, search: params[:search]
       end
     end
 

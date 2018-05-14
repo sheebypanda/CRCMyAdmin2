@@ -4,7 +4,7 @@
   </div>
 <% end %>
 <% if params[:search] %>
-<div class="alert alert-primary" role="alert">
+  <div class="alert alert-primary" role="alert">
   <%= fa_icon("server") %>
   <strong><%= @recettes.count %></strong> Fiches recettes trouvées correspondants à la recherche "<%= params[:search] %>"</h1>
 </div>
@@ -33,6 +33,9 @@
   <tbody>
     <% @recettes.each do |recette| %>
       <tr>
+        <% if params[:search] %>
+          <% recette = Recette.find(recette.searchable_id) %>
+        <% end %>
         <td><%= recette.created_at.strftime("%d/%m/%Y") %></td>
         <% index = recette.user.email.index('@') - 1 %>
         <td><%= recette.user.email.slice(0..index) %></td>
