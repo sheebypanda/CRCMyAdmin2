@@ -8,6 +8,7 @@
   "localisation",
   "adresse",
   "serial",
+  "nb_units",
   "marque",
   "modele",
   "nom",
@@ -25,6 +26,7 @@
   "horaires"] -%>
 <%= CSV.generate_line headers %>
 <%- @all.each do |eq| -%>
+  <% nb_units = eq.serial.scan(/\|/).count + 1 if eq.serial %>
   <% if eq.recette %>
     <% ndi = eq.recette.ligne.ndi %>
     <% internet = eq.recette.ligne.identifiantoperateur %>
@@ -45,6 +47,7 @@
   localisation,
   adresse,
   eq.serial,
+  nb_units,
   eq.marque,
   eq.modele,
   eq.nom,
