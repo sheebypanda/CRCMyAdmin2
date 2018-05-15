@@ -15,15 +15,17 @@
 <table id="tablesorter" class="tablesorter table table-striped table-sm">
   <thead>
     <tr>
-      <th><%= fa_icon("tag") %> Marque</th>
+      <th><%= fa_icon("at") %> IP</th>
+      <th><%= fa_icon("home") %> Ville</th>
+      <th><%= fa_icon("umbrella") %></th>
+      <th>SLA</th>
+      <th><%= fa_icon("building") %> Nom site </th>
+      <th><%= fa_icon("map-marker") %> Adresse </th>
+      <th><%= fa_icon("barcode") %> SN </th>
+      <th>Marque</th>
       <th><%= fa_icon("server") %> Modèle</th>
       <th><%= fa_icon("comment") %> Nom</th>
-      <th><%= fa_icon("tag") %> Net</th>
-      <th><%= fa_icon("thermometer-empty") %> SLA</th>
-      <th><%= fa_icon("umbrella") %> Maintenu ?</th>
-      <th><%= fa_icon("money") %> Coût</th>
-      <th><%= fa_icon("calendar") %> Date début maintenance</th>
-      <th><%= fa_icon("map-marker") %> Localisation</th>
+      <th><%= fa_icon("tag") %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -31,27 +33,23 @@
   <tbody>
     <% @equipements.each do |equipement| %>
       <tr>
+        <td><%= equipement.ip %></td>
+        <td><% if equipement.recette %><%= equipement.recette.localisation.ville %><% end %></td>
+        <% if equipement.maintenance %>
+        <td><%=  fa_icon("check", class: "text-success") %></td>
+        <% else %>
+        <td><%=  fa_icon("close", class: "text-danger") %></td>
+        <% end %>
+        <td><%= equipement.sla %></td>
+        <td><% if equipement.recette %><%= equipement.recette.localisation.nom %><% end %></td>
+        <td><% if equipement.recette %><%= equipement.recette.localisation.adresse %><% end %></td>
+        <td><%= equipement.serial %></td>
         <td><%= equipement.marque %></td>
         <td><%= equipement.modele %></td>
         <td><a href="<%= edit_equipement_path(equipement) %>" data-toggle="tooltip" data-placement="top" title="<%= equipement.ip %>"><%= equipement.nom %></a></td>
         <td><a href="<%= edit_equipement_path(equipement) %>" data-toggle="tooltip" data-placement="top" title="<%= equipement.ip %>"><%= equipement.asapid %></a></td>
-        <td><%= equipement.sla %></td>
-        <% if equipement.maintenance %>
-          <td><%=  fa_icon("check", class: "text-success") %></td>
-        <% else %>
-          <td><%=  fa_icon("close", class: "text-danger") %></td>
-        <% end %>
         <td><%= equipement.coutmaintenance %></td>
-        <td><% if equipement.datemaintenance %>
-              <%= equipement.datemaintenance.strftime("%d/%m/%Y") %>
-            <% end %>
-        </td>
-
-        <td><% if equipement.recette %>
-          <a href="<%= edit_localisation_path(equipement.recette.localisation) %>">
-            <%= equipement.recette.localisation.ville %> <%= equipement.recette.localisation.nom %>
-          </a>
-        <% end %></td>
+        <td><% if equipement.datemaintenance %><%= equipement.datemaintenance.strftime("%d/%m/%Y") %><% end %></td>
         <td><%= link_to fa_icon("pencil"), edit_equipement_path(equipement), class: "btn btn-outline-warning" %></td>
         <td><%= link_to fa_icon("trash"), equipement, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
