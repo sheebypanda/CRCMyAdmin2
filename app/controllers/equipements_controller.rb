@@ -206,17 +206,19 @@ class EquipementsController < ApplicationController
         end
         if response.code == "200"
           hash = JSON.parse(response.body)
-          if !hash["inventory"][0].to_s.empty?
-            e.serial = hash["inventory"][0]["entPhysicalSerialNum"]
-            if e.save!
-              @serial_success << e
+          if hash["inventory"]
+            if !hash["inventory"][0].to_s.empty?
+              e.serial = hash["inventory"][0]["entPhysicalSerialNum"]
+              if e.save!
+                @serial_success << e
+              else
+                e.errors[:base] << "Erreur lors de l'enregistrement"
+                @serial_errors << e
+              end
             else
-              e.errors[:base] << "Erreur lors de l'enregistrement"
+              e.errors[:base] << "LibreNMS n'arrive pas à trouver de Serial pour cet equipement"
               @serial_errors << e
             end
-          else
-            e.errors[:base] << "LibreNMS n'arrive pas à trouver de Serial pour cet equipement"
-            @serial_errors << e
           end
         else
           e.errors[:base] << "LibreNMS ne connait pas cet hôte, ou n'arrive pas à le joindre"
