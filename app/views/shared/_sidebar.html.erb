@@ -27,13 +27,24 @@
 
       <div class="dropright">
         <a class="list-group-item list-group-item-action list-group-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= fa_icon("download")%> Exports CSV
+          <%= fa_icon("table")%> Exports CSV
         </a>
         <div class="dropdown-menu">
-          <%= link_to fa_icon("file-excel-o")+' Équipements', equipements_path(format: :csv), class: 'list-group-item list-group-item-action'%>
-          <%= link_to fa_icon("file-excel-o")+' Lignes', lignes_path(format: :csv), class: 'list-group-item list-group-item-action'%>
-          <%= link_to fa_icon("file-excel-o")+' Localisations', localisations_path(format: :csv), class: 'list-group-item list-group-item-action'%>
-          <%= link_to fa_icon("file-excel-o")+' État du stock', '/stock.csv', format: :csv, class: 'list-group-item list-group-item-action'%>
+          <%= link_to fa_icon("table")+' Équipements', equipements_path(format: :csv), class: 'list-group-item list-group-item-action'%>
+          <%= link_to fa_icon("table")+' Lignes', lignes_path(format: :csv), class: 'list-group-item list-group-item-action'%>
+          <%= link_to fa_icon("table")+' Localisations', localisations_path(format: :csv), class: 'list-group-item list-group-item-action'%>
+          <%= link_to fa_icon("table")+' État du stock', '/stock.csv', format: :csv, class: 'list-group-item list-group-item-action'%>
+        </div>
+      </div>
+      <div class="dropright">
+        <a class="list-group-item list-group-item-action list-group-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= fa_icon("file-excel-o")%> Exports Excel
+        </a>
+        <div class="dropdown-menu">
+          <%= link_to fa_icon("file-excel-o")+' Équipements', equipements_path(format: :xls), class: 'list-group-item list-group-item-action'%>
+          <!-- <%= link_to fa_icon("file-excel-o")+' Lignes', lignes_path(format: :xls), class: 'list-group-item list-group-item-action'%>
+          <%= link_to fa_icon("file-excel-o")+' Localisations', localisations_path(format: :xls), class: 'list-group-item list-group-item-action'%>
+          <%= link_to fa_icon("file-excel-o")+' État du stock', '/stock.csv', format: :xls, class: 'list-group-item list-group-item-action'%> -->
         </div>
       </div>
       <!-- <%= link_to fa_icon("refresh")+' Maj Serials', '/serials_update', class: 'list-group-item list-group-item-action'%> -->

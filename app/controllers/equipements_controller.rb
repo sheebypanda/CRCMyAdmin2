@@ -17,6 +17,7 @@ class EquipementsController < ApplicationController
           headers['Content-Disposition'] = "attachment; filename=\"InventaireEquipements.csv\""
           headers['Content-Type'] ||= 'text/csv'
         end
+        format.xls # { send_data @products.to_csv(col_sep: "\t") }
       end
     end
   end

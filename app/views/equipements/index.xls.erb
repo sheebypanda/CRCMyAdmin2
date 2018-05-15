@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ip</Data></Cell>
+        <Cell><Data ss:Type="String">bp</Data></Cell>
+        <Cell><Data ss:Type="String">ville</Data></Cell>
+        <Cell><Data ss:Type="String">maintenance</Data></Cell>
+        <Cell><Data ss:Type="String">sla</Data></Cell>
+        <Cell><Data ss:Type="String">coutmaintenance</Data></Cell>
+        <Cell><Data ss:Type="String">localisation</Data></Cell>
+        <Cell><Data ss:Type="String">adresse</Data></Cell>
+        <Cell><Data ss:Type="String">serial</Data></Cell>
+        <Cell><Data ss:Type="String">nb_units</Data></Cell>
+        <Cell><Data ss:Type="String">marque</Data></Cell>
+        <Cell><Data ss:Type="String">modele</Data></Cell>
+        <Cell><Data ss:Type="String">nom</Data></Cell>
+        <Cell><Data ss:Type="String">asapid</Data></Cell>
+        <Cell><Data ss:Type="String">iosv</Data></Cell>
+        <Cell><Data ss:Type="String">datemaintenance</Data></Cell>
+        <Cell><Data ss:Type="String">id_localisation</Data></Cell>
+        <Cell><Data ss:Type="String">codepostal</Data></Cell>
+        <Cell><Data ss:Type="String">etage</Data></Cell>
+        <Cell><Data ss:Type="String">tel</Data></Cell>
+        <Cell><Data ss:Type="String">mail</Data></Cell>
+        <Cell><Data ss:Type="String">description</Data></Cell>
+        <Cell><Data ss:Type="String">lat</Data></Cell>
+        <Cell><Data ss:Type="String">lng</Data></Cell>
+        <Cell><Data ss:Type="String">horaire</Data></Cell>
+      </Row>
+    <% @all.each do |eq| %>
+    <% nb_units = eq.serial.scan(/\|/).count + 1 if eq.serial %>
+    <% if eq.recette %>
+      <% ndi = eq.recette.ligne.ndi %>
+      <% internet = eq.recette.ligne.identifiantoperateur %>
+      <% loc_id = eq.recette.localisation.id %>
+      <% localisation = eq.recette.localisation.nom %>
+      <% adresse = eq.recette.localisation.adresse %>
+      <% codepostal = eq.recette.localisation.codepostal %>
+      <% bp = eq.recette.localisation.bp %>
+      <% ville = eq.recette.localisation.ville %>
+    <% end %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= eq.ip %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= bp %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= ville %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= eq.maintenance %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= eq.sla %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= eq.coutmaintenance %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= localisation %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= adresse %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= eq.serial %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= nb_units %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= eq.marque %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= eq.modele %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= eq.nom %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= eq.asapid %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= eq.iosv %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= eq.datemaintenance %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= loc_id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= codepostal %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
