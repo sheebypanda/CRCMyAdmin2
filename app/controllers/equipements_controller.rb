@@ -174,7 +174,7 @@ class EquipementsController < ApplicationController
             e.serial = hash["devices"][0]["serial"]
             # if hash["devices"][0]["hardware"].present?
             #   e.modele = hash["devices"][0]["hardware"]
-            end
+            # end
             if e.save!
               @serial_success << e
             else
