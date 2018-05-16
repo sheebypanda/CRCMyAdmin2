@@ -28,10 +28,10 @@ class Equipement < ApplicationRecord
       equipement_hash = row.to_hash
 
       #Check si equipement existe par le SN ; Sinon on le créé
-      if equipement_hash["ip"].present?
-        equipement = Equipement.where(ip: equipement_hash["ip"])
+      if equipement_hash["serial"].present?
+        equipement = Equipement.where(serial: equipement_hash["serial"])
         equipement_hash["datemaintenance"] = Date.parse(equipement_hash["datemaintenance"]) if equipement_hash["datemaintenance"]
-        equipement_hash = equipement_hash.except!('id_localisation', 'localisation', 'adresse', 'codepostal', 'ville', 'etage', 'tel', 'mail', 'description', 'lat', 'lng', 'horaires','bp', 'nb_units').reject{|k,v| v.blank?}
+        equipement_hash = equipement_hash.except!('id_localisation', 'localisation', 'adresse', 'codepostal', 'ville', 'etage', 'tel', 'mail', 'description', 'lat', 'lng', 'horaires','bp').reject{|k,v| v.blank?}
         if equipement.count == 1
           equipement.first.update_attributes(equipement_hash)
         elsif equipement.count == 0
@@ -66,8 +66,8 @@ class Equipement < ApplicationRecord
       # Check si une recette lie la localisation à l'equipement. Sinon, on la créée
       if equipement_hash["ip"].present? and (equipement_hash["id_localisation"].present? or (equipement_hash["localisation"].present? and equipement_hash['ville'].present?))
         recette_hash = Hash.new
-        recette = Recette.joins(:equipement).where('equipements.ip' => equipement_hash["ip"])
-        equipement = Equipement.where(ip: equipement_hash["ip"])
+        recette = Recette.joins(:equipement).where('equipements.serial' => equipement_hash["serial"])
+        equipement = Equipement.where(serial: equipement_hash["serial"])
         if equipement_hash['id_localisation'].present?
           begin
             localisation = Localisation.find(equipement_hash['id_localisation'])
@@ -88,7 +88,7 @@ class Equipement < ApplicationRecord
         recette_hash['etiquette'] = true
         if recette.count == 1
           recette.first.update_attributes(recette_hash)
-        elsif recette.count == 0 and recette_hash['localisation_id'].present?
+        elsif recette.count == 0 and recette_hash['localisation_id'].present? and equipement_hash["serial"].present?
           Recette.create!(recette_hash)
         end
       end

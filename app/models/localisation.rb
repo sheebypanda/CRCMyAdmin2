@@ -1,5 +1,5 @@
 class Localisation < ApplicationRecord
-  has_many :recettes
+  has_many :recettes, dependent: :destroy
   has_many :localisations, through: :recettes
   has_many :lignes, through: :recettes
   validates :nom, presence: true
