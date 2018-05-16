@@ -8,7 +8,6 @@
   "localisation",
   "adresse",
   "serial",
-  "nb_units",
   "marque",
   "modele",
   "nom",
@@ -24,9 +23,9 @@
   "lat",
   "lng",
   "horaires"] -%>
+
 <%= CSV.generate_line headers %>
 <%- @all.each do |eq| -%>
-  <% nb_units = eq.serial.scan(/\|/).count + 1 if eq.serial %>
   <% if eq.recette %>
     <% ndi = eq.recette.ligne.ndi %>
     <% internet = eq.recette.ligne.identifiantoperateur %>
@@ -37,24 +36,28 @@
     <% bp = eq.recette.localisation.bp %>
     <% ville = eq.recette.localisation.ville %>
   <% end %>
-<%= CSV.generate_line([
-  eq.ip,
-  bp,
-  ville,
-  eq.maintenance,
-  eq.sla,
-  eq.coutmaintenance,
-  localisation,
-  adresse,
-  eq.serial,
-  nb_units,
-  eq.marque,
-  eq.modele,
-  eq.nom,
-  eq.asapid,
-  eq.iosv,
-  eq.datemaintenance,
-  loc_id,
-  codepostal
-  ]).html_safe -%>
+  <% if eq.serial %>
+    <% eq.serial.each_line("|") do |s| %>
+      <%= CSV.generate_line([
+        eq.ip,
+        bp,
+        ville,
+        eq.maintenance,
+        eq.sla,
+        eq.coutmaintenance,
+        localisation,
+        adresse,
+        s.tr('|','').strip,
+        nb_units,
+        eq.marque,
+        eq.modele,
+        eq.nom,
+        eq.asapid,
+        eq.iosv,
+        eq.datemaintenance,
+        loc_id,
+        codepostal
+        ]).html_safe -%>
+    <% end %>
+  <% end %>
 <%- end -%>
