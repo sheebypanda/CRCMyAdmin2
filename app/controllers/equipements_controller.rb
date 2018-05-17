@@ -157,7 +157,7 @@ class EquipementsController < ApplicationController
 
     def devices_update(e)
       if e.ip
-        url = URI.encode(Rails.application.secrets.supervision_api_url.to_s+"/"+e.ip)
+        url = URI.encode(Rails.application.secrets.supervision_api_url.to_s+"/"+e.ip.strip)
         uri = URI.parse(url)
         req_options = {
           use_ssl: uri.scheme == "https",
@@ -170,30 +170,38 @@ class EquipementsController < ApplicationController
         end
         if response.code == "200"
           hash = JSON.parse(response.body)
-          if !hash["devices"][0]["serial"].to_s.empty?
-            e.serial = hash["devices"][0]["serial"]
-            # if hash["devices"][0]["hardware"].present?
-            #   e.modele = hash["devices"][0]["hardware"]
-            # end
-            if e.save!
-              @serial_success << e
+          if hash["devices"][0]["serial"].present?
+            if hash["devices"][0]["serial"].include? "|"
+              hash["devices"][0]["serial"].each_line("|") do |s|
+                eqs = Equipement.where(serial: s.tr('|','').strip)
+                if eqs.count == 0
+                  e.serial = s.tr('|','').strip
+                  nouvel_equipement = Equipement.create(e.as_json(:except => :id))
+                  if e.recette
+                    e.recette.equipement_id = nouvel_equipement.id
+                    nouvelle_recette = Recette.create(e.recette.as_json(:except => :id))
+                  end
+                end
+              end
             else
-              e.errors[:base] << "Erreur lors de l'enregistrement"
-              @serial_errors << e
+              eqs = Equipement.where(serial: hash["devices"][0]["serial"])
+              if eqs.count == 0
+                e.serial = hash["devices"][0]["serial"]
+                if e.save!
+                  @serial_success << e
+                end
+              end
             end
           else
             inventory_update(e)
           end
-        else
-          e.errors[:base] << "LibreNMS ne connait pas cet hôte, ou n'arrive pas à le joindre"
-          @serial_errors << e
         end
       end
     end
 
     def inventory_update(e)
       if e.ip
-        url = URI.encode(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip)
+        url = URI.encode(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip.strip)
         uri = URI.parse(url)
         req_options = {
           use_ssl: uri.scheme == "https",
@@ -207,29 +215,25 @@ class EquipementsController < ApplicationController
         if response.code == "200"
           hash = JSON.parse(response.body)
           if hash["inventory"]
-            if !hash["inventory"][0].to_s.empty?
-              e.serial = hash["inventory"][0]["entPhysicalSerialNum"]
-              if e.save!
-                @serial_success << e
-              else
-                e.errors[:base] << "Erreur lors de l'enregistrement"
-                @serial_errors << e
+            if hash["inventory"][0].present?
+              if hash["inventory"][0]["entPhysicalSerialNum"].present?
+                eqs = Equipement.where(serial: hash["inventory"][0]["entPhysicalSerialNum"])
+                if eqs.count == 0
+                  e.serial = hash["inventory"][0]["entPhysicalSerialNum"]
+                  if e.save!
+                    @serial_success << e
+                  end
+                end
               end
-            else
-              e.errors[:base] << "LibreNMS n'arrive pas à trouver de Serial pour cet equipement"
-              @serial_errors << e
             end
           end
-        else
-          e.errors[:base] << "LibreNMS ne connait pas cet hôte, ou n'arrive pas à le joindre"
-          @serial_errors << e
         end
       end
     end
 
     def stack_update(e)
       if e.ip
-        url = URI.encode(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip+"?entPhysicalContainedIn=1")
+        url = URI.encode(Rails.application.secrets.supervision_api_url.to_s[0..-8]+"inventory/"+e.ip.strip+"?entPhysicalContainedIn=1")
         uri = URI.parse(url)
         req_options = {
           use_ssl: uri.scheme == "https",
@@ -244,20 +248,20 @@ class EquipementsController < ApplicationController
           hash = JSON.parse(response.body)
           for indexStack in 0..4
             if hash["inventory"]
-              if !hash["inventory"][indexStack].to_s.empty?
-                if !hash["inventory"][indexStack]["entPhysicalSerialNum"].empty?
-                  if e.serial != hash["inventory"][indexStack]["entPhysicalSerialNum"]
-                    e.serial = e.serial + " | " + hash["inventory"][indexStack]["entPhysicalSerialNum"]
+              if hash["inventory"][indexStack].present?
+                if hash["inventory"][indexStack]["entPhysicalSerialNum"].present?
+                  eqs = Equipement.where(serial: hash["inventory"][indexStack]["entPhysicalSerialNum"])
+                  if eqs.count == 0
+                    e.serial = hash["inventory"][indexStack]["entPhysicalSerialNum"]
+                    nouvel_equipement = Equipement.create(e.as_json(:except => :id))
+                    if e.recette
+                      e.recette.equipement_id = nouvel_equipement.id
+                      nouvelle_recette = Recette.create(e.recette.as_json(:except => :id))
+                    end
                   end
                 end
               end
             end
-          end
-          if e.save!
-            @serial_success << e
-          else
-            e.errors[:base] << "Erreur lors de l'enregistrement"
-            @serial_errors << e
           end
         end
       end
