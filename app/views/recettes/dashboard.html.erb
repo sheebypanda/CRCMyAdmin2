@@ -13,7 +13,7 @@
   </div>
   <div class="col">
     <h4><%= fa_icon("industry") %> Équipements par fabricant</h4>
-    <%= pie_chart Equipement.group(:marque).count, donut: true, download: true, legend: "bottom", width: "500px", height: "450px" %>
+    <%= pie_chart Equipement.group(:marque).where.not(marque: [nil, '', 'net-snmp', 'Unknown', 'Moxa Technologies Co., Ltd.', 'PipingHot Networks Limited']).count, donut: true, download: true, legend: "bottom", width: "500px", height: "450px" %>
   </div>
 
 </div>
