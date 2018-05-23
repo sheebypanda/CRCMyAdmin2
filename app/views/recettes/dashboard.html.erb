@@ -9,11 +9,11 @@
 <div class="row">
   <div class="col">
     <h4><%= fa_icon("university") %> Équipements par commune</h4>
-    <%= pie_chart Recette.joins(:equipement).where.not('equipements.nom' => 'Cimetière Chartreuse-Loge').joins(:localisation).group(:ville).count, donut: true, download: true, legend: "bottom", width: "500px", height: "450px", download: true %>
+    <%= pie_chart Recette.joins(:equipement).where.not('equipements.nom' => 'Cimetière Chartreuse-Loge').joins(:localisation).group(:ville).count.sort, donut: true, download: true, legend: "bottom", width: "500px", height: "450px", download: true %>
   </div>
   <div class="col">
     <h4><%= fa_icon("industry") %> Équipements par fabricant</h4>
-    <%= pie_chart Equipement.group(:marque).where.not(marque: [nil, '', 'net-snmp', 'Unknown', 'Moxa Technologies Co., Ltd.', 'PipingHot Networks Limited']).count, donut: true, download: true, legend: "bottom", width: "500px", height: "450px" %>
+    <%= pie_chart Equipement.group(:marque).where.not(marque: [nil, '', 'net-snmp', 'Unknown', 'Moxa Technologies Co., Ltd.', 'PipingHot Networks Limited']).count.sort, donut: true, download: true, legend: "bottom", width: "500px", height: "450px" %>
   </div>
 
 </div>
