@@ -9,7 +9,7 @@ class Equipement < ApplicationRecord
     {
       :ip => 'A',
       :nom => 'B',
-      :asapid => 'C',
+      :modele => 'C',
       :serial => 'D'
     },
     using: {
