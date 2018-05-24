@@ -89,6 +89,7 @@ class LocalisationsController < ApplicationController
         :description,
         :lat,
         :lng,
-        :bp)
+        :bp,
+        :rattachement)
     end
 end
