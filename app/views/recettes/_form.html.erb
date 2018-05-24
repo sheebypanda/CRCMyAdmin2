@@ -1,11 +1,11 @@
 <%= simple_form_for(@recette) do |f| %>
   <%= f.error_notification %>
 
-  <div class="card text-white bg-danger mb-3">
+  <div class="card text-danger border-danger mb-3">
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("server") %> Équipements</h4>
       <div class="form-row">
-        <div class='col-lg-6 col-sm-12'>
+        <div class='col-lg-12 col-sm-12'>
           <% if params[:action] == 'edit' %>
             <%= f.association :equipement, label: "Sélectionner un équipement", label_method: :nom, value_method: :id, include_blank: false %>
           <% else %>
@@ -17,38 +17,10 @@
             </select>
           <% end %>
         </div>
-        <div class='col-lg-6 col-sm-12'>
-          <label for="recette_equipement_id">ou alors</label><br/>
-          <a href="<%= new_equipement_path %>" class="btn btn-primary"><%= fa_icon("server") %> Ajouter un nouvel équipement</a>
-        </div>
       </div>
     </div>
   </div>
-  <div class="card text-white bg-warning mb-3">
-    <div class="card-body">
-      <h4 class="card-title"><%= fa_icon("globe") %> Sortie internet</h4>
-      <div class="form-row">
-        <div class='col-lg-6 col-sm-12'>
-          <% if params[:action] == 'edit' %>
-            <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: :numerocompte, value_method: :id, include_blank: false %>
-          <% else %>
-          <label for="recette_equipement_id">Sélectionner une localisation</label>
-          <select class="form-control" name="recette[ligne_id]" id="recette_ligne_id">
-            <% @lignes.each do |lig| %>
-              <option value="<%= lig.id %>"><%= lig.numerocompte %> - <%= lig.ndi %></option>
-            <% end %>
-          </select>
-          <% end %>
-        </div>
-        <div class='col-lg-6 col-sm-12'>
-          <label for="recette_equipement_id">ou alors</label><br/>
-          <a href="<%= new_ligne_path %>" class="btn btn-primary"><%= fa_icon("phone") %> Ajouter une nouvelle ligne</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card text-white bg-info mb-3">
+  <div class="card text-info border-info mb-3">
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("map-marker") %> Localisation</h4>
       <div class="form-row">
@@ -56,23 +28,56 @@
           <% if params[:action] == 'edit' %>
             <%= f.association :localisation, label: "Sélectionner une localisation existante", label_method: :nom, value_method: :id, include_blank: false %>
           <% else %>
-          <label for="recette_equipement_id">Sélectionner une localisation</label>
-          <select class="form-control" name="recette[localisation_id]" id="recette_localisation_id">
-            <% @localisations.each do |loc| %>
-              <option value="<%= loc.id %>"><%= loc.ville %> <%= loc.nom %></option>
+          <label for="recette_equipement_id"><%= fa_icon("university") %>Sélectionner d'abord une ville</label>
+          <select class="form-control" name="recette[localisation_ville]" id="recette_localisation_ville">
+            <% @villes.each do |ville| %>
+            <option value="<%= ville %>"><%= ville %></option>
             <% end %>
           </select>
           <% end %>
         </div>
         <div class='col-lg-6 col-sm-12'>
-          <label for="recette_equipement_id">ou alors</label><br/>
-          <a href="<%= new_localisation_path %>" class="btn btn-primary"><%= fa_icon("map-marker") %> Ajouter une nouvelle localisation</a>
+          <label for="recette_equipement_id"><%= fa_icon("map-marker") %>... puis un lieu</label><br/>
+          <select class="form-control" name="recette[localisation_id]" id="recette_localisation_id">
+            <% @localisations.each do |loc| %>
+            <option class="loc <%= loc.ville.delete(' ') %>" value="<%= loc.id %>"><%= loc.nom %></option>
+            <% end %>
+          </select>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card text-warning border-warning mb-3 internet">
+    <div class="card-body">
+      <h4 class="card-title"><%= fa_icon("globe") %> Sortie internet</h4>
+      <div class="form-row">
+        <div class='col-lg-12 col-sm-12'>
+          <% if params[:action] == 'edit' %>
+            <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: :numerocompte, value_method: :id, include_blank: false %>
+          <% else %>
+          <label for="recette_equipement_id">Sélectionner une sortie internet</label>
+          <select class="form-control" name="recette[ligne_id]" id="recette_ligne_id">
+            <% fpbm = Ligne.where(numerocompte: "Fibre privée BM") %>
+            <option value="<%=fpbm.first.id %>"><%=fpbm.first.numerocompte %></option>
+            <% @lignes.each do |lig| %>
+              <%  recettes =  Recette.where(ligne_id: lig.id) %>
+              <% if recettes.count > 0 %>
+                <% recettes.each do |r| %>
+                  <% l = Localisation.find(r.localisation_id) %>
+                  <option class="<%= l.id %> ligne" value="<%= lig.id %>"><%= lig.numerocompte %> - <%= lig.ndi %></option>
+                <% end %>
+              <% end %>
+            <% end %>
+          </select>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card text-white bg-success mb-3">
+
+  <div class="card text-success border-success mb-3">
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("check") %> Test de conformité</h4>
 

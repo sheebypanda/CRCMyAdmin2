@@ -1,7 +1,7 @@
 class RecettesController < ApplicationController
   before_action :set_recette, only: [:show, :edit, :update, :destroy]
   before_action :get_localisations, :get_lignes, only: [:new, :edit, :create]
-  before_action :get_enr, only:[:new]
+  before_action :get_enr, :get_ville, only:[:new]
   before_action :get_equipements, only:[:edit]
   before_action :check_search
 
@@ -68,6 +68,9 @@ class RecettesController < ApplicationController
     end
     def get_localisations
       @localisations = Localisation.all.order(:ville).order(:nom)
+    end
+    def get_ville
+      @villes = Localisation.distinct.pluck(:ville).sort
     end
     def get_lignes
       @lignes = Ligne.all.order(:numerocompte).order(:ndi)
