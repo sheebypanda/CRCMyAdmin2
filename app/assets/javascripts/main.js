@@ -80,7 +80,6 @@ document.addEventListener("turbolinks:load", function() {
     var ligne_option = ".";
     ligne_option += localisation_id;
     $(ligne_option).show();
-    console.log(ligne_option);
   });
 
 })

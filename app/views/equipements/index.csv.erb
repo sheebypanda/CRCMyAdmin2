@@ -2,6 +2,7 @@
   "ip",
   "bp",
   "ville",
+  "rattachement",
   "maintenance",
   "sla",
   "coutmaintenance",
@@ -35,6 +36,7 @@
     <% codepostal = eq.recette.localisation.codepostal %>
     <% bp = eq.recette.localisation.bp %>
     <% ville = eq.recette.localisation.ville %>
+    <% rattachement = eq.recette.localisation.rattachement %>
   <% end %>
   <% if eq.serial %>
     <% eq.serial.each_line("|") do |s| %>
@@ -42,6 +44,7 @@
         eq.ip,
         bp,
         ville,
+        rattachement,
         eq.maintenance,
         eq.sla,
         eq.coutmaintenance,

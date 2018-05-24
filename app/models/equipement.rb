@@ -31,7 +31,7 @@ class Equipement < ApplicationRecord
       if equipement_hash["serial"].present?
         equipement = Equipement.where(serial: equipement_hash["serial"])
         equipement_hash["datemaintenance"] = Date.parse(equipement_hash["datemaintenance"]) if equipement_hash["datemaintenance"]
-        equipement_hash = equipement_hash.except!('id_localisation', 'localisation', 'adresse', 'codepostal', 'ville', 'etage', 'tel', 'mail', 'description', 'lat', 'lng', 'horaires','bp').reject{|k,v| v.blank?}
+        equipement_hash = equipement_hash.except!('id_localisation', 'localisation', 'adresse', 'codepostal', 'ville', 'rattachement', 'etage', 'tel', 'mail', 'description', 'lat', 'lng', 'horaires','bp').reject{|k,v| v.blank?}
         if equipement.count == 1
           equipement.first.update_attributes(equipement_hash)
         elsif equipement.count == 0
