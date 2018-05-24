@@ -40,7 +40,7 @@
           <label for="recette_equipement_id"><%= fa_icon("map-marker") %>... puis un lieu</label><br/>
           <select class="form-control" name="recette[localisation_id]" id="recette_localisation_id">
             <% @localisations.each do |loc| %>
-            <option class="loc <%= loc.ville.delete(' ') %>" value="<%= loc.id %>"><%= loc.nom %></option>
+              <option class="loc <%= loc.ville.delete(' ') if loc.ville %>" value="<%= loc.id %>"><%= loc.nom %></option>
             <% end %>
           </select>
 
