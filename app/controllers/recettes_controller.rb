@@ -70,7 +70,7 @@ class RecettesController < ApplicationController
       @localisations = Localisation.all.order(:ville).order(:nom)
     end
     def get_ville
-      @villes = Localisation.distinct.pluck(:ville).sort
+      @villes = Localisation.distinct.pluck(:ville)
     end
     def get_lignes
       @lignes = Ligne.all.order(:numerocompte).order(:ndi)
