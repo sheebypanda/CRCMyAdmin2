@@ -7,7 +7,7 @@
       <div class="form-row">
         <div class='col-lg-12 col-sm-12'>
           <% if params[:action] == 'edit' %>
-            <%= f.association :equipement, label: "Sélectionner un équipement", label_method: :nom, value_method: :id, include_blank: false %>
+            <%= f.association :equipement, label: "Sélectionner un équipement", label_method: lambda {|e| "#{e.marque} #{e.modele} - #{e.nom} - #{e.ip}"}, value_method: :id, include_blank: false %>
           <% else %>
             <label for="recette_equipement_id">Sélectionner un équipement existant et non-recetté</label>
             <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
@@ -24,27 +24,29 @@
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("map-marker") %> Localisation</h4>
       <div class="form-row">
+        <% if params[:action] == 'edit' %>
+          <div class='col-lg-12 col-sm-12' id="filtre-select-loc">
+            <%= f.association :localisation, label: "Sélectionner une localisation existante", label_method: lambda { |l| "#{l.ville} #{l.nom}, #{l.adresse}" }, value_method: :id, include_blank: false %>
+            <input class="form-control text-filtre" type="text" placeholder="Filtre">
+          </div>
+        <% else %>
         <div class='col-lg-6 col-sm-12'>
-          <% if params[:action] == 'edit' %>
-            <%= f.association :localisation, label: "Sélectionner une localisation existante", label_method: :nom, value_method: :id, include_blank: false %>
-          <% else %>
           <label for="recette_equipement_id"><%= fa_icon("university") %>Sélectionner d'abord une ville</label>
           <select class="form-control" name="recette[localisation_ville]" id="recette_localisation_ville">
             <% @villes.each do |ville| %>
-            <option value="<%= ville %>"><%= ville %></option>
+              <option value="<%= ville %>"><%= ville %></option>
             <% end %>
           </select>
-          <% end %>
         </div>
         <div class='col-lg-6 col-sm-12'>
           <label for="recette_equipement_id"><%= fa_icon("map-marker") %>... puis un lieu</label><br/>
-          <select class="form-control" name="recette[localisation_id]" id="recette_localisation_id">
+          <select class="form-control recette_localisation_id" name="recette[localisation_id]" id="recette_localisation_id">
             <% @localisations.each do |loc| %>
               <option class="loc <%= loc.ville.delete(' ') if loc.ville %>" value="<%= loc.id %>"><%= loc.nom %></option>
             <% end %>
           </select>
-
         </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -54,7 +56,7 @@
       <div class="form-row">
         <div class='col-lg-12 col-sm-12'>
           <% if params[:action] == 'edit' %>
-            <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: :numerocompte, value_method: :id, include_blank: false %>
+            <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: lambda { |l| "#{l.techno} #{l.numerocompte} - #{l.ndi}" }, value_method: :id, include_blank: false %>
           <% else %>
           <label for="recette_equipement_id">Sélectionner une sortie internet</label>
           <select class="form-control" name="recette[ligne_id]" id="recette_ligne_id">
