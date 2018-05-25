@@ -6,7 +6,7 @@ class LocalisationsController < ApplicationController
      @localisations = Localisation.localisation_search(params[:search]).page params[:page]
      @nb = Localisation.localisation_search(params[:search]).count
     else
-      @localisations = Localisation.order(:nom)
+      @localisations = Localisation.order(:adresse).page params[:page]
       @nb = Localisation.all.count
 
       @lo = Localisation.all
@@ -16,7 +16,7 @@ class LocalisationsController < ApplicationController
           headers['Content-Disposition'] = "attachment; filename=\"InventaireLocalisation.csv\""
           headers['Content-Type'] ||= 'text/csv'
         end
-        format.xls # { send_data @products.to_csv(col_sep: "\t") }
+        format.xls # { send_data @products.to_csv(col_sep: "\t")
       end
     end
   end
