@@ -6,7 +6,7 @@ class LocalisationsController < ApplicationController
      @localisations = Localisation.localisation_search(params[:search]).page params[:page]
      @nb = Localisation.localisation_search(params[:search]).count
     else
-      @localisations = Localisation.all.order(updated_at: :desc).page params[:page]
+      @localisations = Localisation.order(:nom)
       @nb = Localisation.all.count
 
       @lo = Localisation.all
