@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Open+Sans:300');
 
-body {
-  //font-size: .875rem;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.9em;
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: #9c74b2;
 }
 
-h1, h2, h3, h4, h5, h6, .btn, a, nav {
+body {
+  font-size: 0.9rem;
+  font-family: 'Open Sans', sans-serif;
+  // font-size: 0.5em;
+}
+
+h1, h2, h3, h4, h5, h6, .btn, a, nav, .sidebar {
   font-family: 'Roboto', sans-serif;
 }
 

@@ -28,10 +28,10 @@
     <% @localisations.each do |localisation| %>
       <tr>
         <td><%= localisation.ville %></td>
-        <td><a href="<%= edit_localisation_path(localisation)%>"><%= localisation.nom %></a></td>
+        <td><a class="text-info" href="<%= edit_localisation_path(localisation)%>"><%= localisation.nom %></a></td>
         <td><%= localisation.adresse %></td>
         <td><% if localisation.recettes.last %>
-          <a href="<%= edit_ligne_path(localisation.recettes.last.ligne)%>">
+          <a class="text-purple" href="<%= edit_ligne_path(localisation.recettes.last.ligne)%>">
             <% if localisation.recettes.last.ligne.ndi %>
               <%= localisation.recettes.last.ligne.ndi %>
             <% else %>
@@ -40,14 +40,14 @@
           </a>
         <% end %></td>
         <td><% if localisation.recettes.last %>
-          <a href="<%= edit_equipement_path(localisation.recettes.last.equipement)%>">
+          <a class="text-danger" href="<%= edit_equipement_path(localisation.recettes.last.equipement)%>">
             <%= localisation.recettes.last.equipement.nom %>
           </a>
         <% end %></td>
 
-          <td class="text-info"><%= localisation.bp %></td>
+          <td><%= localisation.bp %></td>
 
-        <td><%= link_to fa_icon("pencil"), edit_localisation_path(localisation), class: "btn btn-outline-warning" %></td>
+        <td><%= link_to fa_icon("pencil"), edit_localisation_path(localisation), class: "btn btn-outline-primary" %></td>
         <td><%= link_to fa_icon("trash"), localisation, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -41,17 +41,17 @@
         <td><%=  fa_icon("close", class: "text-danger") %></td>
         <% end %>
         <td><%= equipement.sla %></td>
-        <td><% if equipement.recette %><%= equipement.recette.localisation.nom %><% end %></td>
+        <td><% if equipement.recette and equipement.recette.localisation%><a class="text-danger" href="<%= edit_localisation_path(equipement.recette.localisation) %>"><%= equipement.recette.localisation.nom %></a><% end %></td>
         <td><% if equipement.recette %><%= equipement.recette.localisation.adresse %><% end %></td>
         <td><%= equipement.serial %></td>
         <td><%= equipement.marque %></td>
         <td><%= equipement.modele %></td>
-        <td><a href="<%= edit_equipement_path(equipement) %>" data-toggle="tooltip" data-placement="top" title="<%= equipement.ip %>"><%= equipement.nom %></a></td>
+        <td><a class="text-danger" href="<%= edit_equipement_path(equipement) %>" data-toggle="tooltip" data-placement="top" title="<%= equipement.ip %>"><%= equipement.nom %></a></td>
         <td><a href="<%= edit_equipement_path(equipement) %>" data-toggle="tooltip" data-placement="top" title="<%= equipement.ip %>"><%= equipement.asapid %></a></td>
         <td><%= equipement.coutmaintenance %></td>
         <td><% if equipement.datemaintenance %><%= equipement.datemaintenance.strftime("%d/%m/%Y") %><% end %></td>
-        <td><%= link_to fa_icon("pencil")+" "+fa_icon("server"), edit_equipement_path(equipement), class: "btn btn-outline-info" %></td>
-        <td><% if equipement.recette %><%= link_to fa_icon("pencil")+" "+fa_icon("check-square-o"), edit_recette_path(equipement.recette.id), class: "btn btn-outline-primary" %><% end %></td>
+        <td><%= link_to fa_icon("pencil")+" "+fa_icon("server"), edit_equipement_path(equipement), class: "btn btn-outline-primary" %></td>
+        <td><% if equipement.recette %><%= link_to fa_icon("pencil")+" "+fa_icon("check-square-o"), edit_recette_path(equipement.recette.id), class: "btn btn-outline-success" %><% end %></td>
         <td><%= link_to fa_icon("trash"), equipement, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
