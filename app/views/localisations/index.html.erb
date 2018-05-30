@@ -32,10 +32,8 @@
         <td><%= localisation.adresse %></td>
         <td><% if localisation.recettes.last %>
           <a class="text-purple" href="<%= edit_ligne_path(localisation.recettes.last.ligne)%>">
-            <% if localisation.recettes.last.ligne.ndi %>
-              <%= localisation.recettes.last.ligne.ndi %>
-            <% else %>
-              <%= localisation.recettes.last.ligne.numerocompte %>
+            <% if localisation.recettes.last.ligne %>
+              <%= localisation.recettes.last.ligne.ndi %> - <%= localisation.recettes.last.ligne.numerocompte %>
             <% end %>
           </a>
         <% end %></td>
