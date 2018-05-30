@@ -58,17 +58,13 @@ class LocalisationsController < ApplicationController
         format.json { render :show, status: :ok, location: @localisation }
       else
         format.html { render :edit }
-        format.json { render json: @localisation.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
     @localisation.destroy
-    respond_to do |format|
-      format.html { redirect_to localisations_url, notice: "La localisation #{@localisation.nom} a bien été supprimée." }
-      format.json { head :no_content }
-    end
+    redirect_back fallback_location: localisations_path, notice: "La localisation #{@localisation.nom} a bien été supprimée."
   end
 
   private

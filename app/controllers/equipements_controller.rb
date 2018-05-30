@@ -102,9 +102,7 @@ class EquipementsController < ApplicationController
 
   def destroy
     @equipement.destroy
-    respond_to do |format|
-      format.html { redirect_to equipements_path, notice: "L'équipement #{@equipement.nom} a bien été supprimé" }
-    end
+    redirect_back fallback_location: equipements_path, notice: "L'équipement #{@equipement.nom} a bien été supprimé"
   end
 
   private

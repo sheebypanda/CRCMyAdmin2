@@ -69,10 +69,7 @@ class LignesController < ApplicationController
 
   def destroy
     @ligne.destroy
-    respond_to do |format|
-      format.html { redirect_to lignes_url, notice: "La ligne #{@ligne.numerocompte} a bien été supprimée." }
-      format.json { head :no_content }
-    end
+    redirect_back fallback_location: localisations_path, notice: "La ligne #{@ligne.numerocompte} a bien été supprimée."
   end
 
   private
