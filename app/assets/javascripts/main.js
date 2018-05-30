@@ -87,4 +87,11 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 
+  $(".ligne-filtre").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#filtre-select-lig select option").filter(function(){
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
 })
