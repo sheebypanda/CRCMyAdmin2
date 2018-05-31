@@ -41,7 +41,7 @@
         <td><%=  fa_icon("close", class: "text-danger") %></td>
         <% end %>
         <td><%= equipement.sla %></td>
-        <td><% if equipement.recette and equipement.recette.localisation%><a class="text-danger" href="<%= edit_localisation_path(equipement.recette.localisation) %>"><%= equipement.recette.localisation.nom %></a><% end %></td>
+        <td><% if equipement.recette and equipement.recette.localisation%><a class="text-info" href="<%= edit_localisation_path(equipement.recette.localisation) %>"><%= equipement.recette.localisation.nom %></a><% end %></td>
         <td><% if equipement.recette %><%= equipement.recette.localisation.adresse %><% end %></td>
         <td><%= equipement.serial %></td>
         <td><%= equipement.marque %></td>
