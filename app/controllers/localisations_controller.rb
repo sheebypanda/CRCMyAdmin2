@@ -54,7 +54,7 @@ class LocalisationsController < ApplicationController
   def update
     respond_to do |format|
       if @localisation.update(localisation_params)
-        format.html { redirect_to localisations_path, notice: "La localisation #{@localisation.nom} a bien été créée." }
+        format.html { redirect_to localisations_path, notice: "La localisation #{@localisation.nom} a bien été mise à jour." }
         format.json { render :show, status: :ok, location: @localisation }
       else
         format.html { render :edit }
