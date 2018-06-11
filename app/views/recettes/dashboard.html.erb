@@ -20,11 +20,11 @@
 <div class="row">
   <div class="col">
     <h4>Matériel <span class="text-danger">Brocade</span> par modèle</h4>
-    <%= bar_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count.sort, download: true, width: "500px", height: "800px" %>
+    <%= bar_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count.sort, download: true, width: "500px", height: "1000px" %>
   </div>
   <div class="col">
     <h4>Matériel <span class="text-primary">Cisco</span> par modèle</h4>
-    <%= bar_chart Equipement.where("marque LIKE ?","%Cisco%").group(:modele).count.sort, download: true, width: "500px", height: "800px" %>
+    <%= bar_chart Equipement.where("marque LIKE ?","%Cisco%").group(:modele).count.sort, download: true, width: "500px", height: "1000px" %>
   </div>
 </div>
 
