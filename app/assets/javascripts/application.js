@@ -18,5 +18,4 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require jquery-tablesorter
-//= require Chart.bundle
 //= require chartkick
