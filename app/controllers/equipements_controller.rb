@@ -63,7 +63,7 @@ class EquipementsController < ApplicationController
   end
 
   def stock
-    @stock_brocade = Equipement.where(marque: 'Borcade').where(nom: [nil, ''])
+    @stock_brocade = Equipement.where(marque: 'Brocade').where(nom: [nil, ''])
     @stock_cisco = Equipement.where(marque: 'Cisco').where(nom: [nil, ''])
     @stock_aerohive = Equipement.where(marque: 'Aerohive').where(nom: [nil, ''])
     @stock_all = Equipement.where(nom: [nil, '']).where.not(marque: ['Cisco', 'Brocade', 'Aerohive'])
