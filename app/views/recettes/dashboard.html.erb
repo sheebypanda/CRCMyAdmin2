@@ -9,22 +9,22 @@
 <div class="row">
   <div class="col">
     <h4><%= fa_icon("university") %> Équipements par commune</h4>
-    <%= pie_chart Recette.joins(:equipement).where.not('equipements.nom' => 'Cimetière Chartreuse-Loge').joins(:localisation).group(:ville).count.sort, donut: true, download: true, legend: "bottom", width: "500px", height: "450px", download: true %>
+    <%= pie_chart Recette.joins(:equipement).where.not('equipements.nom' => 'Cimetière Chartreuse-Loge').joins(:localisation).group(:ville).count.sort, donut: true, width: "650px", height: "450px" %>
   </div>
   <div class="col">
     <h4><%= fa_icon("industry") %> Équipements par fabricant</h4>
-    <%= pie_chart Equipement.group(:marque).where.not(marque: [nil, '', 'net-snmp', 'Unknown', 'Moxa Technologies Co., Ltd.', 'PipingHot Networks Limited']).count.sort, donut: true, download: true, legend: "bottom", width: "500px", height: "450px" %>
+    <%= pie_chart Equipement.group(:marque).where.not(marque: [nil, '', 'net-snmp', 'Unknown', 'Moxa Technologies Co., Ltd.', 'PipingHot Networks Limited']).count.sort, donut: true, width: "650px", height: "450px" %>
   </div>
 
 </div>
 <div class="row">
   <div class="col">
     <h4>Matériel <span class="text-danger">Brocade</span> par modèle</h4>
-    <%= bar_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count.sort, download: true, width: "500px", height: "1000px" %>
+    <%= bar_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count.sort, width: "650px", height: "1000px", colors: ['#b82e2e'] %>
   </div>
   <div class="col">
     <h4>Matériel <span class="text-primary">Cisco</span> par modèle</h4>
-    <%= bar_chart Equipement.where("marque LIKE ?","%Cisco%").group(:modele).count.sort, download: true, width: "500px", height: "1000px" %>
+    <%= bar_chart Equipement.where("marque LIKE ?","%Cisco%").group(:modele).count.sort, width: "650px", height: "1000px" %>
   </div>
 </div>
 
@@ -32,11 +32,11 @@
 <div class="row">
   <div class="col">
     <h4>Lignes internet par commune</h4>
-    <%= pie_chart Recette.joins(:ligne).where.not('lignes.numerocompte' => 'Fibre privée BM').joins(:localisation).group(:ville).count, donut: true, download: true, legend: "bottom", width: "500px", height: "450px", download: true %>
+    <%= pie_chart Recette.joins(:ligne).where.not('lignes.numerocompte' => 'Fibre privée BM').joins(:localisation).group(:ville).count, donut: true, width: "650px", height: "450px" %>
   </div>
   <div class="col">
     <h4><%= fa_icon("bug") %> Répartition par opérateur</h4>
-    <%= pie_chart Operateur.joins(:lignes).group(:nom).count, donut: true, download: true, legend: "bottom", width: "500px", height: "450px" %>
+    <%= pie_chart Operateur.joins(:lignes).group(:nom).count, donut: true, width: "650px", height: "450px" %>
   </div>
 </div>
 <% end %>
