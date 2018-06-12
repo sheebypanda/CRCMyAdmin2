@@ -63,10 +63,10 @@ class EquipementsController < ApplicationController
   end
 
   def stock
-    @stock_brocade = Equipement.where("marque = ?", 'Brocade' ).where(nom: nil).or(Equipement.where(nom: ''))
-    @stock_cisco = Equipement.where("marque = ?", 'Cisco' ).where(nom: nil).or(Equipement.where(nom: ''))
-    @stock_aerohive = Equipement.where("marque = ?", 'Aerohive' ).where(nom: nil).or(Equipement.where(nom: ''))
-    @stock_all = Equipement.where(nom: nil).or(Equipement.where(nom: ''))
+    @stock_brocade = Equipement.where(marque: 'Borcade').where(nom: [nil, ''])
+    @stock_cisco = Equipement.where(marque: 'Cisco').where(nom: [nil, ''])
+    @stock_aerohive = Equipement.where(marque: 'Aerohive').where(nom: [nil, ''])
+    @stock_all = Equipement.where(nom: [nil, '']).where.not(marque: ['Cisco', 'Brocade', 'Aerohive'])
     respond_to do |format|
       format.html
       format.csv do
