@@ -19,10 +19,11 @@ class Localisation < ApplicationRecord
   }
 
   # after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }
-  # def full_address
-  #   ['France', ville, adresse].compact.join(‘, ‘)
-  # end
-  # geocoded_by full_adress
+  def full_address
+    adresse + ', ' + ville + ', FR'
+  end
+  after_validation :geocode
+  geocoded_by :full_address, :latitude  => :lat, :longitude => :lng
 
   # reverse_geocoded_by :lat, :lng, :address => :adresse do |obj,results|
   #   if geo = results.first

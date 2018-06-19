@@ -66,7 +66,8 @@ class EquipementsController < ApplicationController
     @stock_brocade = Equipement.where(marque: 'Brocade').where(nom: [nil, ''])
     @stock_cisco = Equipement.where(marque: 'Cisco').where(nom: [nil, ''])
     @stock_aerohive = Equipement.where(marque: 'Aerohive').where(nom: [nil, ''])
-    @stock_all = Equipement.where(nom: [nil, '']).where.not(marque: ['Cisco', 'Brocade', 'Aerohive'])
+    @stock_all = Equipement.where(nom: [nil, ''])
+    @stock_others = Equipement.where(nom: [nil, '']).where.not(marque: ['Cisco', 'Brocade', 'Aerohive'])
     respond_to do |format|
       format.html
       format.csv do
