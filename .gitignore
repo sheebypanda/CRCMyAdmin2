@@ -22,3 +22,5 @@
 # lignes.csv
 config/secrets.yml
 config/secrets.yml
+
+.ruby-version
