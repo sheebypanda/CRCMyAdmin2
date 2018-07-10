@@ -8,7 +8,7 @@
 
 
 
-    <div class="card text-white bg-danger mb-3">
+    <div class="card text-danger border-danger mb-3">
       <div class="card-body">
         <h4 class="card-title"><%= fa_icon("id-card") %> Caractéristiques</h4>
 
@@ -19,7 +19,19 @@
              </div>
           </div>
           <div class='col-lg-3 col-sm-12'>
-            <%= f.input :techno, label: fa_icon("rebel")+" Techno", input_html: {placeholder: "FO - ADSL - SDSL..."} %>
+            <div class="form-group select ligne_techno">
+              <label for="ligne_techno"><%= fa_icon("rebel") %> Techno</label>
+              <select name="ligne[techno]" id="ligne_techno" class="form-control">
+                <option value=""></option>
+                <option <% if @ligne.techno == 'ADSL' %> selected <% end %> value="ADSL">ADSL</option>
+                <option <% if @ligne.techno == 'SDSL' %> selected <% end %> value="SDSL">SDSL</option>
+                <option <% if @ligne.techno == 'VDSL' %> selected <% end %> value="VDSL">VDSL</option>
+                <option <% if @ligne.techno == 'FTTH' %> selected <% end %> value="FTTH">FTTH</option>
+                <option <% if @ligne.techno == 'BES2' %> selected <% end %> value="BES2">BES2</option>
+                <option <% if @ligne.techno == 'GFU' %> selected <% end %> value="GFU">GFU</option>
+                <option <% if @ligne.techno == 'BI' %> selected <% end %> value="BI">BI</option>
+              </select>
+            </div>
           </div>
           <div class='col-lg-3 col-sm-12'>
             <%= f.input :debit, label: fa_icon("cloud-download")+" Débit descendant (Mb/s)", input_html: {placeholder: "20"} %>
