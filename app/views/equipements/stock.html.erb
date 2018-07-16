@@ -22,6 +22,7 @@
               <th><%= fa_icon("tag") %> Marque</th>
               <th><%= fa_icon("server") %> Modèle</th>
               <th><%= fa_icon("barcode") %> Numéro de série</th>
+              <th><%= fa_icon("briefcase") %> Projet</th>
               <th></th>
             </tr>
           </thead>
@@ -32,6 +33,7 @@
               <td><%= s.marque %></td>
               <td><%= s.modele %></td>
               <td><%= s.serial %></td>
+              <td><span class="badge badge-pill badge-primary"><%= s.projet.titre if s.projet %></span></td>
               <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
               <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
@@ -54,6 +56,7 @@
               <th><%= fa_icon("tag") %> Marque</th>
               <th><%= fa_icon("server") %> Modèle</th>
               <th><%= fa_icon("barcode") %> Numéro de série</th>
+              <th><%= fa_icon("briefcase") %> Projet</th>
               <th></th>
             </tr>
           </thead>
@@ -64,6 +67,7 @@
               <td><%= s.marque %></td>
               <td><%= s.modele %></td>
               <td><%= s.serial %></td>
+              <td><span class="badge badge-pill badge-primary"><%= s.projet.titre if s.projet %></span></td>
               <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
               <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
@@ -89,6 +93,7 @@
               <th><%= fa_icon("tag") %> Marque</th>
               <th><%= fa_icon("server") %> Modèle</th>
               <th><%= fa_icon("barcode") %> Numéro de série</th>
+              <th><%= fa_icon("briefcase") %> Projet</th>
               <th></th>
             </tr>
           </thead>
@@ -99,6 +104,7 @@
                 <td><%= s.marque %></td>
                 <td><%= s.modele %></td>
                 <td><%= s.serial %></td>
+                <td><span class="badge badge-pill badge-primary"><%= s.projet.titre if s.projet %></span></td>
                 <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
                 <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
@@ -120,6 +126,7 @@
               <th><%= fa_icon("tag") %> Marque</th>
               <th><%= fa_icon("server") %> Modèle</th>
               <th><%= fa_icon("barcode") %> Numéro de série</th>
+              <th><%= fa_icon("briefcase") %> Projet</th>
               <th></th>
             </tr>
           </thead>
@@ -130,6 +137,7 @@
                 <td><%= s.marque %></td>
                 <td><%= s.modele %></td>
                 <td><%= s.serial %></td>
+                <td><span class="badge badge-pill badge-primary"><%= s.projet.titre if s.projet %></span></td>
                 <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
                 <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180524085432) do
+ActiveRecord::Schema.define(version: 20180622121259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180524085432) do
     t.boolean "maintenance"
     t.float "coutmaintenance"
     t.date "datemaintenance"
+    t.bigint "projet_id"
   end
 
   create_table "lignes", force: :cascade do |t|
@@ -90,6 +91,15 @@ ActiveRecord::Schema.define(version: 20180524085432) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
   end
 
+  create_table "projets", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "titre"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_projets_on_user_id"
+  end
+
   create_table "recettes", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "equipement_id"
@@ -126,6 +136,7 @@ ActiveRecord::Schema.define(version: 20180524085432) do
   end
 
   add_foreign_key "lignes", "operateurs"
+  add_foreign_key "projets", "users"
   add_foreign_key "recettes", "equipements"
   add_foreign_key "recettes", "lignes"
   add_foreign_key "recettes", "localisations"

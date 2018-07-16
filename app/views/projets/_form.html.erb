@@ -1,0 +1,62 @@
+<%= simple_form_for(@projet) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user, :as => :hidden, :input_html => { :value => current_user.id } %>
+    <div class="row m-3">
+      <div class="col">
+        <%= f.input :titre %>
+      </div>
+      <div class="col">
+        <%= f.input :date %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <tr>
+            <th><%= fa_icon('check') %> Équipements réservés</th>
+          </tr>
+
+          <%= f.collection_check_boxes :equipement_ids, @projet.equipements, :id, :modele, label: false do |input| %>
+            <!-- <% if input.object.modele.present? %> -->
+              <tr>
+                <td>
+                  <label>
+                    <%= input.check_box %>
+                    <strong><%= input.object.marque %></strong> <%= input.text %>
+                  </label>
+                </td>
+              </tr>
+            <!-- <% end %> -->
+            <!--  Les commentaires servent à cacher le titre de la collection-->
+          <% end %>
+        </table>
+      </div>
+      <div class="col">
+        <table class="table">
+          <tr>
+            <th><%= fa_icon('truck') %> Équipements en stock</th>
+          </tr>
+          <%= f.collection_check_boxes :equipement_ids, @eqs, :id, :modele do |input| %>
+          <tr>
+            <td>
+              <label>
+                <%= input.check_box %>
+                <strong><%= input.object.marque %></strong> <%= input.text %>
+              </label>
+              <%# use input.object if you want to access the equipment instance %>
+            </td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-outline-primary btn-block' %>
+  </div>
+<% end %>

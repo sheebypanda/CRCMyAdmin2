@@ -1,0 +1,28 @@
+<%= link_to fa_icon('plus')+' Ajouter un projet', new_projet_path, class: 'btn btn-outline-primary' %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th><%= fa_icon('user') %> Responsable</th>
+      <th><%= fa_icon('calendar') %> Date de lancement</th>
+      <th><%= fa_icon('server') %> Nombre d'équipement réservés</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projets.each do |projet| %>
+      <tr id="projet_<%= projet.id %>">
+        <td><strong><%= projet.titre %></strong></td>
+        <td><%= projet.user.email.slice(0..(projet.user.email.index('@')-1)) %></td>
+        <td><%= projet.date.strftime("%d/%m/%y") %></td>
+        <td><span class="badge badge-pill badge-danger"><%= projet.equipements.count %></span></td>
+        <td><%= link_to 'Attribuer du matériel', edit_projet_path(projet), class:'btn btn-outline-success' %></td>
+        <td><%= link_to fa_icon('pencil'), edit_projet_path(projet), class: 'btn btn-outline-primary' %></td>
+        <td><%= link_to fa_icon('trash'), projet, class: 'btn btn-outline-danger', method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
