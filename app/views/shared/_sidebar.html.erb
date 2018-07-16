@@ -6,13 +6,16 @@
         <%= fa_icon("dashboard 2x") %> Tableau de bord <span></span>
       </a>
       <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/recettes') %>active<% end %>" href="<%= recettes_path %>">
-        <%= fa_icon("check-square-o 2x") %> Fiches recettes <span class="badge badge-pill <% if request.path.start_with?('/recettes') %>badge-light<% else %>badge-success<% end %>"><%= Recette.all.count %></span>
+        <%= fa_icon("clipboard 2x") %> Fiches recettes <span class="badge badge-pill <% if request.path.start_with?('/recettes') %>badge-light<% else %>badge-success<% end %>"><%= Recette.all.count %></span>
       </a>
       <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/equipements') %>active<% end %>" href="<%= equipements_path %>">
         <%= fa_icon("server 2x") %> Équipements <span class="badge badge-pill <% if request.path.start_with?('/equipements') %>badge-light<% else %>badge-danger<% end %>"><%= Equipement.all.count %></span>
       </a>
       <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/stock') %>active<% end %>" href="/stock">
         <%= fa_icon("truck 2x") %> Stock <span class="badge badge-pill <% if request.path.start_with?('/stock') %>badge-light<% else %>badge-warning<% end %>"><%= Equipement.where(nom: nil).or(Equipement.where(nom: '')).count %></span>
+      </a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/projets') %>active<% end %>" href="/projets">
+        <%= fa_icon("briefcase 2x") %> Projets <span class="badge badge-pill <% if request.path.start_with?('/projets') %>badge-light<% else %>badge-primary<% end %>"><%= Projet.all.count %></span>
       </a>
       <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/lignes') %>active<% end %>" href="<%= lignes_path %>">
         <%= fa_icon("phone 2x") %> Lignes <span class="badge badge-pill <% if request.path.start_with?('/lignes') %>badge-light<% else %>badge-purple<% end %>"><%= Ligne.all.count %></span>

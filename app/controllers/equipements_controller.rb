@@ -77,6 +77,11 @@ class EquipementsController < ApplicationController
     end
   end
 
+  def reservation
+    @equipements = Equipement.where(nom: [nil, '']).order(:marque)
+    @projets = Projet.all
+  end
+
   def create
     @equipement = Equipement.new(equipement_params)
     respond_to do |format|
@@ -128,7 +133,8 @@ class EquipementsController < ApplicationController
         :sla,
         :maintenance,
         :coutmaintenance,
-        :datemaintenance)
+        :datemaintenance,
+        :projet)
     end
 
     def libreNmsAdd(ip)
