@@ -19,6 +19,7 @@ class Localisation < ApplicationRecord
   }
 
   # after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }
+  after_validation :geocode
   def full_address
     adresse + ', ' + ville + ', FR'
   end

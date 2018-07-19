@@ -5,17 +5,17 @@
     <div class="card-body">
       <%= f.input :nom, label: "Nom du site" %>
       <div class="form-row">
-        <div class='col-lg-12 col-sm-12'>
+        <div class='col-lg-6 col-sm-12'>
           <%= f.input :adresse, label: "Adresse" %>
           <%= f.input :codepostal, label: "Code postal" %>
           <%= f.input :ville, label: "Ville" %>
           <%= f.input :rattachement, label: "Commune de rattachement" %>
         </div>
-        <!-- <div class='col-lg-6 col-sm-12'>
-          <button id="gps" type="button" class="pure-button pure-button-primary btn btn-outline-danger btn-block"><%= fa_icon("map-marker") %> Utiliser ma position</button>
-          <%= f.input :lat, input_html: {readonly:""}, label: "Latitude" %>
-          <%= f.input :lng, input_html: {readonly:""}, label: "Longitude" %>
-        </div> -->
+        <div class='col-lg-6 col-sm-12'>
+          <!-- <button id="gps" type="button" class="pure-button pure-button-primary btn btn-outline-danger btn-block"><%= fa_icon("map-marker") %> Utiliser ma position</button> -->
+          <%= f.input :lat, label: "Latitude" %>
+          <%= f.input :lng, label: "Longitude" %>
+        </div>
       </div>
     </div>
   </div>
