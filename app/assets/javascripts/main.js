@@ -94,4 +94,11 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 
+  $("#filtre_equipements").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".equipement").filter(function(){
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
 })

@@ -1,0 +1,49 @@
+<% if notice  %>
+  <div class="alert alert-success animated slideInDown" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+<%= link_to fa_icon('plus')+' Déposer un nouvel incident', new_incident_path, class: 'btn btn-outline-primary' %>
+
+<table class="table tablesort">
+  <thead>
+    <tr>
+      <th>Équipement</th>
+      <th>Début</th>
+      <th>Fin</th>
+      <th>Durée</th>
+      <th>GTR</th>
+      <th class="text-danger">Retard</th>
+      <th>Identifiant NXO</th>
+      <th>Incident ASAP</th>
+      <th>NB équipements</th>
+      <th>Déposé par</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @incidents.each do |incident| %>
+      <tr>
+        <td><%= incident.equipements.first.marque %> <%= incident.equipements.first.modele %> <%= incident.equipements.first.serial %></td>
+        <td><%= incident.debut.strftime("%d/%m - %H:%M") %></td>
+        <td><%= incident.fin.strftime("%d/%m - %H:%M") %></td>
+        <td><span class="badge badge-pill badge-primary"><% temps_resolution = ((incident.fin - incident.debut)/3600).to_i  %><%= temps_resolution %> h</span></td>
+        <td><span class="badge badge-pill badge-success"><% if incident.equipements.first.sla == 1 %> <% gtr = 4 %><%= gtr %> h
+          <% elsif incident.equipements.first.sla == 5 %> <% gtr = 8 %><%= gtr %> h
+          <% else %> <%  gtr = 24 %><%= gtr %> h
+          <% end %></span></td>
+          <% retard = temps_resolution - gtr %>
+        <td><span class="badge badge-pill badge-danger"><% if retard.positive? %><%= retard %> h<% end %></span></td>
+        <td><%= incident.idnxo %></td>
+        <td><%= incident.idasap %></td>
+        <td><%= incident.equipements.count %></td>
+        <td><%= incident.user.email.slice(0..(incident.user.email.index('@')-1)) %></td>
+        <td><%= link_to fa_icon('pencil'), edit_incident_path(incident), class: 'btn btn-outline-primary btn-sm' %></td>
+        <td><%= link_to fa_icon('trash'), incident, class: 'btn btn-sm btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

@@ -33,7 +33,7 @@ class ProjetsController < ApplicationController
   def update
     respond_to do |format|
       if @projet.update(projet_params)
-        format.html { redirect_to @projet, notice: 'Projet mis à jour' }
+        format.html { redirect_to projets_path, notice: 'Projet mis à jour' }
       else
         format.html { render :edit }
       end

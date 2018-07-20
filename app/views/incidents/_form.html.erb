@@ -1,0 +1,80 @@
+<div class="container">
+  <%= simple_form_for(@incident) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.association :user, :as => :hidden, :input_html => { :value => current_user.id } %>
+      <div class="row">
+        <div class="col">
+          <%= f.input :debut %>
+        </div>
+        <div class="col">
+          <%= f.input :fin %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= f.input :idnxo, label: "Identifiant d'incident NXO" %>
+        </div>
+        <div class="col">
+          <%= f.input :idasap, label: "Identifiant d'incident ASAP", input_html: {placeholder:'INC0012345'} %>
+        </div>
+      </div>
+      <!-- <% if params[:action] == "edit"%>
+        <div class="row">
+          <div class="col">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>Équipement précédemments sélectionnées</th>
+                </tr>
+              </thead>
+              <tbody>
+              <%= f.collection_check_boxes :equipement_ids, @incident.equipements, :id, :serial do |input| %>
+                <% if input.object.modele.present? %>
+                  <tr>
+                    <td>
+                      <label>
+                        <%= input.check_box %>
+                        <strong><%= input.object.marque %></strong> <%= input.object.modele %> <%= input.object.ip %><%= input.text %>
+                      </label>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+          </div>
+        </div>
+      <% end %> -->
+
+
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th  scope="col">Sélectionner les équipements défectueux :</th>
+            <th  scope="col"><input class="form-control" type:"text" id="filtre_equipements" placeholder="Filtre : IP ou n° série ou marque" /></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= f.collection_check_boxes :equipement_ids, @eqs, :id, :serial do |input| %>
+            <tr class="equipement" id=equipement_"<%= input.object.id %>">
+              <td>
+                <label>
+                  <%= input.check_box %>
+                  <strong><%= input.object.marque %></strong> <%= input.object.modele %> <%= input.object.ip %><%= input.text %>
+                </label>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= f.input :commentaire %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+  <% end %>
+</div>

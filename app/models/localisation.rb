@@ -1,7 +1,8 @@
 class Localisation < ApplicationRecord
-  has_many :recettes, dependent: :destroy
+  has_many :recettes
   has_many :localisations, through: :recettes
   has_many :lignes, through: :recettes
+  has_many :equipements, through: :recettes
   validates :nom, presence: true
 
   include PgSearch

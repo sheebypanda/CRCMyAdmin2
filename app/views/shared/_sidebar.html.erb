@@ -23,6 +23,9 @@
       <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/localisations') %>active<% end %>" href="<%= localisations_path %>">
         <%= fa_icon("map-marker 2x") %> Localisations <span class="badge badge-pill <% if request.path.start_with?('/localisations') %>badge-light<% else %>badge-info<% end %>"><%= Localisation.all.count %></span>
       </a>
+      <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/incidents') %>active<% end %>" href="<%= incidents_path %>">
+        <%= fa_icon("exclamation-triangle 2x") %> Suivi incidents NXO <span class="badge badge-pill <% if request.path.start_with?('/incidents') %>badge-light<% else %>badge-warning<% end %>"><%= Incident.all.count %></span>
+      </a>
       <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/operateurs') %>active<% end %>" href="<%= operateurs_path %>">
         <%= fa_icon("user-secret 2x") %> Opérateurs <span class="badge badge-pill <% if request.path.start_with?('/operateurs') %>badge-light<% else %>badge-primary<% end %>"><%= Operateur.all.count %></span>
       </a>

@@ -3,6 +3,7 @@ class Equipement < ApplicationRecord
   has_one :localisation, through: :recette
   has_one :ligne, through: :recette
   belongs_to :projet, optional: true
+  has_and_belongs_to_many :incidents
   #validates :serial, uniqueness: true
 
   include PgSearch

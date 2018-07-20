@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  debut: 2018-07-19 11:46:03
+  fin: 2018-07-19 11:46:03
+  idnxo: MyString
+  idasap: MyString
+  commentaire: MyText
+
+two:
+  user: two
+  debut: 2018-07-19 11:46:03
+  fin: 2018-07-19 11:46:03
+  idnxo: MyString
+  idasap: MyString
+  commentaire: MyText

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :incidents
   resources :projets
   resources :recettes
   resources :localisations do

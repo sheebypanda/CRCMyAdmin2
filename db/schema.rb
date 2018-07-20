@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180622121259) do
+ActiveRecord::Schema.define(version: 20180719134448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,23 @@ ActiveRecord::Schema.define(version: 20180622121259) do
     t.float "coutmaintenance"
     t.date "datemaintenance"
     t.bigint "projet_id"
+  end
+
+  create_table "equipements_incidents", id: false, force: :cascade do |t|
+    t.bigint "incident_id", null: false
+    t.bigint "equipement_id", null: false
+  end
+
+  create_table "incidents", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "debut"
+    t.datetime "fin"
+    t.string "idnxo"
+    t.string "idasap"
+    t.text "commentaire"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_incidents_on_user_id"
   end
 
   create_table "lignes", force: :cascade do |t|
@@ -135,6 +152,7 @@ ActiveRecord::Schema.define(version: 20180622121259) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "incidents", "users"
   add_foreign_key "lignes", "operateurs"
   add_foreign_key "projets", "users"
   add_foreign_key "recettes", "equipements"
