@@ -11,9 +11,11 @@
       <th>Équipement</th>
       <th>Début</th>
       <th>Fin</th>
-      <th>Durée</th>
-      <th>GTR</th>
-      <th class="text-danger">Retard</th>
+      <th class="text-info">Durée</th>
+      <th class="text-primary">SLA</th>
+      <th class="text-success">GTR</th>
+      <th class="text-warning">Retard</th>
+      <th class="text-danger">Pénalités</th>
       <th>Identifiant NXO</th>
       <th>Incident ASAP</th>
       <th>NB équipements</th>
@@ -21,20 +23,59 @@
       <th colspan="2"></th>
     </tr>
   </thead>
-
+<% total_penalite = 0 %>
   <tbody>
     <% @incidents.each do |incident| %>
+    <%
+    case incident.equipements.first.sla
+    when 1
+      gtr = 4
+      gtr_txt = '4h - 24/7'
+      coef_penalite = 2000
+      tranche_penalite = 4
+    when 2
+      gtr = 4
+      gtr_txt = '4h Lun-Sam, 8h-21h'
+      coef_penalite = 1500
+      tranche_penalite = 4
+    when 3
+      gtr = 4
+      gtr_txt = '4h Lun-Sam, 8h-18h'
+      coef_penalite = 1500
+      tranche_penalite = 4
+    when 4
+      gtr = 4
+      gtr_txt = '4h Lun-Ven, 8h-18h'
+      coef_penalite = 1500
+      tranche_penalite = 4
+    when 5
+      gtr = 8
+      gtr_txt = '4h Lun-Ven, 8h-18h'
+      coef_penalite = 1000
+      tranche_penalite = 8
+    when 6
+      gtr = 34
+      gtr_txt = 'J+1 Lun-Ven, 8h-18h'
+      coef_penalite = 500
+      tranche_penalite = 10
+    end
+    %>
       <tr>
         <td><%= incident.equipements.first.marque %> <%= incident.equipements.first.modele %> <%= incident.equipements.first.serial %></td>
         <td><%= incident.debut.strftime("%d/%m - %H:%M") %></td>
         <td><%= incident.fin.strftime("%d/%m - %H:%M") %></td>
-        <td><span class="badge badge-pill badge-primary"><% temps_resolution = ((incident.fin - incident.debut)/3600).to_i  %><%= temps_resolution %> h</span></td>
-        <td><span class="badge badge-pill badge-success"><% if incident.equipements.first.sla == 1 %> <% gtr = 4 %><%= gtr %> h
-          <% elsif incident.equipements.first.sla == 5 %> <% gtr = 8 %><%= gtr %> h
-          <% else %> <%  gtr = 24 %><%= gtr %> h
-          <% end %></span></td>
+        <td><span class="badge badge-pill badge-info"><% temps_resolution = ((incident.fin - incident.debut)/3600).to_i  %><%= temps_resolution %> h</span></td>
+        <td><span class="badge badge-pill badge-primary"><%= incident.equipements.first.sla %></span></td>
+        <td><span class="badge badge-pill badge-success"><%= gtr_txt %></td>
           <% retard = temps_resolution - gtr %>
-        <td><span class="badge badge-pill badge-danger"><% if retard.positive? %><%= retard %> h<% end %></span></td>
+        <td><span class="badge badge-pill badge-warning"><% if retard.positive? %><%= retard %> h<% end %></span></td>
+        <td>
+          <% if retard.positive? %>
+            <% penalite = ((retard % tranche_penalite)+1)*coef_penalite
+            total_penalite = total_penalite + penalite %>
+            <span class="badge badge-pill badge-danger"><%= penalite %> €</span>
+          <% end %>
+        </td>
         <td><%= incident.idnxo %></td>
         <td><%= incident.idasap %></td>
         <td><%= incident.equipements.count %></td>
@@ -45,5 +86,7 @@
     <% end %>
   </tbody>
 </table>
+
+<h4 class="text-center">Montant total des pénalités : <span class="text-danger"><%= total_penalite %> €</span></h4>
 
 <br>
