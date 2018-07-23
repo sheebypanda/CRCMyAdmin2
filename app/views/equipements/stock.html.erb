@@ -4,108 +4,76 @@
   </div>
 <% end %>
 
+<nav class="nav nav-pills nav-justified">
+  <%= link_to fa_icon("plus")+' Ajouter des équipement au stock', new_equipement_path, class: 'm-1 nav-item btn btn-outline-primary' %>
+  <a class="m-1 nav-item btn btn-outline-info" href="#cisco">Cisco</a>
+  <a class="m-1 nav-item btn btn-outline-warning" href="#aerohive">Aerohive</a>
+  <a class="m-1 nav-item btn btn-outline-success" href="#autres">Autre</a>
+</nav>
 
-<%= link_to fa_icon("plus")+' Ajouter des équipement au stock', new_equipement_path, class: 'btn btn-outline-primary' %>
+<div class="container">
 
-<div class="row mt-3">
-  <div class="col-lg-6">
-    <div class="card border-danger">
-      <div class="card-text">
+  <div class="row mt-3">
+    <div class="col">
+      <div class="card border-danger">
+        <div class="card-text">
 
+          <h2 class="m-3 text-danger">Brocade</span></h2>
+          <%= bar_chart @stock_brocade.group(:modele).count, colors: ['#b82e2e']%>
 
-        <h2 class="m-3">État du stock <span class="text-danger">Brocade</span></h2>
-        <%= bar_chart @stock_brocade.group(:modele).count, colors: ['#b82e2e']%>
+          <table id="tablesorter" class="tablesorter table table-striped table-sm">
+            <thead>
+              <tr>
+                <th><%= fa_icon("tag") %> Marque</th>
+                <th><%= fa_icon("server") %> Modèle</th>
+                <th><%= fa_icon("barcode") %> Numéro de série</th>
+                <th><%= fa_icon("briefcase") %> Projet</th>
+                <th><%= fa_icon("calendar") %> Date</th>
+                <th></th>
+              </tr>
+            </thead>
 
-        <table id="tablesorter" class="tablesorter table table-striped table-sm">
-          <thead>
-            <tr>
-              <th><%= fa_icon("tag") %> Marque</th>
-              <th><%= fa_icon("server") %> Modèle</th>
-              <th><%= fa_icon("barcode") %> Numéro de série</th>
-              <th><%= fa_icon("briefcase") %> Projet</th>
-              <th><%= fa_icon("calendar") %> Date</th>
-              <th></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @stock_brocade.each do |s| %>
-            <tr>
-              <td><%= s.marque %></td>
-              <td><%= s.modele %></td>
-              <td><%= s.serial %></td>
-              <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
-              <!-- <td><span class="badge badge-pill badge-primary"><%= s.projet.titre if s.projet %></span></td> -->
-              <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
-              <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
-              <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+            <tbody>
+              <% @stock_brocade.each do |s| %>
+              <tr>
+                <td><%= s.marque %></td>
+                <td><%= s.modele %></td>
+                <td><%= s.serial %></td>
+                <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
+                <!-- <td><span class="badge badge-pill badge-primary"><%= s.projet.titre if s.projet %></span></td> -->
+                <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
+                <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
+                <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="col-lg-6">
-    <div class="card border-primary">
-      <div class="card-text">
+  <div class="row mt-3" id="cisco">
+    <div class="col">
+      <div class="card border-primary">
+        <div class="card-text">
 
-        <h2 class="m-3">État du stock <span class="text-primary">Cisco</span></h2>
-        <%= bar_chart @stock_cisco.group(:modele).count %>
-        <table id="tablesorter" class="tablesorter table table-striped table-sm">
-          <thead>
-            <tr>
-              <th><%= fa_icon("tag") %> Marque</th>
-              <th><%= fa_icon("server") %> Modèle</th>
-              <th><%= fa_icon("barcode") %> Numéro de série</th>
-              <th><%= fa_icon("briefcase") %> Projet</th>
-              <th><%= fa_icon("calendar") %> Date</th>
-              <th></th>
-            </tr>
-          </thead>
+          <h2 class="m-3 text-info">Cisco</span></h2>
+          <%= bar_chart @stock_cisco.group(:modele).count %>
+          <table id="tablesorter" class="tablesorter table table-striped table-sm">
+            <thead>
+              <tr>
+                <th><%= fa_icon("tag") %> Marque</th>
+                <th><%= fa_icon("server") %> Modèle</th>
+                <th><%= fa_icon("barcode") %> Numéro de série</th>
+                <th><%= fa_icon("briefcase") %> Projet</th>
+                <th><%= fa_icon("calendar") %> Date</th>
+                <th></th>
+              </tr>
+            </thead>
 
-          <tbody>
-            <% @stock_cisco.each do |s| %>
-            <tr>
-              <td><%= s.marque %></td>
-              <td><%= s.modele %></td>
-              <td><%= s.serial %></td>
-              <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
-              <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
-              <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
-              <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="row mt-3">
-  <div class="col-lg-6">
-    <div class="card border-warning">
-      <div class="card-text">
-
-        <h2 class="m-3">État du stock <span class="text-warning">Aerohive</span></h2>
-        <%= column_chart @stock_aerohive.group(:modele).count %>
-        <table id="tablesorter" class="tablesorter table table-striped table-sm">
-          <thead>
-            <tr>
-              <th><%= fa_icon("tag") %> Marque</th>
-              <th><%= fa_icon("server") %> Modèle</th>
-              <th><%= fa_icon("barcode") %> Numéro de série</th>
-              <th><%= fa_icon("briefcase") %> Projet</th>
-              <th><%= fa_icon("calendar") %> Date</th>
-              <th></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @stock_aerohive.each do |s| %>
+            <tbody>
+              <% @stock_cisco.each do |s| %>
               <tr>
                 <td><%= s.marque %></td>
                 <td><%= s.modele %></td>
@@ -115,44 +83,86 @@
                 <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
                 <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="col-lg-6">
-    <div class="card border-success">
-      <div class="card-text">
-        <h2 class="m-3">État du stock <span class="text-success">général</span></h2>
 
-        <table id="tablesorter" class="tablesorter table table-striped table-sm">
-          <thead>
-            <tr>
-              <th><%= fa_icon("tag") %> Marque</th>
-              <th><%= fa_icon("server") %> Modèle</th>
-              <th><%= fa_icon("barcode") %> Numéro de série</th>
-              <th><%= fa_icon("briefcase") %> Projet</th>
-              <th><%= fa_icon("calendar") %> Date</th>
-              <th></th>
-            </tr>
-          </thead>
+  <div class="row mt-3" id="aerohive">
+    <div class="col">
+      <div class="card border-warning">
+        <div class="card-text">
 
-          <tbody>
-            <% @stock_others.each do |s| %>
+          <h2 class="m-3 text-warning">Aerohive</span></h2>
+          <%= column_chart @stock_aerohive.group(:modele).count %>
+          <table id="tablesorter" class="tablesorter table table-striped table-sm">
+            <thead>
               <tr>
-                <td><%= s.marque %></td>
-                <td><%= s.modele %></td>
-                <td><%= s.serial %></td>
-                <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
-                <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
-                <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
-                <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <th><%= fa_icon("tag") %> Marque</th>
+                <th><%= fa_icon("server") %> Modèle</th>
+                <th><%= fa_icon("barcode") %> Numéro de série</th>
+                <th><%= fa_icon("briefcase") %> Projet</th>
+                <th><%= fa_icon("calendar") %> Date</th>
+                <th></th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              <% @stock_aerohive.each do |s| %>
+                <tr>
+                  <td><%= s.marque %></td>
+                  <td><%= s.modele %></td>
+                  <td><%= s.serial %></td>
+                  <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
+                  <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
+                  <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
+                  <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col" id="autres">
+      <div class="card border-success">
+        <div class="card-text">
+          <h2 class="m-3 text-success">Autres marques</h2>
+
+          <table id="tablesorter" class="tablesorter table table-striped table-sm">
+            <thead>
+              <tr>
+                <th><%= fa_icon("tag") %> Marque</th>
+                <th><%= fa_icon("server") %> Modèle</th>
+                <th><%= fa_icon("barcode") %> Numéro de série</th>
+                <th><%= fa_icon("briefcase") %> Projet</th>
+                <th><%= fa_icon("calendar") %> Date</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @stock_others.each do |s| %>
+                <tr>
+                  <td><%= s.marque %></td>
+                  <td><%= s.modele %></td>
+                  <td><%= s.serial %></td>
+                  <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
+                  <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
+                  <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
+                  <td><%= link_to fa_icon("trash"), s, class: "btn btn-outline-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
