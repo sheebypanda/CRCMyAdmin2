@@ -87,6 +87,55 @@
   </tbody>
 </table>
 
-<h4 class="text-center">Montant total des pénalités : <span class="text-danger"><%= total_penalite %> €</span></h4>
-
+<h4 class="alert alert-danger">Montant total des pénalités : <strong><%= total_penalite %> €</strong></h4>
 <br>
+<h5>Valeur de référence du marché :</h5>
+<table class="table">
+  <head>
+    <tr>
+      <th>SLA</th>
+      <th>GTR</th>
+      <th>Pénalités</th>
+      <th>Nombre d'équipements</th>
+    </tr>
+  </head>
+  <tbody>
+
+    <tr  class="table-info">
+      <td>1</td>
+      <td>4h - 24/7</td>
+      <td>2000 € / 4h</td>
+      <td><%= Equipement.where(sla: 1).count %></td>
+    </tr>
+    <tr class="table-primary">
+      <td>2</td>
+      <td>4h - Lun-Sam, 8h-21h</td>
+      <td>1500 € / 4h</td>
+      <td><%= Equipement.where(sla: 2).count %></td>
+    </tr>
+    <tr class="table-purple">
+      <td>3</td>
+      <td>4h - Lun-Sam, 8h-18h</td>
+      <td>1500 € / 4h</td>
+      <td><%= Equipement.where(sla: 3).count %></td>
+    </tr>
+    <tr class="table-danger">
+      <td>4</td>
+      <td>4h - Lun-Ven, 8h-18h</td>
+      <td>1500 € / 4h</td>
+      <td><%= Equipement.where(sla: 4).count %></td>
+    </tr>
+    <tr class="table-warning">
+      <td>5</td>
+      <td>8h - Lun-Ven, 8h-18h</td>
+      <td>1000 € / 8h</td>
+      <td><%= Equipement.where(sla: 5).count %></td>
+    </tr>
+    <tr class="table-success">
+      <td>6</td>
+      <td>J+1 - Lun-Ven, 8h-18h</td>
+      <td>500 € / 10h</td>
+      <td><%= Equipement.where(sla: 6).count %></td>
+    </tr>
+  </tbody>
+</table>
