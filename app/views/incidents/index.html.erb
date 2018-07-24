@@ -27,6 +27,7 @@
   <tbody>
     <% @incidents.each do |incident| %>
     <%
+    if incident.equipements.first.sla.present?
     case incident.equipements.first.sla
     when 1
       gtr = 4
@@ -59,7 +60,8 @@
       coef_penalite = 500
       tranche_penalite = 10
     end
-    %>
+  end
+  %>
       <tr>
         <td><%= incident.equipements.first.marque %> <%= incident.equipements.first.modele %> <%= incident.equipements.first.serial %></td>
         <td><%= incident.debut.strftime("%d/%m - %H:%M") %></td>
