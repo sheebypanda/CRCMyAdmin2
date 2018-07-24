@@ -27,7 +27,7 @@
   <tbody>
     <% @incidents.each do |incident| %>
     <%
-    if incident.equipements.first.sla?
+    if incident.equipements.first.present?
     case incident.equipements.first.sla
     when 1
       gtr = 4
