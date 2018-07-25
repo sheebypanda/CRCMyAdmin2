@@ -9,10 +9,10 @@ class IncidentsController < ApplicationController
   def new
     @incident = Incident.new
     @incident.equipements.build
-    @eqs = Array(Equipement.select('id, modele, marque, ip, serial').where.not(ip: ['', nil], marque: ['Unknown', 'Aerohive']).order(:marque))
+    @eqs = Array(Equipement.select('id, modele, marque, ip, serial, nom').where.not(ip: ['', nil], marque: ['Unknown', 'Aerohive']).order(:marque))
   end
   def edit
-    @eqs = Array(Equipement.select('id, modele, marque, ip, serial').where.not(ip: ['', nil], marque: ['Unknown', 'Aerohive']).order(:marque))
+    @eqs = Array(Equipement.select('id, modele, marque, ip, serial, nom').where.not(ip: ['', nil], marque: ['Unknown', 'Aerohive']).order(:marque))
     @incident.equipements.build
   end
   def create

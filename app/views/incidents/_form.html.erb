@@ -20,7 +20,7 @@
           <%= f.input :idasap, label: "Identifiant d'incident ASAP", input_html: {placeholder:'INC0012345'} %>
         </div>
       </div>
-      <!-- <% if params[:action] == "edit"%>
+      <% if params[:action] == "edit"%>
         <div class="row">
           <div class="col">
             <table class="table table-sm">
@@ -31,22 +31,22 @@
               </thead>
               <tbody>
               <%= f.collection_check_boxes :equipement_ids, @incident.equipements, :id, :serial do |input| %>
-                <% if input.object.modele.present? %>
+                <!-- <% if input.object.modele.present? %> -->
                   <tr>
                     <td>
                       <label>
-                        <%= input.check_box %>
+                        <!-- <%= input.check_box %> -->
                         <strong><%= input.object.marque %></strong> <%= input.object.modele %> <%= input.object.ip %><%= input.text %>
                       </label>
                     </td>
                   </tr>
-                <% end %>
+                <!-- <% end %> -->
               <% end %>
             </tbody>
           </table>
           </div>
         </div>
-      <% end %> -->
+      <% end %>
 
 
       <table class="table table-sm">
@@ -62,7 +62,7 @@
               <td>
                 <label>
                   <%= input.check_box %>
-                  <strong><%= input.object.marque %></strong> <%= input.object.modele %> <%= input.object.ip %><%= input.text %>
+                  <strong><%= input.object.marque %></strong> <%= input.object.modele %> <%= input.object.nom %> <%= input.object.ip %> <%= input.text %>
                 </label>
               </td>
             </tr>
