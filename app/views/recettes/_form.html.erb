@@ -11,7 +11,7 @@
           <% else %>
             <label for="recette_equipement_id">Sélectionner un équipement existant et non-recetté</label>
             <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
-              <option value="">Pas d'équipement</option>
+              <option value="2202">Pas d'équipement</option>
               <%  @equipements.each do |e|  %>
               <option value="<%= e.id %>"><%= e.nom %></option>
               <% end %>
