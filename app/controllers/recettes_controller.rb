@@ -94,7 +94,7 @@ class RecettesController < ApplicationController
 
     def get_enr
       @equipements = []
-      Equipement.all.order(updated_at: :desc).each do |e|
+      Equipement.where.not(nom: ['', nil]).order(updated_at: :desc).each do |e|
         unless e.recette
           @equipements.push(e)
         end

@@ -11,6 +11,7 @@
           <% else %>
             <label for="recette_equipement_id">Sélectionner un équipement existant et non-recetté</label>
             <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
+              <option value="">Pas d'équipement</option>
               <%  @equipements.each do |e|  %>
               <option value="<%= e.id %>"><%= e.nom %></option>
               <% end %>
@@ -55,11 +56,11 @@
       <h4 class="card-title"><%= fa_icon("globe") %> Sortie internet</h4>
       <div class="form-row">
         <div class='col-lg-12 col-sm-12' id="filtre-select-lig">
-          <% if params[:action] == 'edit' %>
+          <% #if params[:action] == 'edit' %>
             <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: lambda { |l| "#{l.techno} #{l.numerocompte} - #{l.ndi}" }, value_method: :id, include_blank: false %>
             <input class="form-control ligne-filtre" type="text" placeholder="Filtre">
-          <% else %>
-          <label for="recette_equipement_id">Sélectionner une sortie internet</label>
+          <% #else %>
+          <!-- <label for="recette_equipement_id">Sélectionner une sortie internet</label>
           <select class="form-control" name="recette[ligne_id]" id="recette_ligne_id">
             <% fpbm = Ligne.where(numerocompte: "Fibre privée BM") %>
             <option value="<%=fpbm.first.id %>"><%=fpbm.first.numerocompte %></option>
@@ -72,8 +73,8 @@
                 <% end %>
               <% end %>
             <% end %>
-          </select>
-          <% end %>
+          </select> -->
+          <% #end %>
         </div>
       </div>
     </div>
