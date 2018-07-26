@@ -44,7 +44,7 @@
         <td><%= recette.equipement.serial %></td>
         <td><a class="text-purple" href="<%= edit_ligne_path(recette.ligne) %>"><%= recette.ligne.numerocompte %></a></td>
         <td><a class="text-info" href="<%= edit_localisation_path(recette.localisation) %>"><%= recette.localisation.nom %></a></td>
-        <td><%= recette.localisation.adresse %></td>
+        <td><%= recette.localisation.adresse %>, <strong><%= recette.localisation.ville %></strong></td>
         <% if recette.snmp %><td><%=  fa_icon("check", class: "text-success") %></td>
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>
         <% if recette.tacacs %><td><%=  fa_icon("check", class: "text-success") %></td>
