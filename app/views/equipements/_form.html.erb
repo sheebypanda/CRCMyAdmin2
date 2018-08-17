@@ -81,7 +81,10 @@
     </div>
   </div>
 
-  <%= f.button :submit, "Passer l'équipement en production", class: "btn btn-block btn-outline-primary mb-3" %>
-
+  <% if @equipement.ip.present?  %>
+    <%= f.button :submit, "Modifier l'équipement", class: "btn btn-block btn-outline-primary mb-3" %>
+  <% else %>
+    <%= f.button :submit, "Passer l'équipement en production", class: "btn btn-block btn-outline-primary mb-3" %>
+  <% end %>
 <% end %>
 </div>

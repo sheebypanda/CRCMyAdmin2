@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div class="card text-white bg-info mb-3">
+    <div class="card text-info border-info mb-3">
       <div class="card-body">
         <h4 class="card-title"><%= fa_icon("globe") %> Portail opérateur</h4>
 
@@ -95,6 +95,10 @@
     </div>
 
   <div class="form-actions">
-    <%= f.button :submit, " Ajouter la ligne", class: "btn btn-block btn-outline-primary mb-3" %>
+    <% if params[:action] == 'edit' %>
+      <%= f.button :submit, "Modifier la ligne", class: "btn btn-block btn-outline-primary mb-3" %>
+    <% else %>
+      <%= f.button :submit, "Ajouter la ligne", class: "btn btn-block btn-outline-primary mb-3" %>
+    <% end %>
   </div>
 <% end %>
