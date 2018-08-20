@@ -18,12 +18,12 @@
       <%= render "shared/navbar" %>
     <% end %>
     <div class="container-fluid bg-light card">
-      <div class="row">
+      <div class="row d-flex">
         <% if user_signed_in? %>
           <%= render "shared/sidebar" %>
         <% end %>
-
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-1 px-4">
+          <!-- <i class="fa fa-times" data-toggle="collapse" data-target="#sidebar" aria-hidden="true" aria-expanded="false" aria-controls="sidebar" onclick="var that = this; setTimeout(function() {console.log(that.parentNode);that.parentNode.style.flex = 'auto';that.parentNode.style['max-width'] = 'none';}, 2000);"></i> -->
           <%= yield %>
         </main>
       </div>
