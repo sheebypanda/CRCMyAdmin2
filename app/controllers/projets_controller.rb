@@ -11,12 +11,12 @@ class ProjetsController < ApplicationController
   def new
     @projet = Projet.new
     @projet.equipements.build
-    @eqs = Array(Equipement.select('id, modele, marque').where(ip: ['', nil], projet_id: ['', nil]).order(:marque))
+    @eqs = Array(Equipement.select('id, modele, marque, serial').where(ip: ['', nil], projet_id: ['', nil]).order(:marque))
   end
 
   def edit
     @projet.equipements.build
-    @eqs = Array(Equipement.select('id, modele, marque').where(ip: ['', nil], projet_id: ['', nil]).order(:marque))
+    @eqs = Array(Equipement.select('id, modele, marque, serial').where(ip: ['', nil], projet_id: ['', nil]).order(:marque))
   end
 
   def create
