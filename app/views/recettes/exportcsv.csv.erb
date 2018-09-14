@@ -5,7 +5,7 @@
 <%= CSV.generate_line([
     r.created_at.strftime("%d/%m/%y"),
     r.updated_at.strftime("%d/%m/%y"),
-    r.user.email.index('@') - 1,
+    r.user.email.slice(0..(r.user.email.index('@')-1)),
     r.equipement.nom,
     r.equipement.serial,
     r.localisation.nom,
