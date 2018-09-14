@@ -1,0 +1,22 @@
+<%- headers = ['Date de création','Dernière modification', 'User', 'Hostname', 'Serial', 'Nom site', 'Adresse', 'Ville', 'Identifiant opérateur', 'SNMP', 'TACACS', 'Supervisé', 'Test de débit', 'Etiquette collée'] -%>
+<%= CSV.generate_line headers %>
+<%- @recettes.each do |r| -%>
+<% unless r.equipement.nom =="Pas d'équipement" %>
+<%= CSV.generate_line([
+    r.created_at.strftime("%d/%m/%y"),
+    r.updated_at.strftime("%d/%m/%y"),
+    r.user.email.index('@') - 1,
+    r.equipement.nom,
+    r.equipement.serial,
+    r.localisation.nom,
+    r.localisation.adresse,
+    r.localisation.ville,
+    r.ligne.numerocompte,
+    r.snmp,
+    r.tacacs,
+    r.supervision,
+    r.testdebit,
+    r.etiquette
+  ]).html_safe -%>
+<%- end -%>
+<% end %>

@@ -38,6 +38,7 @@
         <div class="dropdown-menu">
           <%= link_to fa_icon("table", class: "text-danger")+' Équipements', equipements_path(format: :csv), class: 'list-group-item list-group-item-action text-danger'%>
           <%= link_to fa_icon("table", class: "text-purple")+' État du stock', '/stock.csv', format: :csv, class: 'list-group-item list-group-item-action text-purple'%>
+          <%= link_to fa_icon("table", class: "text-primary")+' Fiches recettes', '/fichesrecettes.csv', format: :csv, class: 'list-group-item list-group-item-action text-primary'%>
           <%= link_to fa_icon("table", class: "text-warning")+' Lignes', lignes_path(format: :csv), class: 'list-group-item list-group-item-action text-warning'%>
           <%= link_to fa_icon("table", class: "text-info")+' Localisations', localisations_path(format: :csv), class: 'list-group-item list-group-item-action text-info'%>
         </div>

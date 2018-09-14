@@ -15,6 +15,16 @@ class RecettesController < ApplicationController
     end
   end
 
+  def exportcsv
+    @recettes = Recette.all.order(created_at: :desc)
+    respond_to do |format|
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"FichesRecettes.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
+  end
+
   def show
   end
 

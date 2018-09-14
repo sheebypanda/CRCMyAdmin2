@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   root 'recettes#dashboard'
   get '/stock', to: 'equipements#stock'
+  get '/fichesrecettes', to: 'recettes#exportcsv'
   get '/serials_update', to: 'equipements#serials_update'
   get '/hosts_update', to: 'equipements#hosts_update'
 end
