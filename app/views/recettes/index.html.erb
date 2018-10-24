@@ -21,6 +21,7 @@
       <th><%= fa_icon("barcode") %> Serial</th>
       <th><%= fa_icon("phone") %> Ligne</th>
       <th><%= fa_icon("home") %> Nom site</th>
+      <th><%= fa_icon("image") %></th>
       <th><%= fa_icon("home") %> Adresse</th>
       <th>SNMP</th>
       <th>TACACS</th>
@@ -44,6 +45,13 @@
         <td><%= recette.equipement.serial %></td>
         <td><a class="text-purple" href="<%= edit_ligne_path(recette.ligne) %>"><%= recette.ligne.numerocompte %></a></td>
         <td><a class="text-info" href="<%= edit_localisation_path(recette.localisation) %>"><%= recette.localisation.nom %></a></td>
+        <td>
+          <% if recette.localisation.images %>
+            <% recette.localisation.images.each do |i| %>
+              <%= link_to image_tag(i.variant(resize: '50x35'), class:"rounded"), i %>
+            <% end %>
+          <% end %>
+        </td>
         <td><%= recette.localisation.adresse %>, <strong><%= recette.localisation.ville %></strong></td>
         <% if recette.snmp %><td><%=  fa_icon("check", class: "text-success") %></td>
         <% else %><td><%=  fa_icon("close", class: "text-danger") %></td><% end %>

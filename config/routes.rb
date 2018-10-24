@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   get '/fichesrecettes', to: 'recettes#exportcsv'
   get '/serials_update', to: 'equipements#serials_update'
   get '/hosts_update', to: 'equipements#hosts_update'
+  delete '/delete_image_localisation', to: 'localisations#delete_image'
 end

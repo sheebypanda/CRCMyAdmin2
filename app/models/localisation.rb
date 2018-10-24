@@ -3,7 +3,9 @@ class Localisation < ApplicationRecord
   has_many :localisations, through: :recettes
   has_many :lignes, through: :recettes
   has_many :equipements, through: :recettes
+  has_many_attached :images
   validates :nom, presence: true
+
 
   include PgSearch
   pg_search_scope :localisation_search, :against => {

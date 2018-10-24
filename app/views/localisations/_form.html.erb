@@ -9,17 +9,39 @@
           <%= f.input :adresse, label: "Adresse" %>
           <%= f.input :codepostal, label: "Code postal" %>
           <%= f.input :ville, label: "Ville" %>
-          <%= f.input :rattachement, label: "Commune de rattachement" %>
         </div>
         <div class='col-lg-6 col-sm-12'>
           <!-- <button id="gps" type="button" class="pure-button pure-button-primary btn btn-outline-danger btn-block"><%= fa_icon("map-marker") %> Utiliser ma position</button> -->
           <%= f.input :lat, label: "Latitude" %>
           <%= f.input :lng, label: "Longitude" %>
+          <%= f.input :rattachement, label: "Commune de rattachement" %>
         </div>
       </div>
     </div>
   </div>
 
+  <div class="card border-primary mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= fa_icon("image") %> Photos de la baie :</h4>
+      <div class="form-row">
+        <% if @localisation.images.attached? %>
+          <% @localisation.images.each do |image| %>
+            <div class="col-lg-3">
+              <% if image.variable? %>
+                <%= link_to image_tag(image.variant(resize: '300x200'), class:"img-thumbnail"), image %><br/>
+                <%= link_to fa_icon("trash")+" Supprimer", delete_image_localisation_path(image), method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, class:"btn btn-danger btn-block" %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="form-row mt-3">
+        <div class="col">
+          <%= f.file_field :images, multiple: true %>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <div class="card border-info mb-3">
       <div class="card-body">

@@ -62,6 +62,12 @@ class LocalisationsController < ApplicationController
     end
   end
 
+  def delete_image
+    image = ActiveStorage::Attachment.find(params[:format])
+    image.purge
+    redirect_to localisations_path
+  end
+
   def destroy
     @localisation.destroy
     redirect_back fallback_location: localisations_path, notice: "La localisation #{@localisation.nom} a bien été supprimée."
@@ -86,6 +92,7 @@ class LocalisationsController < ApplicationController
         :lat,
         :lng,
         :bp,
-        :rattachement)
+        :rattachement,
+        images: [])
     end
 end

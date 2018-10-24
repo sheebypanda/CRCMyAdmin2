@@ -17,7 +17,8 @@
       <th><%= fa_icon("home") %> Ville</th>
       <th><%= fa_icon("") %> Nom</th>
       <th><%= fa_icon("map") %> Adresse</th>
-      <th><%= fa_icon("link") %> Nombre de lien</th>
+      <th><%= fa_icon("image") %></th>
+      <th><%= fa_icon("link") %> NB lien</th>
       <th><%= fa_icon("phone") %> Lien principal</th>
       <th><%= fa_icon("server") %> Équipements / site</th>
       <th><%= fa_icon("barcode") %> BP</th>
@@ -31,6 +32,15 @@
         <td><%= localisation.ville %></td>
         <td><a class="text-info" href="<%= edit_localisation_path(localisation)%>"><%= localisation.nom %></a></td>
         <td><%= localisation.adresse %></td>
+
+        <td>
+          <% if localisation.images %>
+            <% localisation.images.each do |i| %>
+              <%= link_to image_tag(i.variant(resize: '50x35'), class:"rounded"), i %>
+            <% end %>
+          <% end %>
+        </td>
+
         <td><span class="badge badge-pill badge-purple"><%= localisation.lignes.uniq.count %></badge></td>
         <td><% if localisation.recettes.last %>
           <a class="text-purple" href="<%= edit_ligne_path(localisation.recettes.last.ligne)%>">
