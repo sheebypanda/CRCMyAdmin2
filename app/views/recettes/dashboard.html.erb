@@ -15,7 +15,7 @@
           <div class="carousel-item <% if a == ActiveStorage::Attachment.last %>active<% end %>">
             <%= image_tag(a, class:"d-block w-100") %>
             <div class="carousel-caption d-none d-md-block bg-dark" style="opacity: 0.8;">
-              <% l = Localisation.find(a.record_id) %>
+              <% l = Localisation.find(a.record_id) %> 
               <a href="<%= edit_localisation_path(l)%>" class="text-light"><h6><strong><%= l.ville %></strong> - <%= l.nom %></h6></a>
             </div>
           </div>
