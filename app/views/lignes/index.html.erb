@@ -6,7 +6,7 @@
 <% if params[:search] %>
 <div class="alert alert-primary" role="alert">
   <%= fa_icon("server") %>
-  <strong><%= @nb %></strong> Lignes trouvées correspondantes à la recherche </h1>
+  <strong><%= @nb %></strong> Lignes trouvées correspondantes à la recherche
 </div>
 <% else %>
   <%= link_to fa_icon("plus")+' Ajouter une nouvelle Ligne', new_ligne_path, class: "btn btn-outline-primary" %>
