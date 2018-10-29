@@ -41,7 +41,7 @@
         <% end %></td>
         <td><% if ligne.recettes.last %>
           <a class="text-info" href="<%= edit_localisation_path(ligne.recettes.last.localisation) %>">
-            <%= ligne.recettes.last.localisation.adresse %>
+            <strong><%= ligne.recettes.last.localisation.nom %>,</strong> <%= ligne.recettes.last.localisation.adresse %>
           </a>
         <% end %></td>
         <td><% if ligne.recettes.last %>
