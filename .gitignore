@@ -22,6 +22,4 @@
 # lignes.csv
 config/secrets.yml
 config/secrets.yml
-storage/*
-/storage/*
 .ruby-version
