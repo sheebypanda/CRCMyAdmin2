@@ -2,23 +2,35 @@ class LignesController < ApplicationController
   before_action :set_ligne, only: [:show, :edit, :update, :destroy]
 
   def index
+    @villes = Localisation.select(:ville).distinct
     if params[:search].present?
      @lignes = Ligne.ligne_search(params[:search]).page params[:page]
      @nb = Ligne.ligne_search(params[:search]).count
     else
-      @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
-      @nb = Ligne.all.count
-
-      @li = Ligne.all
-      respond_to do |format|
-        format.html
-        format.csv do
-          headers['Content-Disposition'] = "attachment; filename=\"InventaireLignes.csv\""
-          headers['Content-Type'] ||= 'text/csv'
+      if params[:ville_id]
+        @lignes = []
+        Localisation.where(ville: params[:ville_id]).each do |l|
+        # Ligne.all.each do |l|
+          l.recettes.each do |r|
+            if params[:ville_id] == r.localisation.ville
+              @lignes << r.ligne
+            end
+          end
         end
-        format.xls # { send_data @products.to_csv(col_sep: "\t") }
-      end
+      else
+        @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
+        @nb = Ligne.all.count
 
+        @li = Ligne.all
+        respond_to do |format|
+          format.html
+          format.csv do
+            headers['Content-Disposition'] = "attachment; filename=\"InventaireLignes.csv\""
+            headers['Content-Type'] ||= 'text/csv'
+          end
+          format.xls # { send_data @products.to_csv(col_sep: "\t") }
+        end
+      end
     end
   end
 

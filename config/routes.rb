@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  resources :incidents
-  resources :projets
-  resources :recettes
+  resources :incidents, :projets, :recettes, :operateurs
+
   resources :localisations do
     collection { post :import }
   end
+
   resources :lignes do
     collection { post :import }
   end
-  resources :operateurs
+
   resources :equipements do
     collection { post :import }
   end
