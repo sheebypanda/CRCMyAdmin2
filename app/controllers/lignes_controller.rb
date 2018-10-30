@@ -14,6 +14,7 @@ class LignesController < ApplicationController
           l.recettes.each do |r|
             if params[:ville_id] == r.localisation.ville
               @lignes << r.ligne
+              @lignes.uniq
             end
           end
         end
