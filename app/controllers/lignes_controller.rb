@@ -9,15 +9,14 @@ class LignesController < ApplicationController
     else
       if params[:ville_id]
         @lignes = []
-        Localisation.where(ville: params[:ville_id]).each do |l|
-        # Ligne.all.each do |l|
-          l.recettes.each do |r|
-            if params[:ville_id] == r.localisation.ville
+        Localisation.where(ville: params[:ville_id]).each do |v|
+          v.recettes.each do |r|
+            unless r.ligne.numerocompte == 'Fibre privée BM'
               @lignes << r.ligne
-              @lignes.uniq
             end
           end
         end
+        @lignes.uniq
       else
         @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
         @nb = Ligne.all.count
