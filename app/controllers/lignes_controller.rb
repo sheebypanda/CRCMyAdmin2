@@ -11,12 +11,12 @@ class LignesController < ApplicationController
         @lignes = []
         Localisation.where(ville: params[:ville_id]).each do |v|
           v.recettes.each do |r|
-            unless r.ligne.numerocompte == 'Fibre privée BM'
+            unless r.ligne.numerocompte.include?  'Fibre priv'
               @lignes << r.ligne
             end
           end
         end
-        @lignes.uniq
+        @lignes.uniq!
       else
         @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
         @nb = Ligne.all.count
