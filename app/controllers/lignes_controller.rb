@@ -11,8 +11,10 @@ class LignesController < ApplicationController
         @lignes = []
         Localisation.where(ville: params[:ville_id]).each do |v|
           v.recettes.each do |r|
-            unless r.ligne.numerocompte.include?  'Fibre priv'
-              @lignes << r.ligne
+            if r.ligne.numerocompte
+              unless r.ligne.numerocompte.include?  'Fibre priv'
+                @lignes << r.ligne
+              end
             end
           end
         end
