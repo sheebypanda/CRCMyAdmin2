@@ -10,16 +10,16 @@
     <tr>
       <th>Équipement</th>
       <th>Localisation</th>
+      <th class="text-primary">SLA</th>
+      <th class="text-success">GTR</th>
       <th>Début</th>
       <th>Fin</th>
       <th class="text-info">Durée</th>
-      <th class="text-primary">SLA</th>
-      <th class="text-success">GTR</th>
       <th class="text-warning">Retard</th>
-      <th class="text-danger">Pénalités</th>
+      <th class="text-danger">NB <%= fa_icon("server") %></th>
+      <th class="text-purple">Pénalités</th>
       <th>Identifiant NXO</th>
       <th>Incident ASAP</th>
-      <th>NB équipements</th>
       <th>Déposé par</th>
       <th colspan="2"></th>
     </tr>
@@ -67,23 +67,23 @@
       <tr>
         <td><%= incident.equipements.first.marque %> <%= incident.equipements.first.modele %> <%= incident.equipements.first.serial %></td>
         <td><a class="text-info" href="<%= edit_localisation_path(incident.equipements.first.localisation) %>"><%= incident.equipements.first.localisation.nom %>, <%= incident.equipements.first.localisation.adresse %>, <strong><%= incident.equipements.first.localisation.ville %></strong></a></td>
+        <td><span class="badge badge-pill badge-primary"><%= incident.equipements.first.sla %></span></td>
+        <td><span class="badge badge-pill badge-success"><%= gtr_txt %></td>
         <td><%= incident.debut.strftime("%d/%m - %H:%M") %></td>
         <td><%= incident.fin.strftime("%d/%m - %H:%M") %></td>
         <td><span class="badge badge-pill badge-info"><% temps_resolution = ((incident.fin - incident.debut)/3600).to_i  %><%= temps_resolution %> h</span></td>
-        <td><span class="badge badge-pill badge-primary"><%= incident.equipements.first.sla %></span></td>
-        <td><span class="badge badge-pill badge-success"><%= gtr_txt %></td>
           <% retard = temps_resolution - gtr %>
         <td><span class="badge badge-pill badge-warning"><% if retard.positive? %><%= retard %> h<% end %></span></td>
+        <td><span class="badge badge-pill badge-danger"><%= incident.equipements.count %></span></td>
         <td>
           <% if retard.positive? %>
-            <% penalite = ((retard / tranche_penalite)+1)*coef_penalite
+            <% penalite = (((retard.to_f / tranche_penalite).ceil)*coef_penalite)*incident.equipements.count
             total_penalite = total_penalite + penalite %>
-            <span class="badge badge-pill badge-danger"><%= penalite %> €</span>
+            <span class="badge badge-pill badge-purple"><%= penalite  %> €</span>
           <% end %>
         </td>
         <td><%= incident.idnxo %></td>
         <td><%= incident.idasap %></td>
-        <td><%= incident.equipements.count %></td>
         <td><%= incident.user.email.slice(0..(incident.user.email.index('@')-1)) %></td>
         <td><%= link_to fa_icon('pencil'), edit_incident_path(incident), class: 'btn btn-outline-primary btn-sm' %></td>
         <td><%= link_to fa_icon('trash'), incident, class: 'btn btn-sm btn-outline-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>
