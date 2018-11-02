@@ -1,4 +1,9 @@
-<%= link_to fa_icon('chevron-left')+' Retour à la liste', recettes_path, class: "btn btn-outline-primary" %>
+<div class="d-flex justify-content-between">
+
+    <%= link_to fa_icon('chevron-left')+' Retour à la liste', recettes_path, class: "btn btn-outline-primary" %>
+    <%= link_to fa_icon("trash")+' Supprimer la fiche recette', @recette, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+
+</div>
 
 <h1 class="text-center mb-3"><%= fa_icon("file-text") %> Modification de la fiche Recette</h1>
 
