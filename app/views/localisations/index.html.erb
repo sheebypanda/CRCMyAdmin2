@@ -51,23 +51,33 @@
             <% end %>
             <% ligne.uniq! %>
             <% ligne.each do |l| %>
-
+            <ul>
               <a class="text-purple" href="<%= edit_ligne_path(l["id"])%>">
                 <% if l %>
-                  <%= l["ndi"] %> - <%= l["numerocompte"] %>
+
+                    <% if l["numerocompte"] %>
+                      <li><%= l["numerocompte"] %></li>
+                    <% else %>
+                      <li><%= l["ndi"] %></li>
+                    <% end %>
+
                 <% end %>
-              </a>-<a class="text-success" href="<%= edit_recette_path(Ligne.find(l["id"]).recettes.last.id) %>"><%= fa_icon("pencil")+fa_icon("check-square-o") %></a><br/>
+              </a>
+            </ul>
             <% end %>
           <% end %>
         </td>
         <td><span class="badge badge-pill badge-danger"><%= localisation.equipements.uniq.count %></span></td>
         <td>
           <% if localisation.recettes %>
+          <ul>
+
             <% localisation.recettes.each do |r| %>
               <a class="text-danger" href="<%= edit_equipement_path(r.equipement)%>">
                 <%= r.equipement.nom %>
               </a>-<a class="text-success" href="<%= edit_recette_path(r) %>"><%= fa_icon("pencil")+fa_icon("check-square-o") %></a><br/>
             <% end %>
+          </ul>
           <% end %>
         </td>
 
