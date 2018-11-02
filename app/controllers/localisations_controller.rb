@@ -2,21 +2,24 @@ class LocalisationsController < ApplicationController
   before_action :set_localisation, only: [:show, :edit, :update, :destroy]
 
   def index
+    @villes = Localisation.select(:ville).distinct
     if params[:search].present?
      @localisations = Localisation.localisation_search(params[:search]).page params[:page]
      @nb = Localisation.localisation_search(params[:search]).count
     else
-      @localisations = Localisation.order(:adresse).page params[:page]
-      @nb = Localisation.all.count
-
-      @lo = Localisation.all
-      respond_to do |format|
-        format.html
-        format.csv do
-          headers['Content-Disposition'] = "attachment; filename=\"InventaireLocalisation.csv\""
-          headers['Content-Type'] ||= 'text/csv'
+      if params[:ville_id]
+        @localisations = Localisation.where(ville: params[:ville_id]).page(params[:page]).per(100)
+      else
+        @localisations = Localisation.order(:adresse).page params[:page]
+        @nb = Localisation.all.count
+        respond_to do |format|
+          format.html
+          format.csv do
+            @lo = Localisation.all
+            headers['Content-Disposition'] = "attachment; filename=\"InventaireLocalisation.csv\""
+            headers['Content-Type'] ||= 'text/csv'
+          end
         end
-        format.xls # { send_data @products.to_csv(col_sep: "\t")
       end
     end
   end

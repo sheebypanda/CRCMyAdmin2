@@ -13,11 +13,8 @@
 <nav class="nav nav-pills nav-justified">
   <%= link_to fa_icon("plus")+' Ajouter une nouvelle Ligne', new_ligne_path, class: "m-1 nav-item btn btn-outline-primary" %>
   <% @villes.each do |v|%>
-    <%= link_to v.ville, lignes_path(:ville_id => v.ville), class: "m-1 nav-item btn btn-outline-primary" %>
+    <%= link_to v.ville, lignes_path(:ville_id => v.ville), class: "m-1 nav-item btn btn-outline-purple" %>
   <% end %>
-  <%# <a class="m-1 nav-item btn btn-outline-info" href="#cisco">Cisco</a>
-  <a class="m-1 nav-item btn btn-outline-warning" href="#aerohive">Aerohive</a>
-  <a class="m-1 nav-item btn btn-outline-success" href="#autres">Autre</a> %>
 </nav>
 <table id="tablesorter" class="table table-striped table-sm tablesorter">
   <thead>

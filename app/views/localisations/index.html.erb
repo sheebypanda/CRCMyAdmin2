@@ -9,7 +9,12 @@
   <strong><%= @nb %></strong> Localisations trouvées correspondantes à la recherche
 </div>
 <% else %>
-  <%= link_to fa_icon("plus")+' Ajouter une localisation', new_localisation_path, class: 'btn btn-outline-primary' %>
+<nav class="nav nav-pills nav-justified">
+  <%= link_to fa_icon("plus")+' Ajouter localisation', new_localisation_path, class: 'm-1 nav-item btn btn-outline-primary' %>
+  <% @villes.each do |v|%>
+    <%= link_to v.ville, localisations_path(:ville_id => v.ville), class: "m-1 nav-item btn btn-outline-info" %>
+  <% end %>
+</nav>
 <% end %>
 <table id="tablesorter" class="tablesorter table table-sm table-striped">
   <thead>
@@ -89,8 +94,9 @@
     <% end %>
   </tbody>
 </table>
-<%= paginate @localisations %>
-
+<% unless @localisations.kind_of?(Array) %>
+  <%= paginate @localisations %>
+<% end %>
 <br>
 <h3>Importer un fichier CSV</h3>
   <%= form_tag import_localisations_path, multipart: true do %>
