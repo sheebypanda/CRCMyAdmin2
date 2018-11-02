@@ -2,7 +2,7 @@ class LignesController < ApplicationController
   before_action :set_ligne, only: [:show, :edit, :update, :destroy]
 
   def index
-    @villes = Localisation.select(:ville).distinct
+    @villes = Localisation.select(:ville).distinct.order(:ville)
     if params[:search].present?
      @lignes = Ligne.ligne_search(params[:search]).page params[:page]
      @nb = Ligne.ligne_search(params[:search]).count
