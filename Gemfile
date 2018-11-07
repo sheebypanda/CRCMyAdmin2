@@ -8,22 +8,18 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
-# Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
-# Use Puma as the app server
 gem 'puma', '~> 3.7'
-# Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-gem 'turbolinks', '~> 5'
+gem 'turbolinks'
 gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'simple_form'
 gem 'jquery-rails'
 gem "font-awesome-rails"
-gem 'bootstrap', '~> 4.0.0.beta'
+gem 'bootstrap', '>= 4.1.2'
 gem 'geocoder'
 gem 'animate-rails'
 gem 'jquery-tablesorter'
