@@ -17,7 +17,6 @@ class EquipementsController < ApplicationController
           headers['Content-Disposition'] = "attachment; filename=\"InventaireEquipements.csv\""
           headers['Content-Type'] ||= 'text/csv'
         end
-        format.xls # { send_data @products.to_csv(col_sep: "\t") }
       end
     end
   end
@@ -36,6 +35,17 @@ class EquipementsController < ApplicationController
 
   def new
     @equipement = Equipement.new
+  end
+
+  def create
+    @equipement = Equipement.new(equipement_params)
+    respond_to do |format|
+      if @equipement.save
+        format.html { redirect_to new_equipement_path, notice: "L'équipement #{@equipement.marque} #{@equipement.modele} #{@equipement.serial} a bien été créé" }
+      else
+        format.html { render :new }
+      end
+    end
   end
 
   def serials_update
@@ -82,16 +92,6 @@ class EquipementsController < ApplicationController
     @projets = Projet.all
   end
 
-  def create
-    @equipement = Equipement.new(equipement_params)
-    respond_to do |format|
-      if @equipement.save
-        format.html { redirect_to new_equipement_path, notice: "L'équipement #{@equipement.marque} #{@equipement.modele} #{@equipement.serial} a bien été créé" }
-      else
-        format.html { render :new }
-      end
-    end
-  end
 
   def update
     unless equipement_params[:supervision]

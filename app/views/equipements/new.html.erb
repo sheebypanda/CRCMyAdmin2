@@ -19,24 +19,24 @@
         <div class="form-group">
            <label for="equipement_marque">Marque</label>
            <select class="form-control" name="equipement[marque]" id="equipement_marque">
-             <option value="Brocade">Brocade</option>
-             <option value="Aerohive">Aerohive</option>
-             <option value="Alcatel">Alcatel</option>
-             <option value="Avaya">Avaya</option>
-              <option value="Cisco">Cisco</option>
-              <option value="DLink">DLink</option>
-              <option value="HP">HP</option>
-              <option value="Huawei">Huawei</option>
-              <option value="Netgear">Netgear</option>
-              <option value="Nortel">Nortel</option>
-              <option value="Sophos">Sophos</option>
-              <option value="TP Link">TP Link</option>
+              <option <% if Equipement.last.marque == 'Brocade' %> selected <% end %> value="Brocade">Brocade</option>
+              <option <% if Equipement.last.marque == 'Aerohive' %> selected <% end %> value="Aerohive">Aerohive</option>
+              <option <% if Equipement.last.marque == 'Alcatel' %> selected <% end %> value="Alcatel">Alcatel</option>
+              <option <% if Equipement.last.marque == 'Avaya' %> selected <% end %> value="Avaya">Avaya</option>
+              <option <% if Equipement.last.marque == 'Cisco' %> selected <% end %> value="Cisco">Cisco</option>
+              <option <% if Equipement.last.marque == 'DLink' %> selected <% end %> value="DLink">DLink</option>
+              <option <% if Equipement.last.marque == 'HP' %> selected <% end %> value="HP">HP</option>
+              <option <% if Equipement.last.marque == 'Huawei' %> selected <% end %> value="Huawei">Huawei</option>
+              <option <% if Equipement.last.marque == 'Netgear' %> selected <% end %> value="Netgear">Netgear</option>
+              <option <% if Equipement.last.marque == 'Nortel' %> selected <% end %> value="Nortel">Nortel</option>
+              <option <% if Equipement.last.marque == 'Sophos' %> selected <% end %> value="Sophos">Sophos</option>
+              <option <% if Equipement.last.marque == 'TP' %> selected <% end %> value="TP Link">TP Link</option>
            </select>
          </div>
 
       </div>
       <div class='col-lg-6 col-sm-12'>
-        <%= f.input :modele, id: :equipement_modele, label: 'Modèle', input_html: {placeholder:'ICX7250-24P...'} %>
+        <%= f.input :modele, id: :equipement_modele, label: 'Modèle', input_html: {placeholder:'ICX7250-24P...', value: Equipement.last.modele} %>
       </div>
     </div>
 
