@@ -23,6 +23,7 @@
               <label for="ligne_techno"><%= fa_icon("rebel") %> Techno</label>
               <select name="ligne[techno]" id="ligne_techno" class="form-control">
                 <option value=""></option>
+                <option <% if @ligne.techno == '4G' %> selected <% end %> value="4G">4G</option>
                 <option <% if @ligne.techno == 'ADSL' %> selected <% end %> value="ADSL">ADSL</option>
                 <option <% if @ligne.techno == 'SDSL' %> selected <% end %> value="SDSL">SDSL</option>
                 <option <% if @ligne.techno == 'VDSL' %> selected <% end %> value="VDSL">VDSL</option>
