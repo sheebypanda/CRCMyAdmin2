@@ -7,7 +7,7 @@ class RecettesController < ApplicationController
 
   def index
     if params[:search].present?
-      @recettes = PgSearch.multisearch(params[:search]).page params[:page]
+      @recettes = PgSearch.multisearch(params[:search]).page(params[:page]).per(100)
     else
       @recettes = Recette.all.order(created_at: :desc).page params[:page]
       @nb = Recette.all.count
