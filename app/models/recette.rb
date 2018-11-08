@@ -19,6 +19,7 @@ class Recette < ApplicationRecord
     :localisation_adresse]
 
   PgSearch.multisearch_options = {
+    :using => { :tsearch => { :prefix => true } },
     :ignoring => :accents
   }
 
