@@ -7,6 +7,8 @@ class Recette < ApplicationRecord
   include PgSearch
   multisearchable :against => [
     :equipement_ip,
+    :equipement_serial,
+    :equipement_modele,
     :equipement_nom,
     :equipement_asapid,
     :equipement_marque,
@@ -16,9 +18,9 @@ class Recette < ApplicationRecord
     :localisation_ville,
     :localisation_adresse]
 
-  # PgSearch.multisearch_options = {
-    # :ignoring => :accents
-  # }
+  PgSearch.multisearch_options = {
+    :ignoring => :accents
+  }
 
   def equipement_ip
     equipement.ip
@@ -31,6 +33,12 @@ class Recette < ApplicationRecord
   end
   def equipement_marque
     equipement.marque
+  end
+  def equipement_modele
+    equipement.modele
+  end
+  def equipement_serial
+    equipement.serial
   end
   def ligne_ndi
     ligne.ndi
