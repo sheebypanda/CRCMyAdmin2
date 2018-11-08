@@ -3,22 +3,19 @@ class LocalisationsController < ApplicationController
 
   def index
     @villes = Localisation.select(:ville).distinct.order(:ville)
-    if params[:search].present?
-     @localisations = Localisation.localisation_search(params[:search]).page params[:page]
-     @nb = Localisation.localisation_search(params[:search]).count
+    @localisations = Localisation.localisation_search(params[:search]).page params[:page]
+    @nb = Localisation.localisation_search(params[:search]).count
+    if params[:ville_id]
+      @localisations = Localisation.where(ville: params[:ville_id]).page(params[:page]).per(100)
     else
-      if params[:ville_id]
-        @localisations = Localisation.where(ville: params[:ville_id]).page(params[:page]).per(100)
-      else
-        @localisations = Localisation.order(:adresse).page params[:page]
-        @nb = Localisation.all.count
-        respond_to do |format|
-          format.html
-          format.csv do
-            @lo = Localisation.all
-            headers['Content-Disposition'] = "attachment; filename=\"InventaireLocalisation.csv\""
-            headers['Content-Type'] ||= 'text/csv'
-          end
+      @localisations = Localisation.order(:adresse).page params[:page]
+      @nb = Localisation.all.count
+      respond_to do |format|
+        format.html
+        format.csv do
+          @lo = Localisation.all
+          headers['Content-Disposition'] = "attachment; filename=\"InventaireLocalisation.csv\""
+          headers['Content-Type'] ||= 'text/csv'
         end
       end
     end

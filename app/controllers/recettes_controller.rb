@@ -5,7 +5,6 @@ class RecettesController < ApplicationController
   before_action :get_equipements, only:[:edit]
   before_action :check_search
 
-
   def index
     if params[:search].present?
       @recettes = PgSearch.multisearch(params[:search]).page params[:page]
