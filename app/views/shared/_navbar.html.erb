@@ -1,7 +1,6 @@
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
   <a class="navbar-brand  col-sm-3 col-md-2 mr-0" href="<%= root_path %>">
-    <img src="http://fichiers.bordeaux-metropole.fr/LOGOS/LOGO-BXM/BM_logo_negatif/BM_logo_negatif_png/Bordeaux_Metropole_logo_negatif_horizontal_RVB_01.png" width="72" height="30" class="d-inline-block align-top" alt="">
-    <span class="text-info">CRC</span>my<span class="text-danger">Admin</span>
+    <%= fa_icon("server")  %> <span class="text-primary">CRC</span>my<span class="text-danger">Admin</span>
   </a>
   <form action="./recettes">
     <input class="form-control w-100" type="text" name="search" placeholder="Rechercher" aria-label="Rechercher">
