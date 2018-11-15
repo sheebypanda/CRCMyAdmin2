@@ -25,7 +25,7 @@
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("map-marker") %> Localisation</h4>
       <div class="form-row">
-        <% if params[:action] == 'edit' %>
+        <% if params[:action] == 'eddit' %>
           <div class='col-lg-12 col-sm-12' id="filtre-select-loc">
             <%= f.association :localisation, label: "Sélectionner une localisation existante", label_method: lambda { |l| "#{l.ville} #{l.nom}, #{l.adresse}" }, value_method: :id, include_blank: false %>
             <input class="form-control text-filtre" type="text" placeholder="Filtre">
@@ -55,26 +55,39 @@
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("globe") %> Sortie internet</h4>
       <div class="form-row">
-        <div class='col-lg-12 col-sm-12' id="filtre-select-lig">
-          <% #if params[:action] == 'edit' %>
-            <%= f.association :ligne, label: "Sélectionner une ligne existante", label_method: lambda { |l| "#{l.techno} #{l.numerocompte} - #{l.ndi}" }, value_method: :id, include_blank: false %>
-            <input class="form-control ligne-filtre" type="text" placeholder="Filtre">
-          <% #else %>
-          <!-- <label for="recette_equipement_id">Sélectionner une sortie internet</label>
+        <div class='col-lg-6 col-sm-12' id="filtre-select-lig">
+          <label for="recette_equipement_id">Sélectionner une sortie internet</label>
           <select class="form-control" name="recette[ligne_id]" id="recette_ligne_id">
-            <% fpbm = Ligne.where(numerocompte: "Fibre privée BM") %>
-            <option value="<%=fpbm.first.id %>"><%=fpbm.first.numerocompte %></option>
-            <% @lignes.each do |lig| %>
-              <%  recettes =  Recette.where(ligne_id: lig.id) %>
-              <% if recettes.count > 0 %>
-                <% recettes.each do |r| %>
-                  <% l = Localisation.find(r.localisation_id) %>
-                  <option class="<%= l.id %> ligne" value="<%= lig.id %>"><%= lig.numerocompte %> - <%= lig.ndi %></option>
+            <optgroup label="Lignes actuellement sur site :">
+              <% fpbm = Ligne.where(numerocompte: "Fibre privée BM").first %>
+              <option value="<%=fpbm.id %>"><%=fpbm.numerocompte %></option>
+              <% @lignes.each do |lig| %>
+                <% recettes =  Recette.where(ligne_id: lig.id).distinct %>
+                <% if recettes.count > 0 %>
+                  <% lignes = [] %>
+                  <% recettes.each do |r| %>
+                    <% l = Localisation.find(r.localisation_id) %>
+                    <% lignes << l %>
+                  <% end %>
+                  <% lignes.uniq! %>
+                  <% lignes.each do |l| %>
+                    <option class="<%= l["id"] %> ligne" value="<%= lig["id"] %>"><%= lig["numerocompte"] %> - <%= lig["ndi"] %></option>
+                  <% end %>
                 <% end %>
               <% end %>
+            </optgroup>
+            <% if params[:action] == 'edit' %>
+              <optgroup label="Autres lignes">
+                <% @lignes.each do |lig| %>
+                  <option value="<%= lig["id"] %>"><%= lig["numerocompte"] %> - <%= lig["ndi"] %></option>
+                <% end %>
+              </optgroup>
             <% end %>
-          </select> -->
-          <% #end %>
+          </select>
+        </div>
+        <div class='col-lg-6 col-sm-12' id="filtre-select-lig">
+          <label for="filtre">Filtrer les éléments de la liste précédente : </label>
+          <input class="form-control ligne-filtre" type="text" name="filtre">
         </div>
       </div>
     </div>
