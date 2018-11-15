@@ -16,7 +16,8 @@ class LignesController < ApplicationController
       end
       @lignes.uniq!
     else
-      @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
+      # @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
+      @lignes = Ligne.all.order(updated_at: :desc)
       @nb = Ligne.all.count
       @li = Ligne.all
       respond_to do |format|
