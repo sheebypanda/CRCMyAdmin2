@@ -94,7 +94,7 @@
     <% end %>
   </tbody>
 </table>
-<% unless @localisations.kind_of?(Array) %>
+<% if !params[:ville_id] %>
   <%= paginate @localisations %>
 <% end %>
 <br>
