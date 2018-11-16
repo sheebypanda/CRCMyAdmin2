@@ -16,9 +16,14 @@
     <%= link_to v.ville, lignes_path(:ville_id => v.ville), class: "m-1 nav-item btn btn-outline-purple" %>
   <% end %>
 </nav>
+
 <nav class="nav nav-pills nav-justified">
   <% @operateurs.each do |o|%>
-    <%= link_to o.nom, lignes_path(:operateur_id => o.id), class: "m-1 nav-item btn btn-sm btn-outline-warning" %>
+    <% if o.id.to_i == @operateur_id.to_i %>
+      <%= link_to o.nom, lignes_path(:operateur_id => o.id), class: "active m-1 nav-item btn btn-sm btn-outline-warning" %>
+    <% else %>
+      <%= link_to o.nom, lignes_path(:operateur_id => o.id), class: "m-1 nav-item btn btn-sm btn-outline-warning" %>
+    <% end %>
   <% end %>
 </nav>
 <table id="tablesorter" class="table table-striped table-sm tablesorter">

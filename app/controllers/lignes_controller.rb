@@ -16,7 +16,8 @@ class LignesController < ApplicationController
       end
       @lignes.uniq!
     elsif params[:operateur_id]
-      @lignes = Ligne.where(operateur_id: params[:operateur_id])    
+      @lignes = Ligne.where(operateur_id: params[:operateur_id])
+      @operateur_id = params[:operateur_id]
     else
       # @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
       @lignes = Ligne.all.order(updated_at: :desc)
