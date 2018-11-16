@@ -31,27 +31,32 @@
             <input class="form-control text-filtre" type="text" placeholder="Filtre">
           </div>
         <% else %>
-        <div class='col-lg-6 col-sm-12'>
+        <div class='col-lg-4 col-sm-12'>
           <label for="recette_equipement_id"><%= fa_icon("university") %>Sélectionner d'abord une ville</label>
           <select class="form-control" name="recette[localisation_ville]" id="recette_localisation_ville">
+              <option></option>
             <% @villes.each do |ville| %>
               <option value="<%= ville %>"><%= ville %></option>
             <% end %>
           </select>
         </div>
-        <div class='col-lg-6 col-sm-12'>
+        <div class='col-lg-4 col-sm-12'>
           <label for="recette_equipement_id"><%= fa_icon("map-marker") %>... puis un lieu</label><br/>
           <select class="form-control recette_localisation_id" name="recette[localisation_id]" id="recette_localisation_id">
             <% @localisations.each do |loc| %>
-              <option class="loc <%= loc.ville.delete(' ') if loc.ville %>" value="<%= loc.id %>"><%= loc.nom %></option>
+              <option <% if @recette.localisation.id == loc.id %> selected <% end %>class="loc <%= loc.ville.delete(' ') if loc.ville %>" value="<%= loc.id %>"><%= loc.nom %></option>
             <% end %>
           </select>
+        </div>
+        <div class='col-lg-4 col-sm-12' id="filtre-select-lig">
+          <label for="filtre">Filtrer les éléments de la liste précédente : </label>
+          <input class="form-control ligne-filtre" type="text" name="filtre">
         </div>
         <% end %>
       </div>
     </div>
   </div>
-  <div class="card text-warning border-warning mb-3 internet">
+  <div class="card text-purple border-purple mb-3 internet">
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("globe") %> Sortie internet</h4>
       <div class="form-row">
@@ -76,13 +81,11 @@
                 <% end %>
               <% end %>
             </optgroup>
-            <% if params[:action] == 'edit' %>
-              <optgroup label="Autres lignes">
-                <% @lignes.each do |lig| %>
-                  <option value="<%= lig["id"] %>"><%= lig["numerocompte"] %> - <%= lig["ndi"] %></option>
-                <% end %>
-              </optgroup>
-            <% end %>
+            <optgroup label="Autres lignes">
+              <% @lignes.each do |lig| %>
+                <option value="<%= lig["id"] %>"><%= lig["numerocompte"] %> - <%= lig["ndi"] %></option>
+              <% end %>
+            </optgroup>
           </select>
         </div>
         <div class='col-lg-6 col-sm-12' id="filtre-select-lig">
@@ -94,7 +97,7 @@
   </div>
 
 
-  <div class="card text-purple border-purple mb-3">
+  <div class="card text-primary border-primary mb-3">
     <div class="card-body">
       <h4 class="card-title"><%= fa_icon("check") %> Test de conformité</h4>
 
