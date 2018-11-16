@@ -70,7 +70,7 @@ class LocalisationsController < ApplicationController
 
   def destroy
     @localisation.destroy
-    redirect_back fallback_location: localisations_path, notice: "La localisation #{@localisation.nom} a bien été supprimée."
+    redirect_to localisations_path, notice: "La localisation #{@localisation.nom} a bien été supprimée."
   end
 
   private

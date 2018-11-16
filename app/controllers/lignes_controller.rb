@@ -30,9 +30,6 @@ class LignesController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def new
     @ligne = Ligne.new
   end
@@ -77,7 +74,7 @@ class LignesController < ApplicationController
 
   def destroy
     @ligne.destroy
-    redirect_back fallback_location: localisations_path, notice: "La ligne #{@ligne.numerocompte} a bien été supprimée."
+    redirect_to lignes_path, notice: "La ligne #{@ligne.numerocompte} a bien été supprimée."
   end
 
   private
