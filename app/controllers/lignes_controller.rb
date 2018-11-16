@@ -1,8 +1,8 @@
 class LignesController < ApplicationController
   before_action :set_ligne, only: [:show, :edit, :update, :destroy]
+  before_action :get_villes, :get_operateurs, only: :index
 
   def index
-    @villes = Localisation.select(:ville).distinct.order(:ville)
     if params[:ville_id]
       @lignes = []
       Localisation.where(ville: params[:ville_id]).each do |v|
@@ -15,6 +15,8 @@ class LignesController < ApplicationController
         end
       end
       @lignes.uniq!
+    elsif params[:operateur_id]
+      @lignes = Ligne.where(operateur_id: params[:operateur_id])    
     else
       # @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
       @lignes = Ligne.all.order(updated_at: :desc)
@@ -84,5 +86,13 @@ class LignesController < ApplicationController
 
     def ligne_params
       params.require(:ligne).permit(:numerocompte, :techno, :cout, :ndi, :debit, :ippublique, :mail, :tel, :identifiantoperateur, :mdpoperateur, :compte, :motdepasse, :operateur_id)
+    end
+
+    def get_villes
+      @villes = Localisation.select(:ville).distinct.order(:ville)
+    end
+
+    def get_operateurs
+      @operateurs = Operateur.select(:id, :nom).sort
     end
 end
