@@ -1,5 +1,7 @@
-<%= link_to fa_icon('chevron-left')+' Retour à la liste', lignes_path, class: "btn btn-outline-primary" %>
-
+<div class="d-flex justify-content-between">
+  <%= link_to fa_icon('chevron-left')+' Retour à la liste', lignes_path, class: "btn btn-outline-primary" %>
+  <%= link_to fa_icon("trash")+' Supprimer la ligne', @ligne, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
 <h1 class="text-center m-3">Modification de la ligne <%= @ligne.numerocompte %></h1>
 
 <%= render 'form', ligne: @ligne %>
