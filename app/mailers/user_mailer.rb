@@ -17,6 +17,7 @@ class UserMailer < ApplicationMailer
     destination = []
 
     destination << email_copy1
+    destination << Rails.application.secrets.email_from
 
     mail(to: destination, subject: "Bordeaux Métropole - Déclaration d'incident sur équipements réseaux" )
   end
