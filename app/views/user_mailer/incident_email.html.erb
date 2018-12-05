@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Déclaration d'incident réseau pour Bordeaux Métropole</h1>
+
+    <table>
+      <tr>
+        <td class="blue">Meta customer</td>
+        <td><%= Rails.application.secrets.meta_customer %></td>
+      </tr>
+      <tr>
+        <td class="blue">Date</td>
+        <td><%=DateTime.now.strftime("%d/%m/%y - %H:%M") %></td>
+      </tr>
+      <tr>
+        <td class="blue">Emetteur</td>
+        <td>Christophe PILLIN <br/>05 57 20 70 90</td>
+      </tr>
+      <tr>
+        <td class="blue">Site impacté</td>
+        <% localisation = @incident.equipements.last.localisation %>
+        <td><%= localisation.nom %>, <%= localisation.adresse %><br/>
+        <%= localisation.codepostal %> <%= localisation.ville %>
+        </td>
+      </tr>
+      <tr>
+        <td class="blue">BP du site impacté</td>
+        <td><%= localisation.bp %>  </td>
+      </tr>
+      <tr>
+        <td class="blue">Type de demande</td>
+        <td>Incident</td>
+      </tr>
+      <tr>
+        <td class="blue">Sévérité</td>
+        <td>Normale</td>
+      </tr>
+      <tr>
+        <td class="blue">Élément matériel :</td>
+        <td>
+          <% @incident.equipements.each do |e| %>
+            <%= e.marque %> <%= e.modele %>, <%= e.serial %> - <%= e.ip %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="blue">Date de début incident</td>
+        <td><%= @incident.debut.strftime("%d/%m/%y - %H:%M") %></td>
+      </tr>
+      <tr>
+        <td class="blue">Description de l'incident</td>
+        <td><%= @incident.commentaire %></td>
+      </tr>
+      <tr>
+        <td class="blue">Numéro d'incident BM</td>
+        <td><%= @incident.idasap %></td>
+      </tr>
+    </table>
+
+  </body>
+</html>

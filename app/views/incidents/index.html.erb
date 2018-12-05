@@ -72,7 +72,7 @@
         <td><%= incident.debut.strftime("%d/%m - %H:%M") %></td>
         <td><%= incident.fin.strftime("%d/%m - %H:%M") %></td>
         <td><span class="badge badge-pill badge-info"><% temps_resolution = ((incident.fin - incident.debut)/3600).to_i  %><%= temps_resolution %> h</span></td>
-          <% retard = temps_resolution - gtr %>
+          <% retard = temps_resolution - gtr.to_f %>
         <td><span class="badge badge-pill badge-warning"><% if retard.positive? %><%= retard %> h<% end %></span></td>
         <td><span class="badge badge-pill badge-danger"><%= incident.equipements.count %></span></td>
         <td>

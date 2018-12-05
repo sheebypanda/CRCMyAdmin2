@@ -1,0 +1,16 @@
+Déclaration d'incident réseau pour Bordeaux Métropole
+Meta customer : <%= Rails.application.secrets.meta_customer %>
+Date : <%=DateTime.now.strftime("%d/%m/%y - %H:%M") %>
+Emetteur : Christophe PILLIN  - 05 57 20 70 90
+<% localisation = @incident.equipements.last.localisation %>
+Site impacté : <%= localisation.nom %>, <%= localisation.adresse %> - <%= localisation.codepostal %> <%= localisation.ville %>
+BP du site impacté : <%= localisation.bp %>
+Type de demande : Incident
+Sévérité : Normale
+Élément matériel :
+<% @incident.equipements.each do |e| %>
+  <%= e.marque %> <%= e.modele %>, <%= e.serial %> - <%= e.ip %>
+<% end %>
+Date de début incident : <%= @incident.debut.strftime("%d/%m/%y - %H:%M") %>
+Description de l'incident : <%= @incident.commentaire %>
+Numéro d'incident BM : <%= @incident.idasap %>

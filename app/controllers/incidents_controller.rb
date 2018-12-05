@@ -19,6 +19,9 @@ class IncidentsController < ApplicationController
     @incident = Incident.new(incident_params)
     respond_to do |format|
       if @incident.save
+
+        UserMailer.with(incident: @incident).incident_email.deliver_now
+
         format.html { redirect_to incidents_url, notice: "L'incident a été enregistré" }
       else
         format.html { render :new }
