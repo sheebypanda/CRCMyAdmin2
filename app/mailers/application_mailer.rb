@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'dip.reseau@bordeaux-metropole.fr'
+  default from: Rails.application.secrets.email_from
   layout 'mailer'
 end
