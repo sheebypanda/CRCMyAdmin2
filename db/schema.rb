@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_23_084346) do
+ActiveRecord::Schema.define(version: 2018_12_06_140042) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_10_23_084346) do
     t.float "coutmaintenance"
     t.date "datemaintenance"
     t.bigint "projet_id"
+    t.boolean "telephonie"
   end
 
   create_table "equipements_incidents", id: false, force: :cascade do |t|

@@ -1,5 +1,4 @@
-<%- headers = [
-  "ip",
+<%- headers = ["ip",
   "bp",
   "ville",
   "rattachement",
@@ -11,6 +10,7 @@
   "serial",
   "marque",
   "modele",
+  "telephonie",
   "nom",
   "asapid",
   "iosv",
@@ -24,7 +24,6 @@
   "lat",
   "lng",
   "horaires"] -%>
-
 <%= CSV.generate_line headers %>
 <%- @all.each do |eq| -%>
   <% if eq.recette %>
@@ -53,6 +52,7 @@
         s.tr('|','').strip,
         eq.marque,
         eq.modele,
+        eq.telephonie,
         eq.nom,
         eq.asapid,
         eq.iosv,

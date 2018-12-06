@@ -131,6 +131,7 @@ class EquipementsController < ApplicationController
         :serial,
         :supervision,
         :sla,
+        :telephonie,
         :maintenance,
         :coutmaintenance,
         :datemaintenance,
