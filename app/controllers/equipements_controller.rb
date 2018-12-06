@@ -134,6 +134,7 @@ class EquipementsController < ApplicationController
         :telephonie,
         :maintenance,
         :coutmaintenance,
+        :honoraire,
         :datemaintenance,
         :projet)
     end

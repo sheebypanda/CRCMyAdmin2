@@ -74,13 +74,18 @@
           <%= f.input :maintenance, as: :boolean, label: fa_icon('umbrella')+'Équipement maintenu ?' %>
         </div>
         <div class='col-lg-3 col-sm-4'>
-          <%= f.input :sla, id: :equipement_sla, label: fa_icon('thermometer-empty')+' SLA' %>
+          <%= f.input :coutmaintenance, id: :equipement_coutmaintenance, label: fa_icon('money')+' Coût annuel' %>
+        </div>
+        <div class='col-lg-4 col-sm-4'>
+          <%= f.input :datemaintenance, id: :equipement_datemaintenance, label: fa_icon('calendar')+" Date de début" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class='col-lg-3 col-sm-4'>
+          <%= f.input :sla, id: :equipement_sla, label: fa_icon('thermometer-empty')+'Niveau de SLA' %>
         </div>
         <div class='col-lg-3 col-sm-4'>
-          <%= f.input :coutmaintenance, id: :equipement_coutmaintenance, label: fa_icon('money')+' Coût mensuel de maintenance' %>
-        </div>
-        <div class='col-lg-3 col-sm-4'>
-          <%= f.input :datemaintenance, id: :equipement_datemaintenance, label: fa_icon('calendar')+" Date de début de maintenance" %>
+          <%= f.input :honoraire, id: :equipement_coutmaintenance, label: fa_icon('money')+' Honoraires' %>
         </div>
       </div>
     </div>

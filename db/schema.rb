@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_06_140042) do
+ActiveRecord::Schema.define(version: 2018_12_06_141449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2018_12_06_140042) do
     t.date "datemaintenance"
     t.bigint "projet_id"
     t.boolean "telephonie"
+    t.float "honoraire"
   end
 
   create_table "equipements_incidents", id: false, force: :cascade do |t|
