@@ -1,3 +1,13 @@
+<% if notice  %>
+  <div class="alert alert-success animated slideInDown" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+<% if alert  %>
+  <div class="alert alert-danger animated slideInDown" role="alert">
+    <%= alert %>
+  </div>
+<% end %>
 <div class="container">
   <%= simple_form_for(@incident) do |f| %>
     <%= f.error_notification %>
@@ -48,7 +58,9 @@
         </div>
       <% end %>
 
-
+      <div class="alert alert-info">
+         <%= fa_icon('exclamation-triangle') %> Vous ne pouvez sélectionner que des équipements qui ont la <strong>même SLA.</strong> Pour en ajouter des différents, déposer un nouvel incident.
+        </div>
       <table class="table table-sm">
         <thead>
           <tr>
@@ -58,7 +70,7 @@
         </thead>
         <tbody>
           <%= f.collection_check_boxes :equipement_ids, @eqs, :id, :serial do |input| %>
-            <tr class="equipement" id=equipement_"<%= input.object.id %>">
+            <tr class="equipement sla-<% if input.object.sla %><%= input.object.sla %>" sla="<%= input.object.sla %><% end %>" id=equipement_"<%= input.object.id %>">
               <td>
                 <label>
                   <%= input.check_box %>

@@ -19,9 +19,9 @@
         <td style="background-color:#202d63 ; color:white">Emetteur</td>
         <td>Christophe PILLIN <br/>05 57 20 70 90</td>
       </tr>
+      <% if localisation = @incident.equipements.last.localisation %>
       <tr>
         <td style="background-color:#202d63 ; color:white">Site impacté</td>
-        <% localisation = @incident.equipements.last.localisation %>
         <td><%= localisation.nom %>, <%= localisation.adresse %><br/>
         <%= localisation.codepostal %> <%= localisation.ville %>
         </td>
@@ -30,6 +30,7 @@
         <td style="background-color:#202d63 ; color:white">BP du site impacté</td>
         <td><%= localisation.bp %>  </td>
       </tr>
+      <% end %>
       <tr>
         <td style="background-color:#202d63 ; color:white">Type de demande</td>
         <td>Incident</td>

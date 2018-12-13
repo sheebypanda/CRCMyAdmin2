@@ -3,6 +3,11 @@
     <%= notice %>
   </div>
 <% end %>
+<% if alert  %>
+  <div class="alert alert-danger animated slideInDown" role="alert">
+    <%= alert %>
+  </div>
+<% end %>
 <%= link_to fa_icon('plus')+' Déposer un nouvel incident', new_incident_path, class: 'btn btn-outline-primary' %>
 
 <table id="tablesorter" class="table table-striped table-sm">
@@ -66,7 +71,7 @@
   <% if incident.equipements.first.present? %>
       <tr>
         <td><%= incident.equipements.first.marque %> <%= incident.equipements.first.modele %> <%= incident.equipements.first.serial %></td>
-        <td><a class="text-info" href="<%= edit_localisation_path(incident.equipements.first.localisation) %>"><%= incident.equipements.first.localisation.nom %>, <%= incident.equipements.first.localisation.adresse %>, <strong><%= incident.equipements.first.localisation.ville %></strong></a></td>
+        <td><% if incident.equipements.first.localisation %><a class="text-info" href="<%= edit_localisation_path(incident.equipements.first.localisation) %>"><%= incident.equipements.first.localisation.nom %>, <%= incident.equipements.first.localisation.adresse %>, <strong><%= incident.equipements.first.localisation.ville %></strong></a><% end %></td>
         <td><span class="badge badge-pill badge-primary"><%= incident.equipements.first.sla %></span></td>
         <td><span class="badge badge-pill badge-success"><%= gtr_txt %></td>
         <td><%= incident.debut.strftime("%d/%m - %H:%M") %></td>
@@ -76,7 +81,7 @@
         <td><span class="badge badge-pill badge-warning"><% if retard.positive? %><%= retard %> h<% end %></span></td>
         <td><span class="badge badge-pill badge-danger"><%= incident.equipements.count %></span></td>
         <td>
-          <% if retard.positive? %>
+          <% if retard.positive? and tranche_penalite %>
             <% penalite = (((retard.to_f / tranche_penalite).ceil)*coef_penalite)*incident.equipements.count
             total_penalite = total_penalite + penalite %>
             <span class="badge badge-pill badge-purple"><%= penalite  %> €</span>

@@ -39,4 +39,10 @@ document.addEventListener("turbolinks:load", function() {
     });
   });
 
+  $(".equipement").click(function() {
+    var value = $(this).attr('sla');
+    $(".equipement").hide();
+    $(".sla-"+value).show();
+  });
+
 })
