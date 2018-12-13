@@ -5,7 +5,7 @@
   "maintenance",
   "sla",
   "coutmaintenance",
-  "honoraire",
+  "fees",
   "localisation",
   "adresse",
   "serial",
@@ -15,7 +15,9 @@
   "nom",
   "asapid",
   "iosv",
+  "supervision",
   "datemaintenance",
+  "datemiseajour",
   "id_localisation",
   "codepostal",
   "etage",
@@ -37,6 +39,10 @@
     <% bp = eq.recette.localisation.bp %>
     <% ville = eq.recette.localisation.ville %>
     <% rattachement = eq.recette.localisation.rattachement %>
+    <% supervision = eq.recette.supervision %>
+    <% if eq.datemaintenance %>
+      <% datemaintenance = eq.datemaintenance.strftime("%d/%m/%Y") %>
+    <% end %>
   <% end %>
   <% if eq.serial %>
     <% eq.serial.each_line("|") do |s| %>
@@ -58,7 +64,9 @@
         eq.nom,
         eq.asapid,
         eq.iosv,
-        eq.datemaintenance,
+        supervision,
+        datemaintenance,
+        eq.updated_at.strftime("%d/%m/%Y"),
         loc_id,
         codepostal
         ]).html_safe -%>
