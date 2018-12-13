@@ -38,6 +38,13 @@
     <% codepostal = eq.recette.localisation.codepostal %>
     <% bp = eq.recette.localisation.bp %>
     <% ville = eq.recette.localisation.ville %>
+    <% etage = eq.recette.localisation.etage %>
+    <% tel = eq.recette.localisation.tel %>
+    <% mail = eq.recette.localisation.mail %>
+    <% description = eq.recette.localisation.description %>
+    <% lat = eq.recette.localisation.lat %>
+    <% lng = eq.recette.localisation.lng %>
+    <% horaires = eq.recette.localisation.horaires %>
     <% rattachement = eq.recette.localisation.rattachement %>
     <% supervision = eq.recette.supervision %>
     <% if eq.datemaintenance %>
@@ -68,7 +75,14 @@
         datemaintenance,
         eq.updated_at.strftime("%d/%m/%Y"),
         loc_id,
-        codepostal
+        codepostal,
+        etage,
+        tel,
+        mail,
+        description,
+        lat,
+        lng,
+        horaires
         ]).html_safe -%>
     <% end %>
   <% end %>
