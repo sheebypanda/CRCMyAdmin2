@@ -55,6 +55,6 @@ class IncidentsController < ApplicationController
       @eqs = Array(Equipement.select('id, modele, marque, ip, serial, nom, sla').where.not(ip: ['', nil], marque: ['Unknown', 'Aerohive'], sla: ['', nil]).order(:marque))
     end
     def incident_params
-      params.require(:incident).permit(:user_id, :debut, :fin, :idnxo, :idasap, :commentaire, equipement_ids: [])
+      params.require(:incident).permit(:user_id, :debut, :fin, :idnxo, :idasap, :commentaire, :nopenality, equipement_ids: [])
     end
 end

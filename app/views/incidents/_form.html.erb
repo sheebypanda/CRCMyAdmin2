@@ -30,13 +30,18 @@
           <%= f.input :idasap, label: "Identifiant d'incident ASAP", input_html: {placeholder:'INC0012345'} %>
         </div>
       </div>
+      <div class="row">
+        <div class="col">
+          <%= f.input :nopenality, label: fa_icon("heartbeat")+" Coupure non franche. (N'applique pas les pénalités). Obligation de justifier dans la description.", wrapper_html: {class: 'alert alert-warning'} %>
+        </div>
+      </div>
       <% if params[:action] == "edit"%>
         <div class="row">
           <div class="col">
             <table class="table table-sm">
               <thead>
                 <tr>
-                  <th>Équipement précédemments sélectionnées</th>
+                  <th>Équipement précédemments sélectionnées : </th>
                 </tr>
               </thead>
               <tbody>
@@ -45,7 +50,6 @@
                   <tr>
                     <td>
                       <label>
-                        <!-- <%= input.check_box %> -->
                         <strong><%= input.object.marque %></strong> <%= input.object.modele %> <%= input.object.nom %> <%= input.object.ip %> <%= input.text %>
                       </label>
                     </td>

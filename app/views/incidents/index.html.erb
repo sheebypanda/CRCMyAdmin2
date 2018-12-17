@@ -81,7 +81,7 @@
         <td><span class="badge badge-pill badge-warning"><% if retard.positive? %><%= retard %> h<% end %></span></td>
         <td><span class="badge badge-pill badge-danger"><%= incident.equipements.count %></span></td>
         <td>
-          <% if retard.positive? and tranche_penalite %>
+          <% if !incident.nopenality and retard.positive? and tranche_penalite %>
             <% penalite = (((retard.to_f / tranche_penalite).ceil)*coef_penalite)*incident.equipements.count
             total_penalite = total_penalite + penalite %>
             <span class="badge badge-pill badge-purple"><%= penalite  %> €</span>
