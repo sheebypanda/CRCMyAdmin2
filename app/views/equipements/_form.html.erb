@@ -52,14 +52,9 @@
         </div>
       </div>
       <div class="form-row">
-        <div class='col-lg-6 col-sm-12'>
+        <div class='col'>
           <div class="form-check">
-            <%= f.input :supervision, as: :boolean, label: "Ne pas superviser l'équipement (borne Wifi)"%>
-          </div>
-        </div>
-        <div class='col-lg-6 col-sm-12'>
-          <div class="form-check">
-            <%= f.input :telephonie, as: :boolean, label: "Équipement téléphonique"%>
+            <%= f.input :telephonie, as: :boolean, label: fa_icon('phone')+" Équipement téléphonique"%>
           </div>
         </div>
       </div>

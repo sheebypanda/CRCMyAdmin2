@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_06_141449) do
+ActiveRecord::Schema.define(version: 2018_12_17_124512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 2018_12_06_141449) do
     t.string "serial"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "supervision"
     t.integer "sla"
     t.boolean "maintenance"
     t.float "coutmaintenance"
