@@ -1,3 +1,6 @@
+<div class="d-flex justify-content-between">
 <%= link_to fa_icon('chevron-left')+' Retour à la liste', equipements_path, class: "btn btn-outline-primary" %>
+<%= link_to fa_icon("trash")+" Supprimer l'équipement", @equipement, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
 <h1 class="text-center p-3">Modification de l'équipement <%= @equipement.nom %></h1>
 <%= render 'form', equipement: @equipement %>
