@@ -6,17 +6,13 @@ class EquipementsController < ApplicationController
   require 'openssl'
 
   def index
-    if params[:search].present?
-     @equipements = Equipement.equipement_search(params[:search]).page params[:page]
-    else
-      @equipements = Equipement.where.not(ip: '').order(updated_at: :desc).page params[:page]
-      @all = Equipement.where.not(ip: '').order(updated_at: :desc)
-      respond_to do |format|
-        format.html
-        format.csv do
-          headers['Content-Disposition'] = "attachment; filename=\"InventaireEquipements.csv\""
-          headers['Content-Type'] ||= 'text/csv'
-        end
+    @equipements = Equipement.all.where.not(ip: ['', nil]).order(:updated_at).page params[:page]
+    # @all = Equipement.where.not(ip: '').order(updated_at: :desc)
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"InventaireEquipements.csv\""
+        headers['Content-Type'] ||= 'text/csv'
       end
     end
   end

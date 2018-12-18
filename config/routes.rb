@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   root 'recettes#dashboard'
   get '/stock', to: 'equipements#stock'
   get '/fichesrecettes', to: 'recettes#exportcsv'
+  get '/enr', to: 'recettes#enr'
   get '/serials_update', to: 'equipements#serials_update'
   get '/hosts_update', to: 'equipements#hosts_update'
   delete '/delete_image_localisation', to: 'localisations#delete_image'

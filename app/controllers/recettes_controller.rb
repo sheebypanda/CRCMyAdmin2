@@ -1,7 +1,7 @@
 class RecettesController < ApplicationController
   before_action :set_recette, only: [:show, :edit, :update, :destroy]
   before_action :get_localisations, :get_lignes, only: [:new, :edit, :create]
-  before_action :get_enr, only:[:new]
+  before_action :get_enr, only:[:new, :enr]
   before_action :get_ville, only:[:new, :edit]
   before_action :check_search
 
@@ -28,6 +28,8 @@ class RecettesController < ApplicationController
   end
 
   def dashboard
+  end
+  def enr
   end
 
   def new
