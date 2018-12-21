@@ -29,7 +29,11 @@ class RecettesController < ApplicationController
 
   def dashboard
   end
-  
+
+  def map
+    @localisations = Localisation.select(:nom, :lat, :lng).where.not(lat: [nil, ''], lng: [nil, ''])
+  end
+
   def enr
   end
 

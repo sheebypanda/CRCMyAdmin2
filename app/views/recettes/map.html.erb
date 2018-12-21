@@ -1,0 +1,29 @@
+<h1>Cartographie des équipements réseaux</h1>
+
+
+<div id="mapid" style="height: 800px;"></div>
+<script>
+	var mymap = L.map('mapid').setView([44.8273, -0.5964], 11);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 18,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		id: 'mapbox.streets'
+	}).addTo(mymap);
+
+
+  var myIcon = L.icon({
+    iconUrl: '<%= asset_path('marker-icon.png') %>',
+    iconSize: [25, 40],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+    shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+  });
+
+  <% @localisations.each do |l| %>
+    var marker = L.marker([<%= l.lat %>, <%= l.lng %>], {icon: myIcon}).addTo(mymap).bindPopup("<%=l.nom%>");
+  <% end %>
+
+</script>
