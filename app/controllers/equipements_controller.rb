@@ -7,7 +7,7 @@ class EquipementsController < ApplicationController
 
   def index
     @equipements = Equipement.all.where.not(ip: ['', nil]).order(:updated_at).page params[:page]
-    # @all = Equipement.where.not(ip: '').order(updated_at: :desc)
+    @all = Equipement.where.not(ip: '').order(updated_at: :desc)
     respond_to do |format|
       format.html
       format.csv do

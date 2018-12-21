@@ -29,6 +29,7 @@ class RecettesController < ApplicationController
 
   def dashboard
   end
+  
   def enr
   end
 
