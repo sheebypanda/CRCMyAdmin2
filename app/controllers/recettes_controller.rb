@@ -31,7 +31,13 @@ class RecettesController < ApplicationController
   end
 
   def map
-    @localisations = Localisation.select(:nom, :lat, :lng).where.not(lat: [nil, ''], lng: [nil, ''])
+    @localisations = []
+    Equipement.all.where.not(ip: ['', nil]).each do |e|
+      if e.recette and e.recette.localisation.lng
+        @localisations << e.recette.localisation
+      end
+    end
+    # @localisations = Localisation.select(:nom, :lat, :lng).where.not(lat: [nil, ''], lng: [nil, ''])
   end
 
   def enr
