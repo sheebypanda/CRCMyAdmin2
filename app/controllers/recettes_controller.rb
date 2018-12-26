@@ -33,7 +33,7 @@ class RecettesController < ApplicationController
   def map
     @brocades_recettes = Recette.joins(:equipement, :localisation).where('equipements.marque' => 'Brocade').where.not('localisations.lng' => ['', nil])
     @ciscos_recettes = Recette.joins(:equipement, :localisation).where('equipements.marque' => 'Cisco').where.not('localisations.lng' => ['', nil])
-    @autres_recettes = Recette.joins(:equipement, :localisation).where.not('localisations.lng' => ['', nil], 'equipements.marque' => ['Cisco', 'Brocade'], 'equipements.id' => 2202)
+    @autres_recettes = Recette.joins(:equipement, :localisation).where.not('localisations.lng' => ['', nil], 'equipements.marque' => ['Cisco', 'Brocade'], 'equipements.id' => 2202, 'equipements.nom' => ['', nil])
   end
 
   def enr
