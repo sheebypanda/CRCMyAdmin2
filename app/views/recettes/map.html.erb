@@ -1,7 +1,7 @@
-<h1>Cartographie des équipements réseaux</h1>
-
+<h2 class="text-center">Cartographie des équipements réseaux</h1>
 
 <div id="mapid" style="height: 800px;"></div>
+
 <script>
 	var mymap = L.map('mapid').setView([44.8273, -0.5964], 11);
 
@@ -11,19 +11,50 @@
 		id: 'mapbox.streets'
 	}).addTo(mymap);
 
-
   var myIcon = L.icon({
     iconUrl: '<%= asset_path('marker-icon.png') %>',
-    iconSize: [25, 40],
-    iconAnchor: [22, 94],
-    popupAnchor: [-3, -76],
-    shadowUrl: 'my-icon-shadow.png',
-    shadowSize: [68, 95],
-    shadowAnchor: [22, 94]
+		iconSize: [25, 41],
+    iconAnchor: [14, 41],
+    popupAnchor: [0,-30],
+    shadowUrl: '<%= asset_path('marker-shadow.png') %>',
+		shadowSize: [41, 41],
+    shadowAnchor: [14, 41]
   });
 
-  <% @localisations.each do |l| %>
-    var marker = L.marker([<%= l.lat %>, <%= l.lng %>], {icon: myIcon}).addTo(mymap).bindPopup("<%=l.nom%>");
-  <% end %>
+	var bros = [];
+	<% @brocades_recettes.each do |r| %>
+		var bro = L.marker([<%= r.localisation.lat %>, <%= r.localisation.lng %>], {icon: myIcon}).addTo(mymap).bindPopup("<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/><i class='fa fa-home'></i> <%=r.localisation.nom%>");
+		bros.push(bro);
+	<% end %>
+	var brocades = L.layerGroup(bros)
+
+	var ciss = [];
+	<% @ciscos_recettes.each do |r| %>
+		var cis = L.marker([<%= r.localisation.lat %>, <%= r.localisation.lng %>], {icon: myIcon}).addTo(mymap).bindPopup("<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/><i class='fa fa-home'></i> <%=r.localisation.nom%>");
+		ciss.push(cis);
+	<% end %>
+	var ciscos = L.layerGroup(ciss);
+
+	var autrs = [];
+	<% @autres_recettes.each do |r| %>
+		var autr = L.marker([<%= r.localisation.lat %>, <%= r.localisation.lng %>], {icon: myIcon}).addTo(mymap).bindPopup("<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/><i class='fa fa-home'></i> <%=r.localisation.nom%>");
+		autrs.push(autr);
+	<% end %>
+	var autres = L.layerGroup(autrs);
+
+	var overlayMaps = {
+    "Brocades": brocades,
+    "Ciscos": ciscos,
+		"Autres": autres
+	};
+
+	L.control.layers('',overlayMaps).addTo(mymap);
+
 
 </script>
+
+<style>
+	.leaflet-touch .leaflet-control-layers-toggle {
+		background-image:url(<%= asset_path('layers.png') %>);
+	}
+</style>

@@ -31,13 +31,9 @@ class RecettesController < ApplicationController
   end
 
   def map
-    @localisations = []
-    Equipement.all.where.not(ip: ['', nil]).each do |e|
-      if e.recette and e.recette.localisation.lng
-        @localisations << e.recette.localisation
-      end
-    end
-    # @localisations = Localisation.select(:nom, :lat, :lng).where.not(lat: [nil, ''], lng: [nil, ''])
+    @brocades_recettes = Recette.joins(:equipement, :localisation).where('equipements.marque' => 'Brocade').where.not('localisations.lng' => ['', nil])
+    @ciscos_recettes = Recette.joins(:equipement, :localisation).where('equipements.marque' => 'Cisco').where.not('localisations.lng' => ['', nil])
+    @autres_recettes = Recette.joins(:equipement, :localisation).where.not('localisations.lng' => ['', nil], 'equipements.marque' => ['Cisco', 'Brocade'])
   end
 
   def enr
