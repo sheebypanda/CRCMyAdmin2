@@ -2,7 +2,7 @@ class LocalisationsController < ApplicationController
   before_action :set_localisation, only: [:show, :edit, :update, :destroy]
 
   def index
-    @villes = Localisation.select(:ville).distinct.order(:ville)
+    @villes = Localisation.select(:rattachement).distinct.order(:rattachement)
     @localisations = Localisation.localisation_search(params[:search]).page params[:page]
     @nb = Localisation.localisation_search(params[:search]).count
     if params[:ville_id]
