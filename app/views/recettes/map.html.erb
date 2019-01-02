@@ -20,35 +20,62 @@
 		shadowSize: [41, 41],
     shadowAnchor: [14, 41]
   });
+  var myIconSuccess = L.icon({
+    iconUrl: '<%= asset_path('marker-icon-success.png') %>',
+		iconSize: [25, 41],
+    iconAnchor: [14, 41],
+    popupAnchor: [0,-30],
+    shadowUrl: '<%= asset_path('marker-shadow.png') %>',
+		shadowSize: [41, 41],
+    shadowAnchor: [14, 41]
+  });
+  var myIconWarning = L.icon({
+    iconUrl: '<%= asset_path('marker-icon-warning.png') %>',
+		iconSize: [25, 41],
+    iconAnchor: [14, 41],
+    popupAnchor: [0,-30],
+    shadowUrl: '<%= asset_path('marker-shadow.png') %>',
+		shadowSize: [41, 41],
+    shadowAnchor: [14, 41]
+  });
+  var myIconDanger = L.icon({
+    iconUrl: '<%= asset_path('marker-icon-danger.png') %>',
+		iconSize: [25, 41],
+    iconAnchor: [14, 41],
+    popupAnchor: [0,-30],
+    shadowUrl: '<%= asset_path('marker-shadow.png') %>',
+		shadowSize: [41, 41],
+    shadowAnchor: [14, 41]
+  });
 
-	var bros = [];
-	<% @brocades_recettes.each do |r| %>
-		var bro = L.marker([<%= r.localisation.lat %>, <%= r.localisation.lng %>], {icon: myIcon}).addTo(mymap).bindPopup("<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/><i class='fa fa-home'></i> <%=r.localisation.nom%>");
-		bros.push(bro);
+	<% @localisations.each do |l| %>
+		<% if l.recettes.count < 3 %>
+			L.marker([<%= l.lat %>, <%= l.lng %>],
+			{icon: myIconSuccess}).addTo(mymap).bindPopup(
+			"<strong><i class='fa fa-home'></i> <%=l.nom%></strong><br/>"
+			<% l.recettes.each do |r| %>
+				+"<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/>"
+			<% end %>
+			);
+		<% elsif l.recettes.count === 3...9 %>
+			L.marker([<%= l.lat %>, <%= l.lng %>],
+			{icon: myIconWarning}).addTo(mymap).bindPopup(
+			"<strong><i class='fa fa-home'></i> <%=l.nom%></strong><br/>"
+			<% l.recettes.each do |r| %>
+				+"<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/>"
+			<% end %>
+			);
+			<% elsif l.recettes.count > 9 %>
+				L.marker([<%= l.lat %>, <%= l.lng %>],
+				{icon: myIconDanger}).addTo(mymap).bindPopup(
+				"<strong><i class='fa fa-home'></i> <%=l.nom%></strong><br/>"
+				<% l.recettes.each do |r| %>
+					+"<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/>"
+				<% end %>
+				);
+		<% end %>
 	<% end %>
-	var brocades = L.layerGroup(bros)
 
-	var ciss = [];
-	<% @ciscos_recettes.each do |r| %>
-		var cis = L.marker([<%= r.localisation.lat %>, <%= r.localisation.lng %>], {icon: myIcon}).addTo(mymap).bindPopup("<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/><i class='fa fa-home'></i> <%=r.localisation.nom%>");
-		ciss.push(cis);
-	<% end %>
-	var ciscos = L.layerGroup(ciss);
-
-	var autrs = [];
-	<% @autres_recettes.each do |r| %>
-		var autr = L.marker([<%= r.localisation.lat %>, <%= r.localisation.lng %>], {icon: myIcon}).addTo(mymap).bindPopup("<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/><i class='fa fa-home'></i> <%=r.localisation.nom%>");
-		autrs.push(autr);
-	<% end %>
-	var autres = L.layerGroup(autrs);
-
-	var overlayMaps = {
-    "Brocades": brocades,
-    "Ciscos": ciscos,
-		"Autres": autres
-	};
-
-	L.control.layers('',overlayMaps).addTo(mymap);
 
 
 </script>
