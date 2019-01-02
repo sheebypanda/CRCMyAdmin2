@@ -57,7 +57,7 @@
 				+"<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/>"
 			<% end %>
 			);
-		<% elsif l.recettes.count === 3...9 %>
+		<% elsif l.recettes.count.between?(3, 9) %>
 			L.marker([<%= l.lat %>, <%= l.lng %>],
 			{icon: myIconWarning}).addTo(mymap).bindPopup(
 			"<strong><i class='fa fa-home'></i> <%=l.nom%></strong><br/>"
@@ -66,6 +66,7 @@
 			<% end %>
 			);
 			<% elsif l.recettes.count > 9 %>
+			<% raise %>
 				L.marker([<%= l.lat %>, <%= l.lng %>],
 				{icon: myIconDanger}).addTo(mymap).bindPopup(
 				"<strong><i class='fa fa-home'></i> <%=l.nom%></strong><br/>"
