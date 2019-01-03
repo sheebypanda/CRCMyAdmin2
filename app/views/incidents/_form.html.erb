@@ -9,6 +9,11 @@
   </div>
 <% end %>
 <div class="container">
+
+  <div class="alert alert-danger"><%= fa_icon('warning') %> Pour les incidents critiques, il est obligatoire de déposer le ticket par téléphone. <small><a href="http://wiki-crc.mbx.fr/doku.php/procedure:astreinte"><%= fa_icon('search') %> Voir le détail</a></small></div>
+
+
+
   <%= simple_form_for(@incident) do |f| %>
     <%= f.error_notification %>
 
@@ -32,7 +37,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <%= f.input :nopenality, label: fa_icon("heartbeat")+" Coupure non franche. (N'applique pas les pénalités). Obligation de justifier dans la description.", wrapper_html: {class: 'alert alert-warning'} %>
+          <%= f.input :nopenality, label: fa_icon("heartbeat")+" Ne pas appliquer les pénalités. Obligation de justifier dans la description.", wrapper_html: {class: 'alert alert-warning'} %>
         </div>
       </div>
       <% if params[:action] == "edit"%>
@@ -63,7 +68,7 @@
       <% end %>
 
       <div class="alert alert-info">
-         <%= fa_icon('exclamation-triangle') %> Vous ne pouvez sélectionner que des équipements qui ont la <strong>même SLA.</strong> Pour en ajouter des différents, déposer un nouvel incident.
+         <%= fa_icon('lightbulb-o') %> Vous ne pouvez sélectionner que des équipements qui ont la <strong>même SLA.</strong> Pour en ajouter des différents, déposer un nouvel incident.
         </div>
       <table class="table table-sm">
         <thead>
