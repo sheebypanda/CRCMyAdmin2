@@ -49,34 +49,23 @@
   });
 
 	<% @localisations.each do |l| %>
-		<% if l.recettes.count < 3 %>
-			L.marker([<%= l.lat %>, <%= l.lng %>],
-			{icon: myIconSuccess}).addTo(mymap).bindPopup(
-			"<strong><i class='fa fa-home'></i> <%=l.nom%></strong><br/>"
-			<% l.recettes.each do |r| %>
-				+"<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/>"
-			<% end %>
-			);
-		<% elsif l.recettes.count.between?(3, 9) %>
-			L.marker([<%= l.lat %>, <%= l.lng %>],
-			{icon: myIconWarning}).addTo(mymap).bindPopup(
-			"<strong><i class='fa fa-home'></i> <%=l.nom%></strong><br/>"
-			<% l.recettes.each do |r| %>
-				+"<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/>"
-			<% end %>
-			);
-			<% elsif l.recettes.count > 9 %>
-				L.marker([<%= l.lat %>, <%= l.lng %>],
-				{icon: myIconDanger}).addTo(mymap).bindPopup(
-				"<strong><i class='fa fa-home'></i> <%=l.nom%></strong><br/>"
-				<% l.recettes.each do |r| %>
-					+"<i class='fa fa-server'></i> <%=r.equipement.nom%> - <%=r.equipement.ip%><br/>"
+		<% if l.recettes.present? and l.recettes.last.equipement.ip.present? %>
+			L.marker([<%= l.lat %>, <%= l.lng %>],{
+				<% if l.recettes.count < 3 %>
+					icon: myIconSuccess
+				<% elsif l.recettes.count.between?(3, 9) %>
+					icon: myIconWarning
+				<% elsif l.recettes.count > 9 %>
+					icon: myIconDanger
 				<% end %>
-				);
+			}).addTo(mymap).bindPopup(
+				"<a href='<%= edit_localisation_path(l) %>' class='text-info'><strong><i class='fa fa-home'></i> <%=l.nom%></strong></a><br/>"
+				<% l.recettes.each do |r| %>
+					+"<a href='<%= edit_equipement_path(r.equipement) %>' class='text-danger'><i class='fa fa-server'></i> <%=r.equipement.nom%></a> - <%=r.equipement.ip%><br/>"
+				<% end %>
+			);
 		<% end %>
 	<% end %>
-
-
 
 </script>
 
