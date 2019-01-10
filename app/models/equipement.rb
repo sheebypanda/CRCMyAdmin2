@@ -4,7 +4,7 @@ class Equipement < ApplicationRecord
   has_one :ligne, through: :recette
   belongs_to :projet, optional: true
   has_and_belongs_to_many :incidents
-  #validates :serial, uniqueness: true
+  validates :serial, uniqueness: true
 
   include PgSearch
   pg_search_scope :equipement_search, :against =>
