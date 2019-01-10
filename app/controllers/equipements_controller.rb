@@ -20,6 +20,15 @@ class EquipementsController < ApplicationController
   def show
   end
 
+  def enr
+    @equipements = []
+    Equipement.where.not(nom: ['', nil]).order(updated_at: :desc).each do |e|
+      unless e.recette
+        @equipements.push(e)
+      end
+    end
+  end
+
   def import
     begin
       Equipement.import(params[:file])

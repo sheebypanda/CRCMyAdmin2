@@ -37,9 +37,6 @@ class RecettesController < ApplicationController
     @localisations = Localisation.where.not(lng: ['', nil])
   end
 
-  def enr
-  end
-
   def new
     @recette = Recette.new
   end

@@ -35,15 +35,16 @@
 
 
       <div class="dropright">
-        <a class="list-group-item list-group-item-action list-group-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= fa_icon("table")%> Exports CSV
+        <a class="d-flex justify-content-between align-items-center  list-group-item list-group-item-action list-group-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= fa_icon("gears 2x")%> Options <span></span>
         </a>
         <div class="dropdown-menu">
-          <%= link_to fa_icon("table", class: "text-danger")+' Équipements', equipements_path(format: :csv), class: 'list-group-item list-group-item-action text-danger'%>
-          <%= link_to fa_icon("table", class: "text-purple")+' État du stock', '/stock.csv', format: :csv, class: 'list-group-item list-group-item-action text-purple'%>
-          <%= link_to fa_icon("table", class: "text-primary")+' Fiches recettes', '/fichesrecettes.csv', format: :csv, class: 'list-group-item list-group-item-action text-primary'%>
-          <%= link_to fa_icon("table", class: "text-warning")+' Lignes', lignes_path(format: :csv), class: 'list-group-item list-group-item-action text-warning'%>
-          <%= link_to fa_icon("table", class: "text-info")+' Localisations', localisations_path(format: :csv), class: 'list-group-item list-group-item-action text-info'%>
+          <%= link_to fa_icon("download", class: "text-danger")+' Équipements', equipements_path(format: :csv), class: 'list-group-item list-group-item-action text-danger'%>
+          <%= link_to fa_icon("download", class: "text-purple")+' État du stock', '/stock.csv', format: :csv, class: 'list-group-item list-group-item-action text-purple'%>
+          <%= link_to fa_icon("download", class: "text-primary")+' Fiches recettes', '/fichesrecettes.csv', format: :csv, class: 'list-group-item list-group-item-action text-primary'%>
+          <%= link_to fa_icon("download", class: "text-warning")+' Lignes', lignes_path(format: :csv), class: 'list-group-item list-group-item-action text-warning'%>
+          <%= link_to fa_icon("download", class: "text-info")+' Localisations', localisations_path(format: :csv), class: 'list-group-item list-group-item-action text-info'%>
+          <%= link_to fa_icon("eye", class: "text-primary")+' Équipements non-recettés en production', '/enr', class: 'list-group-item list-group-item-action text-primary'%>
         </div>
       </div>
       <!-- <div class="dropright">
