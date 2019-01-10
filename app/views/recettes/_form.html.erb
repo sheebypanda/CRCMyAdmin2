@@ -13,7 +13,7 @@
             <select class="form-control" name="recette[equipement_id]" id="recette_equipement_id">
               <option value="2202">Pas d'équipement</option>
               <%  @equipements.each do |e|  %>
-              <option value="<%= e.id %>"><%= e.nom %></option>
+              <option value="<%= e.id %>"><%= e.marque %> - <%= e.modele %> - <%= e.nom %> - <%= e.ip %> - <%= e.serial %></option>
               <% end %>
             </select>
           <% end %>
