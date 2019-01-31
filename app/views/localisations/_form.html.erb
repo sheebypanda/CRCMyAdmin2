@@ -26,12 +26,16 @@
       <div class="form-row">
         <% if @localisation.images.attached? %>
           <% @localisation.images.each do |image| %>
-            <div class="col-lg-3">
-              <% if image.variable? %>
-                <%= link_to image_tag(image.variant(resize: '300x200'), class:"img-thumbnail"), image %><br/>
-                <%= link_to fa_icon("trash")+" Supprimer", delete_image_localisation_path(image), method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, class:"btn btn-danger btn-block" %>
-              <% end %>
-            </div>
+            <% if image.variable? %>
+              <div class="card m-3 border-secondary" style="width: 18rem;">
+                <%= image_tag(image.variant(resize: '300x400'), class:"card-img-top")%>
+                <div class="card-body">
+                  <p class="text-center"><span class="badge badge-secondary"><%= fa_icon("calendar")+" "+image.created_at.strftime("%d/%m/%y") %></span></p>
+                  <%= link_to fa_icon("eye")+" Voir en grand", image, class:"btn btn-primary btn-block" %><br/>
+                  <%= link_to fa_icon("trash")+" Supprimer", delete_image_localisation_path(image), method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, class:"btn btn-danger btn-block" %>
+                </div>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>
