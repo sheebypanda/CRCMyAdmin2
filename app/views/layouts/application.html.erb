@@ -15,18 +15,30 @@
   </head>
 
   <body>
+
     <% if user_signed_in? %>
       <%= render "shared/navbar" %>
     <% end %>
+
     <div class="container-fluid bg-light">
       <div class="row d-flex">
+
         <% if user_signed_in? %>
           <%= render "shared/sidebar" %>
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-1 px-4">
+            <!-- <i class="fa fa-times" data-toggle="collapse" data-target="#sidebar" aria-hidden="true" aria-expanded="false" aria-controls="sidebar" onclick="var that = this; setTimeout(function() {console.log(that.parentNode);that.parentNode.style.flex = 'auto';that.parentNode.style['max-width'] = 'none';}, 2000);"></i> -->
+            <%= yield %>
+          </main>
+        <% else %>
+          <div class="container">
+            <div class="row justify-content-md-center">
+              <div class="col-sm-5">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
         <% end %>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-1 px-4">
-          <!-- <i class="fa fa-times" data-toggle="collapse" data-target="#sidebar" aria-hidden="true" aria-expanded="false" aria-controls="sidebar" onclick="var that = this; setTimeout(function() {console.log(that.parentNode);that.parentNode.style.flex = 'auto';that.parentNode.style['max-width'] = 'none';}, 2000);"></i> -->
-          <%= yield %>
-        </main>
+
       </div>
     </div>
   </body>

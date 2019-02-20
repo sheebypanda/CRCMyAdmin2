@@ -1,7 +1,7 @@
-<h1 class="text-center"><%= fa_icon("dashboard")%> CRCMyAdmin</h1>
+<h1 class="text-center p-3"><%= fa_icon("server")%> <span class="text-primary">CRC</span>My<span class="text-danger">Admin</span></h1>
 
-<div class="alert alert-danger" role="alert">
-  Pour accéder à l'application, merci de vous authentifier.
+<div class="alert alert-danger text-center" role="alert">
+  <strong>Authentification requise</strong>
 </div>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
