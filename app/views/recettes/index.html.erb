@@ -38,7 +38,7 @@
         <% if params[:search] %>
           <% recette = Recette.find(recette.searchable_id) %>
         <% end %>
-        <td><%= recette.created_at.strftime("%d/%m") %></td>
+        <td><%= recette.created_at.strftime("%d/%m/%y") %></td>
         <% index = recette.user.email.index('@') - 1 %>
         <td><%= recette.user.email.slice(0..index) %></td>
         <td><a class="text-danger" href="<%= edit_equipement_path(recette.equipement) %>"><%= recette.equipement.nom %></a></td>
