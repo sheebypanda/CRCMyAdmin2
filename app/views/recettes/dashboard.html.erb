@@ -7,95 +7,123 @@
 
 <div class="row">
   <div class="col-md-4">
-    <h4 class="pt-3 pb-3"><%= fa_icon("image") %> Dernières photos de LT ajoutées :</h4>
 
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-      <div class="carousel-inner">
-        <% ActiveStorage::Attachment.last(15).each do |a| %>
-          <div class="carousel-item <% if a == ActiveStorage::Attachment.last %>active<% end %>">
-            <%= image_tag(a, class:"d-block w-100") %>
-            <div class="carousel-caption d-none d-md-block bg-dark" style="opacity: 0.8;">
-              <% l = Localisation.find(a.record_id) %>
-              <a href="<%= edit_localisation_path(l)%>" class="text-light"><h6><strong><%= l.ville %></strong> - <%= l.nom %></h6></a>
-            </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= fa_icon("image") %> Dernières photos ajoutées :</h5>
+        <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
+          <div class="carousel-inner">
+            <% ActiveStorage::Attachment.last(15).each do |a| %>
+              <div class="carousel-item <% if a == ActiveStorage::Attachment.last %>active<% end %>">
+                <%= image_tag(a.variant(resize: '300x400'), class:"d-block w-100") %>
+                <div class="alert alert-secondary carousel-caption d-none d-md-block">
+                  <% l = Localisation.find(a.record_id) %>
+                  <a href="<%= edit_localisation_path(l)%>" class="text-dark"><h6><strong><%= l.ville %></strong> - <%= l.nom %></h6></a>
+                </div>
+              </div>
+            <% end %>
           </div>
-        <% end %>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+    </div>
+    <div class="card mt-1">
+      <div class="card-body">
+        <h5 class="card-title"><%= fa_icon("spinner") %> Avancement des visites des locaux techniques</h5>
+        <div class="progress">
+          <%  localisations_with_photos = ActiveStorage::Attachment.all.where(record_type: 'Localisation').select(:record_id).distinct.count
+          all_localisation = Localisation.all.count
+          localisation_percent = (localisations_with_photos.to_f / all_localisation * 100).round(2)
+          %>
+          <div class="progress-bar" role="progressbar" style="width: <%= localisation_percent %>%;"
+            aria-valuenow="<%= localisations_with_photos %>"
+            aria-valuemin="0"
+            aria-valuemax="<%= all_localisation %>"><%= localisation_percent %> %</div>
+          </div>
+          <span class="badge badge-pill badge-secondary"><%= localisations_with_photos %> <%= fa_icon("image") %></span> / <span class="badge badge-pill badge-secondary"><%= all_localisation %> <%= fa_icon("map-marker") %></span>
+      </div>
     </div>
 
-    <h4 class="pt-3 pb-3"><%= fa_icon("spinner") %> Avancement visites LT</h4>
-    <div class="progress">
-      <%  localisations_with_photos = ActiveStorage::Attachment.all.where(record_type: 'Localisation').select(:record_id).distinct.count
-      all_localisation = Localisation.all.count
-      localisation_percent = (localisations_with_photos.to_f / all_localisation * 100).round(2)
-      %>
-      <div class="progress-bar" role="progressbar" style="width: <%= localisation_percent %>%;"
-        aria-valuenow="<%= localisations_with_photos %>"
-        aria-valuemin="0"
-        aria-valuemax="<%= all_localisation %>"><%= localisation_percent %> %</div>
-      </div>
-      <span class="badge badge-pill badge-secondary"><%= localisations_with_photos %> <%= fa_icon("image") %></span> / <span class="badge badge-pill badge-secondary"><%= all_localisation %> <%= fa_icon("map-marker") %></span>
   </div>
 
   <div class="col-md-8">
+
     <div class="row">
+
       <div class="col">
-        <h4 class="pt-3 pb-3"><%= fa_icon("thumbs-up") %>Niveaux de SLA</h4>
-        <%= pie_chart Equipement.group(:sla).count, donut: true %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= fa_icon("shield") %> Niveaux de SLA</h5>
+            <%= pie_chart Equipement.group(:sla).count, donut: true %>
+          </div>
+        </div>
       </div>
       <div class="col">
-        <h4 class="pt-3 pb-3"><%= fa_icon("bell") %>Incidents par marque</h4>
-        <%= pie_chart Incident.joins(:equipements).group(:marque).count.sort, donut: true %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= fa_icon("bell") %> Incidents par marque</h4>
+            <%= pie_chart Incident.joins(:equipements).group(:marque).count.sort, donut: true %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= fa_icon("bell") %> Incidents au fil du temps :</h4>
+            <%= column_chart Incident.group_by_month(:created_at, format: "%m/%y").count %>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="col">
-      <h4 class="pt-3 pb-3"><%= fa_icon("bell") %>Incidents au fil du temps :</h4>
-      <%= line_chart Incident.group_by_month(:created_at).count %>
+<div class="row mt-3">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= fa_icon("university") %> Équipements par commune</h5>
+        <%= pie_chart Recette.joins(:equipement).where.not('equipements.nom' => 'Cimetière Chartreuse-Loge').joins(:localisation).group(:ville).count.sort, donut: true %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= fa_icon("industry") %> Équipements par fabricant</h5>
+        <%= pie_chart Equipement.group(:marque).where.not(marque: [nil, '', 'net-snmp', 'Unknown', 'Moxa Technologies Co., Ltd.', 'PipingHot Networks Limited']).count.sort, donut: true %>
+      </div>
     </div>
   </div>
 </div>
 
-<h2 class="pb-3 pt-3"><%= fa_icon("server") %> Équipements</h2>
-<div class="row">
-  <div class="col-md-6">
-    <h4 class="pt-3 pb-3"><%= fa_icon("university") %> Équipements par commune</h4>
-    <%= pie_chart Recette.joins(:equipement).where.not('equipements.nom' => 'Cimetière Chartreuse-Loge').joins(:localisation).group(:ville).count.sort, donut: true %>
-  </div>
-  <div class="col-md-6">
-    <h4 class="pt-3 pb-3"><%= fa_icon("industry") %> Équipements par fabricant</h4>
-    <%= pie_chart Equipement.group(:marque).where.not(marque: [nil, '', 'net-snmp', 'Unknown', 'Moxa Technologies Co., Ltd.', 'PipingHot Networks Limited']).count.sort, donut: true %>
-  </div>
 
-</div>
-<div class="row">
+<div class="row mt-3">
   <div class="col-md-6">
-    <h4 class="pt-3 pb-3">Matériel <span class="text-danger">Brocade</span> par modèle</h4>
-    <%= bar_chart Equipement.where("marque LIKE ?","%Brocade%").group(:modele).count.sort, colors: ['#b82e2e'] %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= fa_icon("university") %> Lignes internet par commune</h5>
+        <%= pie_chart Recette.joins(:ligne).where.not('lignes.numerocompte' => 'Fibre privée BM').joins(:localisation).group(:ville).count, donut: true %>
+      </div>
+    </div>
   </div>
   <div class="col-md-6">
-    <h4 class="pt-3 pb-3">Matériel <span class="text-primary">Cisco</span> par modèle</h4>
-    <%= bar_chart Equipement.where("marque LIKE ?","%Cisco%").group(:modele).count.sort %>
-  </div>
-</div>
-
-<h2 class="pt-3 pb-3"><%= fa_icon("globe") %> Sorties internet</h2>
-<div class="row">
-  <div class="col-md-6">
-    <h4 class="pt-3 pb-3">Lignes internet par commune</h4>
-    <%= pie_chart Recette.joins(:ligne).where.not('lignes.numerocompte' => 'Fibre privée BM').joins(:localisation).group(:ville).count, donut: true %>
-  </div>
-  <div class="col-md-6">
-    <h4 class="pt-3 pb-3"><%= fa_icon("bug") %> Répartition par opérateur</h4>
-    <%= pie_chart Operateur.joins(:lignes).group(:nom).count, donut: true %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= fa_icon("bug") %> Lignes internet par opérateur</h5>
+        <%= pie_chart Operateur.joins(:lignes).group(:nom).count, donut: true %>
+      </div>
+    </div>
   </div>
 </div>
 <% end %>
