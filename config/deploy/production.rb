@@ -4,10 +4,14 @@ set :deploy_to, "/usr/local/CRCMyAdmin2"
 set :repo_url, "https://github.com/sheebypanda/CRCMyAdmin2"
 #set :branch, ENV["PRODUCTION_BRANCH"]
 set :branch, "master"
-set :bundle_env_variables, { 'https_proxy' => 'https://172.20.92.38:3128' }
+
+# set :bundle_env_variables, { 'https_proxy' => 'https://172.20.92.38:3128' }
+set :bundle_env_variables, { 'https_proxy' => 'https://192.168.2.18:3128' }
 
 #server ENV["PRODUCTION_SERVER_IP"], user: ENV["PRODUCTION_DEPLOY_USER"], roles: %w{web app db}
-server "172.20.92.38", user: "deploy", roles: %w{web app db}
+
+# server "172.20.92.38", user: "deploy", roles: %w{web app db}
+server "172.26.3.70", user: "deploy", roles: %w{web app db}
 
 # server-based syntax
 # ======================
