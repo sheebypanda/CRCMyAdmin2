@@ -68,7 +68,7 @@ class EquipementsController < ApplicationController
     @add_response2 = []
     eqs = Equipement.where.not(ip: [nil, ''])
     eqs.each do |e|
-      libreNmsAdd(e.ip)
+      # libreNmsAdd(e.ip)
       @add_response << e
       @add_response2 << @response
     end
@@ -100,7 +100,7 @@ class EquipementsController < ApplicationController
 
   def update
     unless equipement_params[:supervision]
-      libreNmsAdd(equipement_params[:ip])
+      # libreNmsAdd(equipement_params[:ip])
     end
     respond_to do |format|
       if @equipement.update(equipement_params)
