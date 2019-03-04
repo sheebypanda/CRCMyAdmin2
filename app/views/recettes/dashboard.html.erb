@@ -107,6 +107,34 @@
   </div>
 </div>
 
+<div class="row mt-3">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= fa_icon("bar-chart") %> Inventaire des équipements</h5>
+        <table id="tablesorter" class="tablesorter table table-sm table-striped">
+          <thead>
+            <tr>
+              <th>Marque</th>
+              <th>Modèle</th>
+              <th>Quantité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @eqs.each do |e| %>
+              <tr>
+                <td><%= e.marque %></td>
+                <td><%= e.modele %></td>
+                <td><span class="badge badge-pill badge-danger"><%= Equipement.where(modele: e.modele).count %></span></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="row mt-3">
   <div class="col-md-6">
