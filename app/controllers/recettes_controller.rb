@@ -28,7 +28,7 @@ class RecettesController < ApplicationController
   end
 
   def dashboard
-    @eqs = Equipement.select(:marque, :modele).where.not(marque: [nil, '', 'net-snmp', 'Unknown', 'Moxa Technologies Co., Ltd.', 'PipingHot Networks Limited'], 'equipements.nom' => 'Cimetière Chartreuse-Loge').distinct(:modele)
+    @eqs = Equipement.select(:marque, :modele).where.not(marque: [nil, '', 'net-snmp', 'Unknown', 'Moxa Technologies Co., Ltd.', 'PipingHot Networks Limited', 'Aerohive'], 'equipements.nom' => 'Cimetière Chartreuse-Loge').distinct(:modele)
   end
 
   def map
