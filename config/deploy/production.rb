@@ -10,7 +10,7 @@ set :bundle_env_variables, { 'https_proxy' => 'https://s-proxc.mbx.fr:80' }
 #server ENV["PRODUCTION_SERVER_IP"], user: ENV["PRODUCTION_DEPLOY_USER"], roles: %w{web app db}
 
 # server "172.20.92.38", user: "deploy", roles: %w{web app db}
-server "172.26.3.70", user: "deploy", roles: %w{web app db}
+server "172.26.2.18", user: "deploy", roles: %w{web app db}
 
 # server-based syntax
 # ======================
