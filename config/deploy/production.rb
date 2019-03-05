@@ -5,8 +5,7 @@ set :repo_url, "https://github.com/sheebypanda/CRCMyAdmin2"
 #set :branch, ENV["PRODUCTION_BRANCH"]
 set :branch, "master"
 
-# set :bundle_env_variables, { 'https_proxy' => 'https://172.20.92.38:3128' }
-set :bundle_env_variables, { 'https_proxy' => 'https://192.168.2.18:3128' }
+set :bundle_env_variables, { 'https_proxy' => 'https://s-proxc.mbx.fr:80' }
 
 #server ENV["PRODUCTION_SERVER_IP"], user: ENV["PRODUCTION_DEPLOY_USER"], roles: %w{web app db}
 
