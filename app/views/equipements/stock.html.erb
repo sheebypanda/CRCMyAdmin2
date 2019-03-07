@@ -21,7 +21,7 @@
           <h2 class="m-3 text-danger">Brocade</span></h2>
           <%= bar_chart @stock_brocade.group(:modele).count, colors: ['#b82e2e']%>
 
-          <table id="tablesorter" class="tablesorter table table-striped table-sm">
+          <table id="tablesorter-brocade" class="tablesorter table table-striped table-sm">
             <thead>
               <tr>
                 <th><%= fa_icon("tag") %> Marque</th>
@@ -60,7 +60,7 @@
 
           <h2 class="m-3 text-info">Cisco</span></h2>
           <%= bar_chart @stock_cisco.group(:modele).count %>
-          <table id="tablesorter" class="tablesorter table table-striped table-sm">
+          <table id="tablesorter-cisco" class="tablesorter table table-striped table-sm">
             <thead>
               <tr>
                 <th><%= fa_icon("tag") %> Marque</th>
@@ -99,7 +99,7 @@
 
           <h2 class="m-3 text-warning">Aerohive</span></h2>
           <%= column_chart @stock_aerohive.group(:modele).count %>
-          <table id="tablesorter" class="tablesorter table table-striped table-sm">
+          <table id="tablesorter-aerohive" class="tablesorter table table-striped table-sm">
             <thead>
               <tr>
                 <th><%= fa_icon("tag") %> Marque</th>
@@ -136,7 +136,7 @@
         <div class="card-text">
           <h2 class="m-3 text-success">Autres marques</h2>
 
-          <table id="tablesorter" class="tablesorter table table-striped table-sm">
+          <table id="tablesorter-autre" class="tablesorter table table-striped table-sm">
             <thead>
               <tr>
                 <th><%= fa_icon("tag") %> Marque</th>

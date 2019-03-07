@@ -1,6 +1,10 @@
 document.addEventListener("turbolinks:load", function() {
 
   $("#tablesorter").tablesorter();
+  $("#tablesorter-cisco").tablesorter();
+  $("#tablesorter-brocade").tablesorter();
+  $("#tablesorter-aerohive").tablesorter();
+  $("#tablesorter-autre").tablesorter();
 
   $("#recette_localisation_ville").change(function() {
     var ville = $( this ).val();
