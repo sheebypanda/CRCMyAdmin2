@@ -24,7 +24,7 @@ class Localisation < ApplicationRecord
     adresse + ', ' + ville + ', FR'
   end
 
-  geocoded_by :full_address, :latitude  => :lat, :longitude => :lng
+  geocoded_by :full_address, latitude: :lat, longitude: :lng
 
   after_validation :geocode
 # after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }
