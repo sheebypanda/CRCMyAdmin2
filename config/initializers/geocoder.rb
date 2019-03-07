@@ -1,6 +1,6 @@
 Geocoder.configure(
-  :http_proxy => 'http://172.20.92.38:3128',
-  :https_proxy => 'https://172.20.92.38:3128',
+  :http_proxy => 'http://s-proxc.mbx.fr:80',
+  :https_proxy => 'https://s-proxc.mbx.fr:80',
   :timeout => 5,
   lookup: :nominatim,
   units: :km,

@@ -43,10 +43,8 @@ class LocalisationsController < ApplicationController
     respond_to do |format|
       if @localisation.save
         format.html { redirect_to localisations_path, notice: "La localisation #{@localisation.nom} a bien été créée." }
-        format.json { render :show, status: :created, location: @localisation }
       else
         format.html { render :new }
-        format.json { render json: @localisation.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,7 +53,6 @@ class LocalisationsController < ApplicationController
     respond_to do |format|
       if @localisation.update(localisation_params)
         format.html { redirect_to localisations_path, notice: "La localisation #{@localisation.nom} a bien été mise à jour." }
-        format.json { render :show, status: :ok, location: @localisation }
       else
         format.html { render :edit }
       end
