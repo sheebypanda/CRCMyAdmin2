@@ -6,7 +6,6 @@ class Localisation < ApplicationRecord
   has_many_attached :images
   validates :nom, presence: true
 
-
   include PgSearch
   pg_search_scope :localisation_search, :against => {
     :nom => 'A',
@@ -21,23 +20,14 @@ class Localisation < ApplicationRecord
     }
   }
 
-  # after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }
-  after_validation :geocode
   def full_address
     adresse + ', ' + ville + ', FR'
   end
-  after_validation :geocode
+
   geocoded_by :full_address, :latitude  => :lat, :longitude => :lng
 
-  # reverse_geocoded_by :lat, :lng, :address => :adresse do |obj,results|
-  #   if geo = results.first
-  #     obj.adresse = geo.street_number+" "+geo.route
-  #     obj.ville = geo.city
-  #     obj.codepostal = geo.postal_code
-  #   end
-  # end
-
-  # after_validation :reverse_geocode, :if => lambda{ |obj| obj.lat_changed? }
+#  after_validation :geocode
+  after_validation :geocode, :if => lambda{ |obj| obj.adresse_changed? }
 
   require 'csv'
 
