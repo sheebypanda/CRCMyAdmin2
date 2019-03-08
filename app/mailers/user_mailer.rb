@@ -14,14 +14,14 @@ class UserMailer < ApplicationMailer
 
     destination = []
 
-    destination << Rails.application.secrets.email_from
-    destination << email_nxo
+#    destination << Rails.application.secrets.email_from
+#    destination << email_nxo
     destination << email_copy1
-    destination << email_copy2
-    destination << email_copy3
-    destination << email_copy4
+#    destination << email_copy2
+ #   destination << email_copy3
+ #   destination << email_copy4
 
     mail(to: destination, subject: "Bordeaux Métropole - Déclaration d'incident sur équipements réseaux" )
-    
+
   end
 end
