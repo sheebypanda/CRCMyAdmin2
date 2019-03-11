@@ -75,11 +75,11 @@
           </tr>
         </thead>
         <tbody>
-          <%= f.collection_radio_buttons :equipement_ids, @eqs, :id, :serial do |input| %>
+          <%= f.collection_check_boxes :equipement_ids, @eqs, :id, :serial do |input| %>
             <tr class="equipement sla-<% if input.object.sla %><%= input.object.sla %>" sla="<%= input.object.sla %><% end %>" id=equipement_"<%= input.object.id %>">
               <td>
                 <label>
-                  <%= input.radio_button %>
+                  <%= input.check_box %>
                   <strong><%= input.object.marque %></strong> <%= input.object.modele %> <%= input.object.nom %> <%= input.object.ip %> <%= input.text %>
                 </label>
               </td>

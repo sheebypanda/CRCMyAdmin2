@@ -19,8 +19,8 @@ class IncidentsController < ApplicationController
     if @incident.equipements.empty?
       flash[:alert] = "Pas d'équipement sélectionné"
       redirect_to new_incident_path
-    elsif @incident.equipements.where(sla: @incident.equipements.first.sla).count == @incident.equipements.count
-      flash[:alert] = "Les équipements sélectionnées n'ont pas la même SLA !"
+    elsif @incident.equipement_ids.count > 1
+      flash[:alert] = "Selectionner un seul équipement"
       redirect_to new_incident_path
     elsif @incident.save
       UserMailer.with(incident: @incident).incident_email.deliver_now
