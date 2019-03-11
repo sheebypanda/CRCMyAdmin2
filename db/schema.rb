@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_17_134910) do
+ActiveRecord::Schema.define(version: 2019_03_11_101232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2018_12_17_134910) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "nopenality"
+    t.boolean "nomail"
     t.index ["user_id"], name: "index_incidents_on_user_id"
   end
 

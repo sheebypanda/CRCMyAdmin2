@@ -22,9 +22,14 @@ class IncidentsController < ApplicationController
     elsif @incident.equipement_ids.count > 1
       flash[:alert] = "Selectionner un seul équipement"
       redirect_to new_incident_path
+    elsif @incident.nopenality and @incident.commentaire.empty?
+      flash[:alert] = "Obligation de justifier dans le champ commentaire, si non-application des pénalitées."
+      redirect_to new_incident_path
     elsif @incident.save
-      UserMailer.with(incident: @incident).incident_email.deliver_now
       flash[:notice] = "L'incident a été enregistré et notifié par mail à la hotline NXO et à dip.reseau"
+      unless @incident.nomail
+        UserMailer.with(incident: @incident).incident_email.deliver_now
+      end
       redirect_to incidents_path
     end
   end
@@ -55,6 +60,6 @@ class IncidentsController < ApplicationController
       @eqs = Array(Equipement.select('id, modele, marque, ip, serial, nom, sla').where.not(ip: ['', nil], marque: ['Unknown', 'Aerohive'], sla: ['', nil]).order(:marque))
     end
     def incident_params
-      params.require(:incident).permit(:user_id, :debut, :fin, :idnxo, :idasap, :commentaire, :nopenality, equipement_ids: [])
+      params.require(:incident).permit(:user_id, :debut, :fin, :idnxo, :idasap, :commentaire, :nopenality, :nomail, equipement_ids: [])
     end
 end

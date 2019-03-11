@@ -21,7 +21,7 @@
       <%= f.association :user, :as => :hidden, :input_html => { :value => current_user.id } %>
       <div class="row">
         <div class="col">
-          <%= f.input :debut %>
+          <%= f.input :debut, label: "Début", as: :datetime %>
         </div>
         <div class="col">
           <%= f.input :fin %>
@@ -37,7 +37,10 @@
       </div>
       <div class="row">
         <div class="col">
-          <%= f.input :nopenality, label: fa_icon("heartbeat")+" Ne pas appliquer les pénalités. Obligation de justifier dans la description.", wrapper_html: {class: 'alert alert-warning'} %>
+          <%= f.input :nopenality, label: fa_icon("gavel")+" Ne pas appliquer les pénalités. Obligation de justifier.", wrapper_html: {class: 'alert alert-warning'} %>
+        </div>
+        <div class="col">
+          <%= f.input :nomail, label: fa_icon("ban")+" Ne pas notifier par mail.", wrapper_html: {class: 'alert alert-info'} %>
         </div>
       </div>
       <% if params[:action] == "edit"%>
