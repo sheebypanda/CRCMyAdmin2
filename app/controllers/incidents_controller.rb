@@ -20,15 +20,16 @@ class IncidentsController < ApplicationController
       flash[:alert] = "Pas d'équipement sélectionné"
       redirect_to new_incident_path
     elsif @incident.equipement_ids.count > 1
-      flash[:alert] = "Selectionner un seul équipement"
+      flash[:alert] = "Sélectionner un seul équipement"
       redirect_to new_incident_path
     elsif @incident.nopenality and @incident.commentaire.empty?
       flash[:alert] = "Obligation de justifier dans le champ commentaire, si non-application des pénalitées."
       redirect_to new_incident_path
     elsif @incident.save
-      flash[:notice] = "L'incident a été enregistré et notifié par mail à la hotline NXO et à dip.reseau"
+      flash[:notice] = "L'incident a été enregistré."
       unless @incident.nomail
         UserMailer.with(incident: @incident).incident_email.deliver_now
+        flash[:notice] = "L'incident a été signalé par mail à la hotline NXO."
       end
       redirect_to incidents_path
     end
