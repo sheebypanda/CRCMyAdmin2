@@ -9,39 +9,39 @@
     <table>
       <tr>
         <td style="background-color:#202d63 ; color:white">Meta customer</td>
-        <td><%= Rails.application.secrets.meta_customer %></td>
+        <td style="background-color:#eee"><%= Rails.application.secrets.meta_customer %></td>
       </tr>
       <tr>
         <td style="background-color:#202d63 ; color:white">Date</td>
-        <td><%=DateTime.now.strftime("%d/%m/%y - %H:%M") %></td>
+        <td style="background-color:#eee"><%=DateTime.now.strftime("%d/%m/%y - %H:%M") %></td>
       </tr>
       <tr>
         <td style="background-color:#202d63 ; color:white">Emetteur</td>
-        <td>Christophe PILLIN <br/>05 57 20 70 90</td>
+        <td style="background-color:#eee">Christophe PILLIN <br/>05 57 20 70 90</td>
       </tr>
       <% if localisation = @incident.equipements.last.localisation %>
       <tr>
         <td style="background-color:#202d63 ; color:white">Site impacté</td>
-        <td><%= localisation.nom %>, <%= localisation.adresse %><br/>
+        <td style="background-color:#eee"><%= localisation.nom %>, <%= localisation.adresse %><br/>
         <%= localisation.codepostal %> <%= localisation.ville %>
         </td>
       </tr>
       <tr>
         <td style="background-color:#202d63 ; color:white">BP du site impacté</td>
-        <td><%= localisation.bp %>  </td>
+        <td style="background-color:#eee"><%= localisation.bp %>  </td>
       </tr>
       <% end %>
       <tr>
         <td style="background-color:#202d63 ; color:white">Type de demande</td>
-        <td>Incident</td>
+        <td style="background-color:#eee">Incident</td>
       </tr>
       <tr>
         <td style="background-color:#202d63 ; color:white">Sévérité</td>
-        <td>Normale</td>
+        <td style="background-color:#eee">Normale</td>
       </tr>
       <tr>
         <td style="background-color:#202d63 ; color:white">Élément matériel :</td>
-        <td>
+        <td style="background-color:#eee">
           <% @incident.equipements.each do |e| %>
             <%= e.marque %> <%= e.modele %>, <%= e.serial %> - <%= e.ip %> <br/>
           <% end %>
@@ -49,15 +49,15 @@
       </tr>
       <tr>
         <td style="background-color:#202d63 ; color:white">Date de début incident</td>
-        <td><%= @incident.debut.strftime("%d/%m/%y - %H:%M") %></td>
+        <td style="background-color:#eee"><%= @incident.debut.strftime("%d/%m/%y - %H:%M") %></td>
       </tr>
       <tr>
         <td style="background-color:#202d63 ; color:white">Description de l'incident</td>
-        <td><%= @incident.commentaire %></td>
+        <td style="background-color:#eee"><%= @incident.commentaire %></td>
       </tr>
       <tr>
         <td style="background-color:#202d63 ; color:white">Numéro d'incident BM</td>
-        <td><%= @incident.idasap %></td>
+        <td style="background-color:#eee"><%= @incident.idasap %></td>
       </tr>
     </table>
 
