@@ -10,7 +10,7 @@
 <% end %>
 <div class="container">
 
-  <div class="alert alert-danger"><%= fa_icon('warning') %> Pour les incidents critiques, il est obligatoire de déposer le ticket par téléphone. <small><a href="http://wiki-crc.mbx.fr/doku.php/procedure:astreinte"><%= fa_icon('search') %> Voir le détail</a></small></div>
+  <div class="alert alert-danger"><%= fa_icon('warning') %> Pour les incidents <strong>critiques</strong>, il est obligatoire de déposer le ticket par <strong>téléphone</strong>. <small><a href="http://wiki-crc.mbx.fr/doku.php/procedure:astreinte"><%= fa_icon('search') %> Voir le détail</a></small></div>
 
 
 
@@ -67,22 +67,19 @@
         </div>
       <% end %>
 
-      <div class="alert alert-info">
-         <%= fa_icon('lightbulb-o') %> Vous ne pouvez sélectionner que des équipements qui ont la <strong>même SLA.</strong> Pour en ajouter des différents, déposer un nouvel incident.
-        </div>
       <table class="table table-sm">
         <thead>
           <tr>
-            <th  scope="col">Sélectionner les équipements défectueux :</th>
+            <th  scope="col">Sélectionner l'équipement défectueux :</th>
             <th  scope="col"><input class="form-control" type:"text" id="filtre_equipements" placeholder="Filtre : IP ou n° série ou marque" /></th>
           </tr>
         </thead>
         <tbody>
-          <%= f.collection_check_boxes :equipement_ids, @eqs, :id, :serial do |input| %>
+          <%= f.collection_radio_buttons :equipement_ids, @eqs, :id, :serial do |input| %>
             <tr class="equipement sla-<% if input.object.sla %><%= input.object.sla %>" sla="<%= input.object.sla %><% end %>" id=equipement_"<%= input.object.id %>">
               <td>
                 <label>
-                  <%= input.check_box %>
+                  <%= input.radio_button %>
                   <strong><%= input.object.marque %></strong> <%= input.object.modele %> <%= input.object.nom %> <%= input.object.ip %> <%= input.text %>
                 </label>
               </td>
@@ -95,7 +92,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit %>
+      <%= f.button :submit, "Déposer le ticket d'incident chez NXO", class: "btn-block btn-primary mb-3" %>
     </div>
   <% end %>
 </div>
