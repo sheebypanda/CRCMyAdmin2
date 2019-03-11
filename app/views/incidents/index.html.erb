@@ -74,8 +74,8 @@
         <td><% if incident.equipements.first.localisation %><a class="text-info" href="<%= edit_localisation_path(incident.equipements.first.localisation) %>"><%= incident.equipements.first.localisation.nom %>, <%= incident.equipements.first.localisation.adresse %>, <strong><%= incident.equipements.first.localisation.ville %></strong></a><% end %></td>
         <td><span class="badge badge-pill badge-primary"><%= incident.equipements.first.sla %></span></td>
         <td><span class="badge badge-pill badge-success"><%= gtr_txt %></td>
-        <td><%= incident.debut.strftime("%d/%m - %H:%M") %></td>
-        <td><%= incident.fin.strftime("%d/%m - %H:%M") %></td>
+        <td><%= fa_icon('calendar')%> <%= incident.debut.strftime("%d/%m/%y") %> - <%= fa_icon('clock-o') %> <%= incident.debut.strftime("%H:%M")%></td>
+        <td><%= incident.fin.strftime("%d/%m/%y %H:%M") %></td>
         <td><span class="badge badge-pill badge-info"><% temps_resolution = ((incident.fin - incident.debut)/3600).to_i  %><%= temps_resolution %> h</span></td>
           <% retard = temps_resolution - gtr.to_f %>
         <td><span class="badge badge-pill badge-warning"><% if retard.positive? %><%= retard %> h<% end %></span></td>
