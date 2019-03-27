@@ -6,6 +6,75 @@
 <% else %>
 
 <div class="row">
+  <div class="col">
+    <div class="card bg-danger text-white mb-3 p-3">
+      <h6>Équipements en production :</h6>
+      <div class="row">
+        <div class="col">
+          <h1><strong><%= Equipement.where.not(ip: ['', nil]).count %></strong></h1>
+        </div>
+        <div class="col" style="opacity:0.6">
+          <%= fa_icon('server 5x')%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card bg-primary text-white mb-3 p-3">
+      <h6>Équipements en stock :</h6>
+      <div class="row">
+        <div class="col">
+          <h1><strong><%= Equipement.where(ip: ['', nil]).count %></strong></h1>
+        </div>
+        <div class="col" style="opacity:0.6">
+          <%= fa_icon('truck 5x')%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card bg-purple text-white mb-3 p-3">
+      <h6>Sorties internet :</h6>
+      <div class="row">
+        <div class="col">
+          <h1><strong><%= Ligne.count %></strong></h1>
+        </div>
+        <div class="col" style="opacity:0.6">
+          <%= fa_icon('phone 5x')%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card bg-info text-white mb-3 p-3">
+      <h6>Localisations :</h6>
+      <div class="row">
+        <div class="col">
+          <h1><strong><%= Localisation.count %></strong></h1>
+        </div>
+        <div class="col" style="opacity:0.6">
+          <%= fa_icon('map-marker 5x')%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card bg-warning text-white mb-3 p-3">
+      <h6>Nombre d'incidents NXO :</h6>
+      <div class="row">
+        <div class="col">
+          <h1><strong><%= Incident.count %></strong></h1>
+        </div>
+        <div class="col" style="opacity:0.6">
+          <%= fa_icon('life-ring 5x')%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
   <div class="col-md-4">
 
     <div class="card">
