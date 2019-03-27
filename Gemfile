@@ -15,11 +15,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.5'
-gem 'devise'
+gem 'devise', ">= 4.6.0"
 gem 'simple_form'
 gem 'jquery-rails'
 gem "font-awesome-rails"
-gem 'bootstrap', '>= 4.1.2'
+gem 'bootstrap', '>= 4.3.1'
 gem 'geocoder'
 gem 'animate-rails'
 gem 'jquery-tablesorter'
