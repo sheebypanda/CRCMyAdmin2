@@ -27,8 +27,9 @@
                 <th><%= fa_icon("tag") %> Marque</th>
                 <th><%= fa_icon("server") %> Modèle</th>
                 <th><%= fa_icon("barcode") %> Numéro de série</th>
+                <th><%= fa_icon("calendar") %> Date d'ajout</th>
                 <th><%= fa_icon("briefcase") %> Projet</th>
-                <th><%= fa_icon("calendar") %> Date</th>
+                <th><%= fa_icon("calendar") %> Date du projet</th>
                 <th></th>
               </tr>
             </thead>
@@ -39,7 +40,8 @@
                 <td><%= s.marque %></td>
                 <td><%= s.modele %></td>
                 <td><%= s.serial %></td>
-                <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
+                <td><span class="badge badge-pill badge-primary"><%= s.created_at.strftime("%d/%m/%y") %></span></td>
+                <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-success" if s.projet%></td>
                 <!-- <td><span class="badge badge-pill badge-primary"><%= s.projet.titre if s.projet %></span></td> -->
                 <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
                 <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
@@ -66,8 +68,9 @@
                 <th><%= fa_icon("tag") %> Marque</th>
                 <th><%= fa_icon("server") %> Modèle</th>
                 <th><%= fa_icon("barcode") %> Numéro de série</th>
+                <th><%= fa_icon("calendar") %> Date d'ajout</th>
                 <th><%= fa_icon("briefcase") %> Projet</th>
-                <th><%= fa_icon("calendar") %> Date</th>
+                <th><%= fa_icon("calendar") %> Date du projet</th>
                 <th></th>
               </tr>
             </thead>
@@ -78,6 +81,7 @@
                 <td><%= s.marque %></td>
                 <td><%= s.modele %></td>
                 <td><%= s.serial %></td>
+                <td><span class="badge badge-pill badge-primary"><%= s.created_at.strftime("%d/%m/%y") %></span></td>
                 <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
                 <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
                 <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
@@ -105,8 +109,9 @@
                 <th><%= fa_icon("tag") %> Marque</th>
                 <th><%= fa_icon("server") %> Modèle</th>
                 <th><%= fa_icon("barcode") %> Numéro de série</th>
+                <th><%= fa_icon("calendar") %> Date d'ajout</th>
                 <th><%= fa_icon("briefcase") %> Projet</th>
-                <th><%= fa_icon("calendar") %> Date</th>
+                <th><%= fa_icon("calendar") %> Date du projet</th>
                 <th></th>
               </tr>
             </thead>
@@ -117,6 +122,7 @@
                   <td><%= s.marque %></td>
                   <td><%= s.modele %></td>
                   <td><%= s.serial %></td>
+                  <td><span class="badge badge-pill badge-primary"><%= s.created_at.strftime("%d/%m/%y") %></span></td>
                   <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
                   <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
                   <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
@@ -142,8 +148,9 @@
                 <th><%= fa_icon("tag") %> Marque</th>
                 <th><%= fa_icon("server") %> Modèle</th>
                 <th><%= fa_icon("barcode") %> Numéro de série</th>
+                <th><%= fa_icon("calendar") %> Date d'ajout</th>
                 <th><%= fa_icon("briefcase") %> Projet</th>
-                <th><%= fa_icon("calendar") %> Date</th>
+                <th><%= fa_icon("calendar") %> Date du projet</th>
                 <th></th>
               </tr>
             </thead>
@@ -154,6 +161,7 @@
                   <td><%= s.marque %></td>
                   <td><%= s.modele %></td>
                   <td><%= s.serial %></td>
+                  <td><span class="badge badge-pill badge-primary"><%= s.created_at.strftime("%d/%m/%y") %></span></td>
                   <td><%= link_to s.projet.titre, edit_projet_path(s.projet), class: "badge badge-pill badge-primary" if s.projet%></td>
                   <td><span class="badge badge-pill badge-success"><%= s.projet.date.strftime("%d/%m/%y")  if s.projet %></span></td>
                   <td><%= link_to fa_icon("thumbs-up")+" Passer en prod", edit_equipement_path(s), class: "btn btn-outline-primary btn-sm" %></td>
