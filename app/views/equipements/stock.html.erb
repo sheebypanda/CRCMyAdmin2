@@ -5,7 +5,6 @@
 <% end %>
 
 <nav class="nav nav-pills nav-justified">
-  <%= link_to fa_icon("plus")+' Ajouter des équipement au stock', new_equipement_path, class: 'm-1 nav-item btn btn-outline-primary' %>
   <a class="m-1 nav-item btn btn-outline-info" href="#cisco">Cisco</a>
   <a class="m-1 nav-item btn btn-outline-warning" href="#aerohive">Aerohive</a>
   <a class="m-1 nav-item btn btn-outline-success" href="#autres">Autre</a>
@@ -18,7 +17,7 @@
       <div class="card border-danger">
         <div class="card-text">
 
-          <h2 class="m-3 text-danger">Brocade</span></h2>
+          <h2 class="m-3 text-danger">Brocade</h2>
           <%= bar_chart @stock_brocade.group(:modele).count, colors: ['#b82e2e'], height: "600px"%>
 
           <table id="tablesorter-brocade" class="tablesorter table table-striped table-sm">

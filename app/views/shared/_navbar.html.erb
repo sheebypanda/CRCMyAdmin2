@@ -1,25 +1,39 @@
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
   <a class="navbar-brand  col-sm-3 col-md-2 col-lg-1 mr-0" href="<%= root_path %>">
     <%= fa_icon("server")  %> <span class="text-primary">CRC</span>my<span class="text-danger">Admin</span>
   </a>
-  <form action="/recettes">
-    <input class="form-control w-100" type="text" name="search" placeholder="Rechercher" aria-label="Rechercher">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+   <span class="navbar-toggler-icon"></span>
+ </button>
+
+ <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   <ul class="navbar-nav mr-auto">
+     <li class="nav-item dropdown">
+       <a class="dropdown-toggle btn btn-outline-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         <%= fa_icon('plus') %> Ajouter
+       </a>
+       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         <a class="dropdown-item" href="<%= new_recette_path%>"><%= fa_icon('clipboard') %> Fiche recette</a>
+         <a class="dropdown-item" href="<%= new_equipement_path%>"><%= fa_icon('server') %> Equipement</a>
+         <a class="dropdown-item" href="<%= new_localisation_path%>"><%= fa_icon('map-marker') %> Localisation</a>
+         <a class="dropdown-item" href="<%= new_ligne_path%>"><%= fa_icon('phone') %> Ligne</a>
+         <a class="dropdown-item" href="<%= new_incident_path%>"><%= fa_icon('life-ring') %> Incident</a>
+         <a class="dropdown-item" href="<%= new_ligne_path%>"><%= fa_icon('suitcase') %> Projet</a>
+       </div>
+</li>
+</ul>
+</div>
+  <form class="form-inline" action="/recettes">
+    <input class="form-control mr-sm-2" type="text" name="search" placeholder="Rechercher" aria-label="Rechercher">
+    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Rechercher</button>
   </form>
+
   <ul class="navbar-nav px-3">
     <% if user_signed_in? %>
-      <!-- <li class="nav-item  text-nowrap"> -->
-        <!-- <%= link_to fa_icon("user-circle-o") + " " + current_user.email , edit_user_registration_path, :class => 'nav-link' %> -->
-      <!-- </li> -->
       <li class="nav-item text-nowrap">
         <%= link_to fa_icon("sign-out") + "Déconnexion", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
       </li>
-    <% else %>
-    <!-- <li class="nav-item text-nowrap">
-      <%= link_to "Sign up", new_user_registration_path, :class => 'nav-link'  %>
-    </li>
-    <li class="nav-item text-nowrap">
-      <%= link_to "Login", new_user_session_path, :class => 'nav-link'  %>
-    </li> -->
     <% end %>
   </ul>
 

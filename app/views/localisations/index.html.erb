@@ -9,10 +9,15 @@
   <strong><%= @nb %></strong> Localisations trouvées correspondantes à la recherche
 </div>
 <% else %>
-<nav class="nav nav-pills nav-justified">
-  <%= link_to fa_icon("plus")+' Ajouter localisation', new_localisation_path, class: 'm-1 nav-item btn btn-outline-primary' %>
+<nav class="nav nav-pills nav-fill">
+  <% i = 0 %>
   <% @rattachements.each do |r|%>
     <%= link_to r.rattachement, localisations_path(:ville_id => r.rattachement), class: "m-1 nav-item btn btn-outline-info" %>
+    <% if i == 7 %>
+      </nav>
+      <nav class="nav nav-pills nav-justified">
+    <% end %>
+    <% i += 1 %>
   <% end %>
 </nav>
 <% end %>

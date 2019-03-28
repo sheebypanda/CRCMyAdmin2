@@ -8,8 +8,6 @@
   <%= fa_icon("server") %>
   <strong><%= PgSearch.multisearch(params[:search]).count %></strong> Fiches recettes trouvées correspondants à la recherche "<%= params[:search] %>"</h1>
 </div>
-<% else %>
-  <%= link_to fa_icon("plus")+' Nouvelle fiche recette', new_recette_path, class: 'btn btn-outline-primary' %>
 <% end %>
 
 <table id="tablesorter" class="tablesorter table table-sm table-striped">
