@@ -1,0 +1,35 @@
+<% if notice  %>
+  <div class="alert alert-success animated slideInDown" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+<table id="tablesorter" class="tablesorter table table-sm table-striped">
+  <thead>
+    <tr>
+      <th><%= fa_icon("user-circle") %> Utilisateur</th>
+      <th><%= fa_icon("calendar") %> Date d'ajout</th>
+      <th><%= fa_icon("barcode") %> Référence de livraison</th>
+      <th><%= fa_icon("calendar") %> Référence de la commande</th>
+      <th><%= fa_icon("comment") %> Commentaire</th>
+      <th><%= fa_icon("server") %> NB équipements</th>
+      <th><%= fa_icon("file-pdf-o") %> NB PV</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @livraisons.each do |livraison| %>
+      <tr><% index = livraison.user.email.index('@') - 1 %>
+        <td><%= livraison.user.email.slice(0..index) %></td>
+        <td><%= livraison.created_at.strftime("%d/%m/%y") %></td>
+        <td><%= livraison.nom %></td>
+        <td><%= livraison.commande %></td>
+        <td><%= livraison.commentaire %></td>
+        <td><span class="badge badge-pill badge-danger"><%= livraison.equipements.count %></span></td>
+        <td><span class="badge badge-pill badge-primary"><%= livraison.pvs.count %></span></td>
+        <td><%= link_to 'Edit', edit_livraison_path(livraison) %></td>
+        <td><%= link_to 'Destroy', livraison, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

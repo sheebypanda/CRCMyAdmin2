@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :incidents, :projets, :recettes, :operateurs
+  resources :livraisons
+  resources :incidents, :projets, :recettes, :operateurs, :livraisons
 
   resources :localisations do
     collection { post :import }
@@ -26,4 +27,5 @@ Rails.application.routes.draw do
   get '/serials_update', to: 'equipements#serials_update'
   get '/hosts_update', to: 'equipements#hosts_update'
   delete '/delete_image_localisation', to: 'localisations#delete_image'
+  delete '/delete_pv_livraison', to: 'livraisons#delete_pv'
 end

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @livraison.user %>
+</p>
+
+<p>
+  <strong>Nom:</strong>
+  <%= @livraison.nom %>
+</p>
+
+<p>
+  <strong>Commande:</strong>
+  <%= @livraison.commande %>
+</p>
+
+<p>
+  <strong>Commentaire:</strong>
+  <%= @livraison.commentaire %>
+</p>
+
+<%= link_to 'Edit', edit_livraison_path(@livraison) %> |
+<%= link_to 'Back', livraisons_path %>

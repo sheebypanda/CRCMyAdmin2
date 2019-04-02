@@ -27,7 +27,7 @@
           <h1><strong><%= Equipement.where(ip: ['', nil]).count %></strong></h1>
         </div>
         <div class="col" style="opacity:0.6">
-          <%= fa_icon('truck 5x')%>
+          <%= fa_icon('cubes 5x')%>
         </div>
       </div>
     </div>
@@ -82,7 +82,7 @@
         <h5 class="card-title"><%= fa_icon("image") %> Dernières photos ajoutées :</h5>
         <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
           <div class="carousel-inner">
-            <% ActiveStorage::Attachment.last(15).each do |a| %>
+            <% ActiveStorage::Attachment.where(name: "images").last(15).each do |a| %>
               <div class="carousel-item <% if a == ActiveStorage::Attachment.last %>active<% end %>">
                 <%= image_tag(a.variant(resize: '300x400'), class:"d-block w-100") %>
                 <div class="alert alert-secondary carousel-caption d-none d-md-block">

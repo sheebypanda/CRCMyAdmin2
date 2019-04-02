@@ -1,0 +1,51 @@
+<%= simple_form_for(@livraison) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user, :as => :hidden, :input_html => { :value => current_user.id } %>
+    <div class="row">
+      <div class="col">
+        <%= f.input :nom, label:'Référence de la livraison' %>
+      </div>
+      <div class="col">
+        <%= f.input :commande, label: 'Référence de la commande' %>
+      </div>
+    </div>
+    <%= f.input :commentaire %>
+  </div>
+
+  <div class="card border-primary mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= fa_icon("file") %> Pièces jointes :</h5>
+      <div class="form-row">
+        <% if @livraison.pvs.attached? %>
+          <% @livraison.pvs.each do |pv| %>
+            <% if pv.previewable? %>
+              <div class="card m-3 border-secondary" style="width: 18rem;">
+                <%= image_tag(pv.preview(resize: '300x400') , class:"card-img-top")%>
+                <div class="card-body">
+                  <p class="text-center"><span class="badge badge-secondary"><%= fa_icon("calendar")+" "+pv.created_at.strftime("%d/%m/%y") %></span></p>
+                  <%= link_to fa_icon("eye")+" Voir en grand", pv, class:"btn btn-primary btn-block" %><br/>
+                  <%= link_to fa_icon("trash")+" Supprimer", delete_pv_livraison_path(pv), method: :delete, data: { confirm: 'Êtes-vous sûr ?' }, class:"btn btn-danger btn-block" %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="form-row mt-3">
+        <div class="col">
+          <%= f.file_field :pvs, multiple: true %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <% if params[:action] == 'edit' %>
+      <%= f.button :submit, "Valider les modifications", class: "btn btn-outline-primary btn-block mb-3" %>
+    <% else %>
+      <%= f.button :submit, "Ajouter la livraison", class: "btn btn-outline-primary btn-block mb-3" %>
+    <% end %>
+  </div>
+<% end %>

@@ -14,9 +14,9 @@
       <a class="bg-primary list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/stock') %>active<% end %>" href="/stock">
         <%= fa_icon("cubes 3x") %> Stock
       </a>
-      <!--<a class="bg-tomate list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/livraisons') %>active<% end %>" href="/livraisons">
-        <%= fa_icon("truck 3x") %> PV Livraison
-      </a>-->
+      <a class="bg-tomate list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/livraisons') %>active<% end %>" href="/livraisons">
+        <%= fa_icon("truck 3x") %> Livraisons
+      </a>
       <a class="bg-purple list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/lignes') %>active<% end %>" href="<%= lignes_path %>">
         <%= fa_icon("phone 3x") %> Lignes
       </a>

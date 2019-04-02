@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_101232) do
+ActiveRecord::Schema.define(version: 2019_04_02_123959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_101232) do
     t.bigint "projet_id"
     t.boolean "telephonie"
     t.float "honoraire"
+    t.bigint "livraison_id"
   end
 
   create_table "equipements_incidents", id: false, force: :cascade do |t|
@@ -98,6 +99,16 @@ ActiveRecord::Schema.define(version: 2019_03_11_101232) do
     t.string "vlan"
     t.float "cout"
     t.index ["operateur_id"], name: "index_lignes_on_operateur_id"
+  end
+
+  create_table "livraisons", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "nom"
+    t.string "commande"
+    t.text "commentaire"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_livraisons_on_user_id"
   end
 
   create_table "localisations", force: :cascade do |t|
@@ -181,6 +192,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_101232) do
 
   add_foreign_key "incidents", "users"
   add_foreign_key "lignes", "operateurs"
+  add_foreign_key "livraisons", "users"
   add_foreign_key "projets", "users"
   add_foreign_key "recettes", "equipements"
   add_foreign_key "recettes", "lignes"
