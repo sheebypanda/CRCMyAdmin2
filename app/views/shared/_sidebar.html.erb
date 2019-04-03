@@ -1,42 +1,42 @@
 <nav id="sidebar" class="col-md-2 col-lg-1 p-0 bg-light collapse show width">
 
   <div class="sidebar-sticky p-0">
-    <div class="list-group list-group-flush">
+    <div class="list-group list-group-flush text-white">
       <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if current_page?(root_url) %>active<% end %>" href="<%= root_path %>">
-        <%= fa_icon("dashboard 3x") %> Tableau de bord
+        <span class="pr-1"><%= fa_icon("dashboard 3x opa") %></span> <strong>Tableau de bord</strong>
       </a>
       <a class="bg-danger list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/recettes') %>active<% end %>" href="<%= recettes_path %>">
-        <%= fa_icon("clipboard 3x") %> Fiches recettes
+        <span class="pr-1"><%= fa_icon("clipboard 3x opa") %></span> <strong>Fiches recettes</strong>
       </a>
       <a class="bg-info list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/localisations') %>active<% end %>" href="<%= localisations_path %>">
-        <%= fa_icon("map-marker 3x") %> Localisations
+        <span class="pr-1"><%= fa_icon("map-marker 3x opa") %></span> <strong>Localisations</strong>
       </a>
       <a class="bg-primary list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/stock') %>active<% end %>" href="/stock">
-        <%= fa_icon("cubes 3x") %> Stock
+        <span class="pr-1"><%= fa_icon("cubes 3x opa") %></span> <strong>Stock</strong>
       </a>
       <a class="bg-tomate list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/livraisons') %>active<% end %>" href="/livraisons">
-        <%= fa_icon("truck 3x") %> Livraisons
+        <span class="pr-1"><%= fa_icon("truck 3x opa") %></span> <strong>Livraisons</strong>
       </a>
       <a class="bg-purple list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/lignes') %>active<% end %>" href="<%= lignes_path %>">
-        <%= fa_icon("phone 3x") %> Lignes
+        <span class="pr-1"><%= fa_icon("phone 3x opa") %></span> <strong>Lignes</strong>
       </a>
       <a class="bg-warning list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/incidents') %>active<% end %>" href="<%= incidents_path %>">
-        <%= fa_icon("life-ring 3x") %> Suivi incidents
+        <span class="pr-1"><%= fa_icon("life-ring 3x opa") %></span> <strong>Suivi incidents</strong>
       </a>
       <a class="bg-success list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/projets') %>active<% end %>" href="/projets">
-        <%= fa_icon("briefcase 3x") %> Projets
+        <span class="pr-1"><%= fa_icon("briefcase 3x opa") %></span> <strong>Projets</strong>
       </a>
       <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center text-center <% if request.path.start_with?('/map') %>active<% end %>" href="<%= map_path %>">
-        <%= fa_icon("map 3x") %> Carte intéractive
+        <span class="pr-1"><%= fa_icon("map 3x opa") %></span> <strong>Carte intéractive</strong>
       </a>
       <!--<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center <% if request.path.start_with?('/equipements') %>active<% end %>" href="<%= equipements_path %>"> %>
-        <%= fa_icon("server 3x") %> Équipements<span class="badge badge-pill <% if request.path.start_with?('/equipements') %>badge-light<% else %>badge-danger<% end %>"><%= Equipement.all.count %></span>
+        <%= fa_icon("server 3x opa") %> Équipements<span class="badge badge-pill <% if request.path.start_with?('/equipements') %>badge-light<% else %>badge-danger<% end %>"><%= Equipement.all.count %></span>
       </a> -->
 
 
       <div class="dropright">
-        <a class="d-flex justify-content-between align-items-center  list-group-item list-group-item-action list-group-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= fa_icon("gears 2x")%> Options <span></span>
+        <a class="text-secondary d-flex justify-content-between align-items-center list-group-item list-group-item-action list-group-item dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= fa_icon("gears 2x")%> <strong>Options</strong> <span></span>
         </a>
         <div class="dropdown-menu">
           <%= link_to fa_icon("download", class: "text-danger")+' Équipements', equipements_path(format: :csv), class: 'list-group-item list-group-item-action text-danger'%>

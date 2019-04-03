@@ -1,5 +1,10 @@
-<%- headers = ['Marque', 'Modele', 'Numéro de série'] -%>
+<%- headers = ['marque', 'modele', 'serial', 'reference_livraison'] -%>
 <%= CSV.generate_line headers %>
 <%- @stock_all.each do |s| -%>
-<%= CSV.generate_line([s.marque, s.modele, s.serial]).html_safe -%>
+  <% if s.livraison
+      livraison = s.livraison.nom
+    else
+      livraison = ''
+   end %>
+  <%= CSV.generate_line([s.marque, s.modele, s.serial,livraison]).html_safe -%>
 <%- end -%>

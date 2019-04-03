@@ -83,7 +83,7 @@
         <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
           <div class="carousel-inner">
             <% ActiveStorage::Attachment.where(name: "images").last(15).each do |a| %>
-              <div class="carousel-item <% if a == ActiveStorage::Attachment.last %>active<% end %>">
+              <div class="carousel-item <% if a == ActiveStorage::Attachment.where(name: "images").last %>active<% end %>">
                 <%= image_tag(a.variant(resize: '300x400'), class:"d-block w-100") %>
                 <div class="alert alert-secondary carousel-caption d-none d-md-block">
                   <% l = Localisation.find(a.record_id) %>
@@ -137,7 +137,7 @@
       <div class="col">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title"><%= fa_icon("bell") %> Incidents par marque</h4>
+            <h5 class="card-title"><%= fa_icon("bell") %> Incidents par marque</h5>
             <%= pie_chart Incident.joins(:equipements).group(:marque).count.sort, donut: true %>
           </div>
         </div>
@@ -148,7 +148,7 @@
       <div class="col">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title"><%= fa_icon("bell") %> Incidents au fil du temps :</h4>
+            <h5 class="card-title"><%= fa_icon("bell") %> Incidents au fil du temps :</h5>
             <%= column_chart Incident.group_by_month(:created_at, format: "%m/%y").count %>
           </div>
         </div>

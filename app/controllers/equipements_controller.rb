@@ -1,5 +1,6 @@
 class EquipementsController < ApplicationController
   before_action :set_equipement, only: [:show, :edit, :update, :destroy]
+  before_action :get_livraison, only: [:new, :edit, :create]
   require 'net/http'
   require 'uri'
   require 'json'
@@ -120,6 +121,9 @@ class EquipementsController < ApplicationController
     def set_equipement
       @equipement = Equipement.find(params[:id])
     end
+    def get_livraison
+      @livraisons = Livraison.all
+    end
 
     def equipement_params
       params.require(:equipement).permit(
@@ -141,7 +145,8 @@ class EquipementsController < ApplicationController
         :coutmaintenance,
         :honoraire,
         :datemaintenance,
-        :projet)
+        :projet,
+        :livraison_id)
     end
 
     def libreNmsAdd(ip)

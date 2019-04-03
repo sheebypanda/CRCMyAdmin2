@@ -15,7 +15,7 @@
 //= require jquery3
 //= require_tree .
 
+//= require chartkick
 //= require popper
 //= require bootstrap-sprockets
 //= require jquery-tablesorter
-//= require chartkick

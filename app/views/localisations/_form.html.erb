@@ -1,7 +1,7 @@
 <%= simple_form_for(@localisation) do |f| %>
   <%= f.error_notification %>
 <div class="container">
-  <div class="card border-danger mb-3">
+  <div class="card border-info mb-3">
     <div class="card-body">
       <%= f.input :nom, label: "Nom du site" %>
       <div class="form-row">
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="card border-primary mb-3">
+  <div class="card border-info mb-3">
     <div class="card-body">
       <h5 class="card-title"><%= fa_icon("image") %> Photos de la baie :</h5>
       <div class="form-row">
@@ -68,9 +68,9 @@
     </div>
   </div>
   <% if params[:action] == 'edit' %>
-    <%= f.button :submit, "Valider les modifications", class: "btn btn-outline-primary btn-block mb-3" %>
+    <%= f.button :submit, "Valider les modifications", class: "btn btn-outline-info btn-block mb-3" %>
   <% else %>
-    <%= f.button :submit, "Ajouter la localisation", class: "btn btn-outline-primary btn-block mb-3" %>
+    <%= f.button :submit, "Ajouter la localisation", class: "btn btn-outline-info btn-block mb-3" %>
   <% end %>
 <% end %>
 </div>

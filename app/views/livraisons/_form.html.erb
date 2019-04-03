@@ -14,9 +14,9 @@
     <%= f.input :commentaire %>
   </div>
 
-  <div class="card border-primary mb-3">
+  <div class="card border-tomate mb-3">
     <div class="card-body">
-      <h5 class="card-title"><%= fa_icon("file") %> Pièces jointes :</h5>
+      <h5 class="card-title text-tomate"><%= fa_icon("file-pdf-o") %> Bon de livraison :</h5>
       <div class="form-row">
         <% if @livraison.pvs.attached? %>
           <% @livraison.pvs.each do |pv| %>
@@ -41,11 +41,47 @@
     </div>
   </div>
 
+  <div class="card border-danger mb-3">
+    <div class="card-body">
+      <h5 class="card-title text-danger"><%= fa_icon("server") %> Equipements livrés :</h5>
+      <div class="form-row">
+        <table class="table table-sm table-striped tablesorter" id="tablesorter">
+          <thead>
+            <tr>
+              <th>Marque</th>
+              <th>Modèle</th>
+              <th>Numéro de série</th>
+              <th>Localisation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @livraison.equipements %>
+              <% @livraison.equipements.each do |e| %>
+                <tr>
+                  <td><%= e.marque  %></td>
+                  <td><%= e.modele  %></td>
+                  <td><a class="text-danger" href="<%= edit_equipement_path(e)%>"><%= e.serial  %></a></td>
+                  <td>
+                    <% if e.recette %>
+                      <a class="text-info" href="<%= edit_localisation_path(e.recette.localisation) %>"><%= e.recette.localisation.nom %> - <%= e.recette.localisation.ville %></a>
+                    <% else %>
+                    <strong>En stock</strong>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <div class="form-actions">
     <% if params[:action] == 'edit' %>
-      <%= f.button :submit, "Valider les modifications", class: "btn btn-outline-primary btn-block mb-3" %>
+      <%= f.button :submit, "Valider les modifications", class: "btn btn-outline-tomate btn-block mb-3" %>
     <% else %>
-      <%= f.button :submit, "Ajouter la livraison", class: "btn btn-outline-primary btn-block mb-3" %>
+      <%= f.button :submit, "Ajouter la livraison", class: "btn btn-outline-tomate btn-block mb-3" %>
     <% end %>
   </div>
 <% end %>

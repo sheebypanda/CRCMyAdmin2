@@ -22,13 +22,13 @@
       <tr><% index = livraison.user.email.index('@') - 1 %>
         <td><%= livraison.user.email.slice(0..index) %></td>
         <td><%= livraison.created_at.strftime("%d/%m/%y") %></td>
-        <td><%= livraison.nom %></td>
+        <td><%= link_to livraison.nom, edit_livraison_path(livraison), class:"text-tomate" %></td>
         <td><%= livraison.commande %></td>
         <td><%= livraison.commentaire %></td>
         <td><span class="badge badge-pill badge-danger"><%= livraison.equipements.count %></span></td>
         <td><span class="badge badge-pill badge-primary"><%= livraison.pvs.count %></span></td>
-        <td><%= link_to 'Edit', edit_livraison_path(livraison) %></td>
-        <td><%= link_to 'Destroy', livraison, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to fa_icon("pencil"), edit_livraison_path(livraison), class: "btn btn-outline-primary" %></td>
+        <td><%= link_to fa_icon("trash"), livraison, class: "btn btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
