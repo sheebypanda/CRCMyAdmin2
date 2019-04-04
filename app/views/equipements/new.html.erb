@@ -63,9 +63,9 @@
               <select class="form-control" name="equipement[livraison_id]" id="equipement_livraison">
                 <option></option>
                 <% @livraisons.each do |l| %>
-                <% if Equipement.last.livraison_id? %>
-                <option <% if Equipement.last.livraison_id == l.id %> selected <% end %> value="<%= l.id %>"><%= l.created_at.strftime("%d/%m/%y") %> - <%= l.nom %></option>
-                <% end %>
+
+                <option   value="<%= l.id %>"><%= l.created_at.strftime("%d/%m/%y") %> - <%= l.nom %></option>
+
                 <% end %>
               </select>
             </div>
