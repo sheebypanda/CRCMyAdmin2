@@ -31,12 +31,12 @@ class EquipementsController < ApplicationController
   end
 
   def import
-    begin
+    # begin
       Equipement.import(params[:file])
-      redirect_to equipements_path, notice: 'Equipements importés ! :-)'
-    rescue
-      redirect_to equipements_path, notice: 'CSV invalide ! :-('
-    end
+      redirect_to '/stock', notice: 'Equipements importés !'
+    # rescue
+      # redirect_to '/stock', alert: 'CSV invalide'
+    # end
   end
 
   def new
@@ -105,7 +105,7 @@ class EquipementsController < ApplicationController
     end
     respond_to do |format|
       if @equipement.update(equipement_params)
-        format.html { redirect_to equipements_path, notice: "L'équipement #{@equipement.nom} a bien été passé en prod. Supervision : #{@response}" }
+        format.html { redirect_to recettes_path, notice: "L'équipement #{@equipement.nom} a bien été passé en prod. Supervision : #{@response}" }
       else
         format.html { render :edit }
       end
@@ -114,7 +114,7 @@ class EquipementsController < ApplicationController
 
   def destroy
     @equipement.destroy
-    redirect_back fallback_location: equipements_path, notice: "L'équipement #{@equipement.nom} a bien été supprimé"
+    redirect_to recettes_path, notice: "L'équipement #{@equipement.nom} a bien été supprimé"
   end
 
   private

@@ -1,14 +1,20 @@
-<% if notice  %>
-  <div class="alert alert-success animated slideInDown" role="alert">
-    <%= notice %>
-  </div>
-<% end %>
 
 <nav class="nav nav-pills nav-justified">
   <a class="m-1 nav-item btn btn-outline-info" href="#cisco">Cisco</a>
   <a class="m-1 nav-item btn btn-outline-warning" href="#aerohive">Aerohive</a>
   <a class="m-1 nav-item btn btn-outline-success" href="#autres">Autre</a>
+  <a class="m-1 nav-item btn btn-outline-danger" href="#csv">CSV</a>
 </nav>
+
+<% if notice  %>
+<div class="alert alert-success animated slideInDown" role="alert">
+  <%= notice %>
+</div>
+<% else %>
+<div class="alert alert-danger animated slideInDown" role="alert">
+  <%= alert %>
+</div>
+<% end %>
 
 <div class="container">
 
@@ -175,10 +181,27 @@
   </div>
 
 
-  <h3>Importer un fichier CSV</h3>
-    <%= form_tag import_equipements_path, multipart: true do %>
-      <%= file_field_tag :file, class: "btn" %>
-      <%= submit_tag "Importer le CSV", class: "btn" %>
-  <% end %>
+  <div class="row mt-3 mb-3">
+    <div class="col" id="csv">
+      <div class="card border-danger">
+        <div class="card-body">
+          <h5 class="m-3 cart-title text-danger"><%= fa_icon('file-excel-o') %> Importer des équipements depuis un fichier CSV</h5>
+          <p class="card-text">Pour importer un fichier CSV :
+            <ol>
+              <li>Télécharger le modèle de fichier en cliquant sur le bouton <span class="badge "><%= fa_icon('gears') %> Options</span>,
+                puis <span class="badge badge-purple"><%= fa_icon('download') %> État du stock</span>.</li>
+              <li>Supprimer toutes les lignes du fichier, sauf la première.</li>
+              <li>Remplisser le fichier, puis envoyer le en utilisant les boutons ci-dessous. </li>
+            </ol>
+          </p>
+        </div>
+
+        <%= form_tag import_equipements_path, multipart: true do %>
+        <%= file_field_tag :file, class: "btn" %>
+        <%= submit_tag "Importer le CSV", class: "btn btn-danger btn-block" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
 </div>
