@@ -26,6 +26,7 @@
               <option <% if Equipement.last.marque == 'Cisco' %> selected <% end %> value="Cisco">Cisco</option>
               <option <% if Equipement.last.marque == 'DELL' %> selected <% end %> value="DELL">DELL</option>
               <option <% if Equipement.last.marque == 'DLink' %> selected <% end %> value="DLink">DLink</option>
+              <option <% if Equipement.last.marque == 'Hirschmann' %> selected <% end %> value="Hirschmann">Hirschmann</option>
               <option <% if Equipement.last.marque == 'HP' %> selected <% end %> value="HP">HP</option>
               <option <% if Equipement.last.marque == 'Huawei' %> selected <% end %> value="Huawei">Huawei</option>
               <option <% if Equipement.last.marque == 'Netgear' %> selected <% end %> value="Netgear">Netgear</option>
@@ -63,9 +64,9 @@
               <select class="form-control" name="equipement[livraison_id]" id="equipement_livraison">
                 <option></option>
                 <% @livraisons.each do |l| %>
-
-                <option   value="<%= l.id %>"><%= l.created_at.strftime("%d/%m/%y") %> - <%= l.nom %></option>
-
+                <% if Equipement.last.livraison_id? %>
+                <option <% if Equipement.last.livraison_id == l.id %> selected <% end %> value="<%= l.id %>"><%= l.created_at.strftime("%d/%m/%y") %> - <%= l.nom %></option>
+                <% end %>
                 <% end %>
               </select>
             </div>
