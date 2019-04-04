@@ -1,3 +1,4 @@
+<div class="container">
 <% if notice  %>
   <div class="alert alert-success animated slideInDown" role="alert">
     <%= notice %>
@@ -52,37 +53,37 @@
 
 <div class="row">
   <div class="col">
-    <div class="card text-primary border-primary mb-3">
-      <div class="card-body">
-        <h4 class="card-title"><%= fa_icon("handshake-o") %> Garantie</h4>
-        <div class="form-row">
-          <div class='col-lg-6 col-sm-12'>
-            <%= f.input :achat, id: :equipement_achat, label: "Date d'achat", input_html: {placeholder: ''}  %>
-          </div>
-          <div class='col-lg-6 col-sm-12'>
-            <%= f.input :garantie, id: :equipement_garantie, label: "Durée de garantie (en année)", input_html: {placeholder: ''}  %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col">
     <div class="card text-tomate border-tomate mb-3">
       <div class="card-body">
         <h4 class="card-title"><%= fa_icon("truck") %> Livraison</h4>
         <div class="form-row">
           <div class='col-lg-12 col-sm-12'>
             <div class="form-group">
-               <label for="equipement_livraison">Bon de livraison :</label>
-               <select class="form-control" name="equipement[livraison_id]" id="equipement_livraison">
-                 <option></option>
-                  <% @livraisons.each do |l| %>
-                    <% if Equipement.last.livraison_id? %>
-                      <option <% if Equipement.last.livraison_id == l.id %> selected <% end %> value="<%= l.id %>"><%= l.created_at.strftime("%d/%m/%y") %> - <%= l.nom %></option>
-                    <% end %>
-                  <% end %>
-               </select>
-             </div>
+              <label for="equipement_livraison">Bon de livraison :</label>
+              <select class="form-control" name="equipement[livraison_id]" id="equipement_livraison">
+                <option></option>
+                <% @livraisons.each do |l| %>
+                <% if Equipement.last.livraison_id? %>
+                <option <% if Equipement.last.livraison_id == l.id %> selected <% end %> value="<%= l.id %>"><%= l.created_at.strftime("%d/%m/%y") %> - <%= l.nom %></option>
+                <% end %>
+                <% end %>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card text-primary border-primary mb-3">
+      <div class="card-body">
+        <h4 class="card-title"><%= fa_icon("handshake-o") %> Garantie</h4>
+        <div class="form-row">
+          <div class='col-lg-7 col-sm-12'>
+            <%= f.input :achat, id: :equipement_achat, label: "Date d'achat", input_html: {placeholder: ''}  %>
+          </div>
+          <div class='col-lg-5 col-sm-12'>
+            <%= f.input :garantie, id: :equipement_garantie, label: "Durée de garantie (en année)", input_html: {placeholder: ''}  %>
           </div>
         </div>
       </div>
@@ -91,6 +92,7 @@
 </div>
 
 
-<%= f.button :submit, "Ajouter l'équipement", class: "btn btn-block btn-outline-primary mb-3" %>
+<%= f.button :submit, "Ajouter l'équipement", class: "btn btn-block btn-outline-danger mb-3" %>
 
 <% end %>
+</div>

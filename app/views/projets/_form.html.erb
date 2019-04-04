@@ -1,4 +1,5 @@
-<%= simple_form_for(@projet) do |f| %>
+<div class="container">
+  <%= simple_form_for(@projet) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -62,6 +63,7 @@
   </div>
 
   <div class="form-actions mb-3">
-    <%= f.button :submit, class: 'btn btn-outline-success btn-block' %>
+    <%= f.button :submit, 'Ajouter le projet', class: 'btn btn-outline-success btn-block' %>
   </div>
 <% end %>
+</div>

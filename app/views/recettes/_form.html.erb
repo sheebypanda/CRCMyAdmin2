@@ -1,3 +1,4 @@
+<div class="container">
 <%= simple_form_for(@recette) do |f| %>
   <%= f.error_notification %>
 
@@ -123,6 +124,7 @@
     </div>
   </div>
 
-  <%= f.button :submit, "Valider et ajouter la fiche recette", class: "btn btn-block btn-outline-primary mb-3" %>
+  <%= f.button :submit, "Valider et ajouter la fiche recette", class: "btn btn-block btn-outline-danger mb-3" %>
 
 <% end %>
+</div>

@@ -53,6 +53,6 @@ class LivraisonsController < ApplicationController
     end
 
     def livraison_params
-      params.require(:livraison).permit(:user_id, :nom, :commande, :commentaire, pvs: [])
+      params.require(:livraison).permit(:user_id, :nom, :commande, :commentaire, :partielle, pvs: [])
     end
 end
