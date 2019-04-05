@@ -3,6 +3,16 @@
     <%= notice %>
   </div>
 <% end %>
+<div class="btn-group btn-group-sm mt-1" role="group">
+  <% @rattachements.each do |r|%>
+  <% if r.rattachement == params['ville_id']
+      active = "active"
+    else
+      active = ""
+    end %>
+  <%= link_to r.rattachement, localisations_path(:ville_id => r.rattachement), class: "btn btn-outline-info "+active %>
+  <% end %>
+</div>
 <table id="tablesorter" class="tablesorter table table-sm table-striped">
   <thead>
     <tr>

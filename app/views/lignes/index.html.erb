@@ -3,34 +3,27 @@
     <%= notice %>
   </div>
 <% end %>
-<% if params[:search] %>
-<div class="alert alert-primary" role="alert">
-  <%= fa_icon("server") %>
-  <strong><%= @nb %></strong> Lignes trouvées correspondantes à la recherche
-</div>
-<% else %>
-<% end %>
-<nav class="nav nav-pills nav-justified">
-  <% i = 0 %>
+<div class="btn-group btn-group-sm mt-1 d-flex justify-content-center" role="group">
   <% @villes.each do |v|%>
-    <%= link_to v.ville, lignes_path(:ville_id => v.ville), class: "m-1 nav-item btn btn-outline-purple" %>
-    <% if i == 12 %>
-      </nav>
-      <nav class="nav nav-pills nav-justified">
-    <% end %>
-    <% i += 1 %>
+  <% if v.ville == params['ville_id']
+      active = "active"
+    else
+      active = ""
+    end %>
+  <%= link_to v.ville, lignes_path(:ville_id => v.ville), class: "btn btn-outline-purple "+active %>
   <% end %>
-</nav>
-
-<nav class="nav nav-pills nav-justified">
+</div>
+<div class="btn-group btn-group-sm mt-1 d-flex justify-content-center" role="group">
   <% @operateurs.each do |o|%>
-    <% if o.id.to_i == @operateur_id.to_i %>
-      <%= link_to o.nom, lignes_path(:operateur_id => o.id), class: "active m-1 nav-item btn btn-sm btn-outline-warning" %>
-    <% else %>
-      <%= link_to o.nom, lignes_path(:operateur_id => o.id), class: "m-1 nav-item btn btn-sm btn-outline-warning" %>
-    <% end %>
+  <% if o.id.to_s == params['operateur_id']
+      active = "active"
+    else
+      active = ""
+    end %>
+  <%= link_to o.nom, lignes_path(:operateur_id => o.id), class: "btn btn-outline-warning "+active %>
   <% end %>
-</nav>
+</div>
+
 <table id="tablesorter" class="table table-striped table-sm tablesorter">
   <thead>
     <tr>

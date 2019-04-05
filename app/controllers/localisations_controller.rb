@@ -8,7 +8,7 @@ class LocalisationsController < ApplicationController
     if params[:ville_id]
       @localisations = Localisation.where(rattachement: params[:ville_id])
     else
-      @localisations = Localisation.order(:adresse).page params[:page]
+      @localisations = Localisation.order(:nom).page params[:page]
       @nb = Localisation.all.count
       respond_to do |format|
         format.html
