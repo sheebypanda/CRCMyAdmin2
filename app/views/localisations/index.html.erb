@@ -3,7 +3,7 @@
     <%= notice %>
   </div>
 <% end %>
-<div class="btn-group btn-group-sm mt-1" role="group">
+<div class="btn-group btn-group-sm mt-1 mb-1 d-flex justify-content-center" role="group">
   <% @rattachements.each do |r|%>
   <% if r.rattachement == params['ville_id']
       active = "active"
