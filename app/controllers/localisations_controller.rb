@@ -3,13 +3,10 @@ class LocalisationsController < ApplicationController
 
   def index
     @rattachements = Localisation.select(:rattachement).distinct.order(:rattachement)
-    @localisations = Localisation.localisation_search(params[:search]).page params[:page]
-    @nb = Localisation.localisation_search(params[:search]).count
     if params[:ville_id]
-      @localisations = Localisation.where(rattachement: params[:ville_id])
+      @localisations = Localisation.where(rattachement: params[:ville_id]).order(:nom)
     else
       @localisations = Localisation.order(:nom).page params[:page]
-      @nb = Localisation.all.count
       respond_to do |format|
         format.html
         format.csv do
