@@ -19,13 +19,12 @@ class LignesController < ApplicationController
       @lignes = Ligne.where(operateur_id: params[:operateur_id])
       @operateur_id = params[:operateur_id]
     else
-      # @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
-      @lignes = Ligne.all.order(updated_at: :desc)
-      @nb = Ligne.all.count
-      @li = Ligne.all
+      @lignes = Ligne.all.order(updated_at: :desc).page params[:page]
+      # @lignes = Ligne.all.order(updated_at: :desc)
       respond_to do |format|
         format.html
         format.csv do
+          @li = Ligne.all
           headers['Content-Disposition'] = "attachment; filename=\"InventaireLignes.csv\""
           headers['Content-Type'] ||= 'text/csv'
         end
