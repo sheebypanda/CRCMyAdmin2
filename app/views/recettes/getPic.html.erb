@@ -1,0 +1,5 @@
+<% if @pic %>
+  <%= image_tag(@pic.variant(resize: '300x400'), class:"card-img-top")%>
+<% else %>
+  <h6>Pas de photo de baie disponible.</h6>
+<% end %>

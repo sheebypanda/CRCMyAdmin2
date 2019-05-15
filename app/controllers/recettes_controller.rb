@@ -4,6 +4,7 @@ class RecettesController < ApplicationController
   before_action :get_enr, only:[:new, :enr]
   before_action :get_ville, only:[:new, :edit]
   before_action :check_search
+  skip_before_action :authenticate_user!, only: [:getPic]
 
   def index
     if params[:search].present?
@@ -11,6 +12,17 @@ class RecettesController < ApplicationController
     else
       @recettes = Recette.all.order(created_at: :desc).page params[:page]
       @nb = Recette.all.count
+    end
+  end
+
+  def getPic
+    if params[:ip].present?
+      @no_html = true
+      if Equipement.where(ip: params[:ip]).first.present?
+        if Equipement.where(ip: params[:ip]).first.localisation.images
+          @pic = Equipement.where(ip: params[:ip]).first.localisation.images.first
+        end
+      end
     end
   end
 

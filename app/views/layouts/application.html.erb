@@ -1,45 +1,30 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>CRCMyAdmin</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
+<%= render "shared/header" unless @no_html %>
 
-    <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
-    <%= csrf_meta_tags %>
+<% if user_signed_in? %>
+  <%= render "shared/navbar" unless @no_html%>
+<% end %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-  </head>
-
-  <body>
-
-    <% if user_signed_in? %>
-      <%= render "shared/navbar" %>
-    <% end %>
-
-    <div class="container-fluid bg-light">
-      <div class="row d-flex">
-
-        <% if user_signed_in? %>
-          <%= render "shared/sidebar" %>
-          <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
-            <!-- <i class="fa fa-times" data-toggle="collapse" data-target="#sidebar" aria-hidden="true" aria-expanded="false" aria-controls="sidebar" onclick="var that = this; setTimeout(function() {console.log(that.parentNode);that.parentNode.style.flex = 'auto';that.parentNode.style['max-width'] = 'none';}, 2000);"></i> -->
-            <%= yield %>
-          </main>
-        <% else %>
-          <div class="container">
-            <div class="row justify-content-md-center">
-              <div class="col-sm-5">
-                <%= yield %>
-              </div>
+<% unless @no_html %>
+  <div class="container-fluid bg-light">
+    <div class="row d-flex">
+      <% if user_signed_in? %>
+        <%= render "shared/sidebar" unless @no_html%>
+        <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
+<% end %>
+          <%= yield %>
+        </main>
+      <% else %>
+<% unless @no_html %>
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-sm-5">
+<% end %>
+              <%= yield %>
+<% unless @no_html %>
             </div>
           </div>
-        <% end %>
+        </div>
+<% end %>
+      <% end %>
 
-      </div>
-    </div>
-  </body>
-</html>
+<%= render "shared/footer" unless @no_html %>
