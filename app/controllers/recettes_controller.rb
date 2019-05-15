@@ -21,6 +21,7 @@ class RecettesController < ApplicationController
       if Equipement.where(ip: params[:ip]).first.present?
         if Equipement.where(ip: params[:ip]).first.localisation.images
           @pic = Equipement.where(ip: params[:ip]).first.localisation.images.first
+          redirect_to url_for(@pic)
         end
       end
     end
