@@ -1,30 +1,24 @@
-<%= render "shared/header" unless @no_html %>
+<%= render "shared/header" %>
 
 <% if user_signed_in? %>
-  <%= render "shared/navbar" unless @no_html%>
+  <%= render "shared/navbar" %>
 <% end %>
 
-<% unless @no_html %>
   <div class="container-fluid bg-light">
     <div class="row d-flex">
       <% if user_signed_in? %>
-        <%= render "shared/sidebar" unless @no_html%>
+        <%= render "shared/sidebar" %>
         <main role="main" class="col-md-10 ml-sm-auto col-lg-11">
-<% end %>
           <%= yield %>
         </main>
       <% else %>
-<% unless @no_html %>
         <div class="container">
           <div class="row justify-content-md-center">
             <div class="col-sm-5">
-<% end %>
               <%= yield %>
-<% unless @no_html %>
             </div>
           </div>
         </div>
-<% end %>
       <% end %>
 
-<%= render "shared/footer" unless @no_html %>
+<%= render "shared/footer" %>
