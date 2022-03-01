@@ -25,7 +25,7 @@ gem 'animate-rails'
 gem 'jquery-tablesorter'
 gem 'kaminari'
 gem 'pg_search'
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 
 gem 'capistrano', '~> 3.10.0'
 gem "capistrano3-puma"
